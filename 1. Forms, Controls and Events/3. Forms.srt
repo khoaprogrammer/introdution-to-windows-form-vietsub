@@ -1,104 +1,91 @@
 1
 00:00:02,000 --> 00:00:10,000
 When building any kind of program using Visual Studio, using its Tools and Designers, there'll be things
-
+khi xây dựng bất cứ chương trình nào sử dụng VS , sử dụng những tool và designer , chúng sẻ là những thứ
 2
 00:00:10,000 --> 00:00:15,000
 that will happen that may not be obvious to you, and there'll be files that are generated that may be
-
+mà nó sẻ xảy ra , cái trước đó bạn chưa biết , chúng là những file mà được sinh ra , chúng sẻ không 
 3
 00:00:15,000 --> 00:00:21,000
 purposely hidden from you. And while these obfuscations are done for a reason, they can impede the learning
-
+ẩn khỏi bạn ,
 4
 00:00:21,000 --> 00:00:27,000
 of a new technology. So what we're going to do over the next few sections of this module is build a
-
+vì vậy chúng ta sẻ làm khi học một vài mục tiếp theo của module này là xây dựng a ứng dụng form 
 5
 00:00:27,000 --> 00:00:34,000
 Windows Forms application just using code. Doing so will ensure that you see and understand each of the
-
+bằng code , vì vậy bạn sẻ hiểu đk mỗi phần riêng của chương trình 
 6
 00:00:34,000 --> 00:00:41,000
 individual pieces of the program and how they fit together. In this section we'll take a look at how to
-
+và cách chúng lắp ghép với nhau , trong mục này chúng ta nhìn cách xây dựng
 7
 00:00:41,000 --> 00:00:48,000
 build a Form and show it on the screen. Creating a Form is a pretty simple process.
-
+1 form và hiển thị trên màn hình , tạo 1 form là 1 tiến trình rất đơn giản
 8
 00:00:48,000 --> 00:00:56,000
 We just create a class that inherits from System.Windows.Forms.Form, and set its properties in the constructor.
-
+chúng ta chỉ tạo 1 class và kế thừa từ System.Windows.Forms.Form , và đặt những thuộc tính của nó trong constructor
 9
 00:00:56,000 --> 00:01:02,000
 How we show a Form on the screen will depend on whether we're talking about the start-up form, which is the
-
+cách chúng ta hiển thị 1 form trên màn hình là chúng ta đang nói về form start - up , đây là
 10
 00:01:02,000 --> 00:01:08,000
 form that shows when the application first starts up; this is quite often also called the Main Form.
-
+form hiển thị khi ứng dụng đầu tiên đk chạy , gọi là form chính 
 11
 00:01:08,000 --> 00:01:13,000
 Well we're talking about a secondary form. This is a form that starts up during the life cycle of the
-
+, rồi chúng ta nói về form thứ 2 , form mà nó chạy trong thời gian thuộc chu kỳ của chương trình đang chạy
 12
 00:01:13,000 --> 00:01:20,000
 program, and it will almost always show either beside or on top of the main form.
-
+nó hiển thị bất cứ chổ nào trong form chính (trái , phải , dưới , hoặc top trong form chính)
 13
 00:01:20,000 --> 00:01:25,000
-For secondary forms, we just create an instance of the form type, and then call either the Show() or
-
+đối với form thứ 2 , chỉ cần tạo 1 thể hiện kiểu form của nó (giống như tạo đối tương ) , rồi gọi phương thức show() , hoặc showdialog() 
 14
 00:01:25,000 --> 00:01:34,000
-ShowDialog() method to display the form. Using Show will display the form modelessly; using ShowDialog will
-
+để hiển thị nó ra , sử dụng show sẻ hiển thị form modelessly , sử dụng show dialog sẻ hiển thị form modally
 15
 00:01:34,000 --> 00:01:41,000
-display the form modally. When starting up a Windows Forms application, a little bit more work needs to be
-
+khi chạy 1 ứng dụng form ,1 chút công việc bổ sung cần thiết 
 16
 00:01:41,000 --> 00:01:49,000
-done than just showing the start-up or main form. This work is done by the Application Object.
-
+thì đk hoàn thành hơn là chỉ hiển thị form start up hoặc form chính , công việc này hoàn thành bởi đối tượng Application
 17
 00:01:49,000 --> 00:01:59,000
-So, on start-up, we'll create an instance of our Form object and pass it to the Run method of the Application Object.
-
+vì vậy đối với form start up , chúng ta sẻ tạo 1 form thể hiện của đối tượng , rồi đưa nó tới phương thức Run của đối tượng ứng dụng (trong file program.cs)
 18
 00:01:59,000 --> 00:02:07,000
-This not only displays the main form, but it also tells .NET to listen in on the Windows message loop.
-
+điều này không chỉ hiển thị form chính , nhưng nó củng nói cho .net nghe trong vòng lặp thông điệp của windows
 19
 00:02:07,000 --> 00:02:12,000
-Recall that the .NET framework sits on top of Windows, and it's actually Windows which is getting information
-
+......windows lấy thông tin 
 20
 00:02:12,000 --> 00:02:18,000
-about the user interaction with our program, so the Application Object listens in on the message loop and
-
+về sự tương tác với chương trình chúng ta , vì vậy đối tượng Application nghe vòng lặp thông điệp 
 21
 00:02:18,000 --> 00:02:28,000
-then passes the messages Windows is getting off to the actual forms and controls we have in our .NET application.
+Sau đó chuyển các thông điệp Windows đang nhận được đến form thực và những controls chúng ta có trong ứng dụng .NET của chúng ta
 
 22
 00:02:28,000 --> 00:02:33,000
-To close our program we can call Application.Exit; this tells .NET to stop listening on the Windows message
-
+để đóng chương trình , gọi Application.exit , nó nói với ,net ngừng nghe thông điệp của windows
 23
 00:02:33,000 --> 00:02:41,000
-loop and close all open forms. But we normally don't have to explicitly call Application.Exit, because
-
+đóng tất cả các form đang mở  , nhưng ko phải rõ ràng gọi application , vì 
 24
 00:02:41,000 --> 00:02:48,000
-closing the Main Form by default implicitly calls this method for us.
-
+đóng form chính thì mặc định đã gọi nó rồi
 25
 00:02:48,000 --> 00:02:52,000
-Okay, that's enough information to get us started, so we can move on to the first part of the demo,
-
+chúng ta đã hiểu đk cơ chế của nó , vậy vào phần đầu tiên của demo
 26
 00:02:52,000 --> 00:59:00,000
-where we'll see how to create the Form class and show it on the screen.
-
+, chúng ta sẻ nhìn thấy cách tạo form và chạy nó trên màn hình

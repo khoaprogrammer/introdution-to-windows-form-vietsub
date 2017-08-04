@@ -1,99 +1,75 @@
 1
 00:00:01,000 --> 00:00:10,000
-The first step in creating our code-only Windows Forms Application is to create the Visual Studio project.
-
+bước đầu tiên tạo ứng dụng chỉ bằng code , 
 2
 00:00:10,000 --> 00:00:18,000
-So over here in Visual Studio, I'll choose File, New, Project, and because I want this to be code-only,
-
+ở đây trong visual stdio , chọn file -> new , project , và vì tôi muốn ứng dụng này chỉ bằng code mà thôi
 3
 00:00:18,000 --> 00:00:27,000
-I'm going to use the Empty Project template. I'll name my project Simple, and then click OK.
-
+tôi sẻ sử dụng khung project trống , đặt tên nó là simple , click ok
 4
 00:00:27,000 --> 00:00:34,000
-Now I want to create the class to represent our Windows Form, so I'll right-click on the project, and choose
-
+, giờ tôi tạo class hiển thì form windown , click chuột phải trên project , và chọn
 5
 00:00:34,000 --> 00:00:45,000
-Add Class, and I'll call the class MyForm. And I want this class to inherit from System.Windows.Forms.Form.
-
+Add Class , gọi class là MyForm , nó kế thừa từ System.Windows.Forms.Form.
 6
 00:00:45,000 --> 00:00:51,000
-To be able to do that, I need to reference the System.Windows.Forms assembly, so I'll right-click on the
-
+để làm đk như vậy , tôi cần tham chiếu the System.Windows.Forms assembly, vì vậy click chuột phải trên project
 7
 00:00:51,000 --> 00:00:59,000
-project, choose Add Reference, make sure the Framework section is highlighted, and then scroll down to
-
+chọn Add Reference , chắc chắn rắn mục Framework thì sáng , rồi cuộn xuống
 8
 00:00:59,000 --> 00:01:08,000
-System.Windows.Forms, make sure that assembly is checked, and then click OK.
-
+System.Windows.Forms , chắc chắn assembly thì đk click , nhấn OK
 9
 00:01:08,000 --> 00:01:14,000
-With the assembly reference added, I can now add the line of code to indicate that my class inherits from form,
-
+với sự tham chiếu của assembly đk thêm vào , tôi có thể thêm dòng code mà nó chỉ ra rằng lớp của tôi kế thừa từ form
 10
 00:01:14,000 --> 00:01:25,000
-so Inherits Form, and I'll just use the Ctrl . to add the Import statement for Systems.Windows.Forms.
-
+để kế thừa form , tôi sử dụng Ctrl . để add câu lệnh Import cho Systems.Windows.Forms.
 11
 00:01:25,000 --> 00:01:33,000
-And then the last thing I need to do to my class is create the constructor, so that's Public Sub New(),
-
+cuối cùng cần làm là tạo constructor , nó là Public Sub New(),
 12
 00:01:33,000 --> 00:01:39,000
-and then inside of here set any properties I want for the form; and right now all that's set is the actual
-
+rồi đặt trong đây , đặt bất cứ thuộc tính nào cần cho form , bây giờ đặt tiêu đề cho form
 13
 00:01:39,000 --> 00:01:50,000
-title of the form so that's the Text property, and I'll set that = "My Form".
-
+, nó là thuộc tính text , đặt là = "My Form"
 14
 00:01:50,000 --> 00:01:55,000
-So that completes our form class. Now we need to add the main method, which is the entry point for our
-
+, để hoàn thành class form , cần thêm method chính (main) , nó là điễm đi vào cho ứng dụng VB
 15
 00:01:55,000 --> 00:02:02,000
-Visual Basic application. The main method goes inside of a module, so I'll right-click on the project,
-
+, method chính đi vào trong 1 module , click trên project - > add module 
 16
 00:02:02,000 --> 00:02:11,000
-and choose Add Module, I'll call this module Startup, click Add, and then inside the module I'll create the
-
+, tôi gọi module này chạy chương trình , click add , rồi trong module tôi sẻ tạo 
 17
 00:02:11,000 --> 00:02:28,000
-main method, so that's Public Sub Main(), and now I need to create an instance of my form, so Dim form As New MyForm.
-
+mehod chính , nó là Public Sub Main() , tôi cần tạo 1 thể hiện của my form , nó là Dim form As New MyForm
 18
 00:02:28,000 --> 00:02:34,000
-And then, as I mentioned, I can use like form.Show, right there is a show method and show dialog method,
-
+, như đã đề cập trước đó , tôi có thể sử dụng giống như là form.show , nó là phương thức show và show dialog 
 19
 00:02:34,000 --> 00:02:42,000
-but for the start-up form, which is what this form instance is going to be, we need to instead use
-
+nhưng đối với form startup , nó là những gì thể hiện của form ,
 20
 00:02:42,000 --> 00:02:50,000
-Application; so this is a Singleton object, it lives in the System.Windows.Forms namespace, so again I'll
-
+đây là đối tượng Singleton , nó thuộc ở trong System.Windows.Forms namespace , vì vậy 1 lần nữa sử dụng
 21
 00:02:50,000 --> 00:02:58,000
-use Ctrl . to add the Import statement we need, and then the method I want to call is Run, and then pass
-
+Ctrl . để import , và rồi phương thức tôi muốn gọi là Run , và đưa nó vào trong 
 22
 00:02:58,000 --> 00:03:09,000
-in my form object. So again, this does a few things. 1) It starts listening in on the Windows message loop,
-
+đối tượng form của tôi , điều nào làm 1,2 thứ , nó bắt đầu nghe dựa trên vòng lặp thông điệp của windowns
 23
 00:03:09,000 --> 00:03:17,000
-2) It sets this form object as the main form for the application, and then 3) It actually shows the form.
-
+nó đặt đối tượng form này như form chính cho ứng dụng , rồi hiển thị ra
 24
 00:03:17,000 --> 00:03:29,000
-So with this code complete, I can now press F5 to run the application, and there is our form.
-
+vì vậy với sự hoàn thành đoạn code này , có thể nhấn F5 để chạy ứng dụng , và đó là form chúng ta 
 25
 00:03:29,000 --> 00:03:36,000
 Just one note for those of you who are following along using C#, if I go over to the C# version of this project,
