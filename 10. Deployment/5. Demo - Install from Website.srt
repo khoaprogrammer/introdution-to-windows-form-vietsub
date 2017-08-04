@@ -1,0 +1,180 @@
+1
+00:00:01,000 --> 00:00:08,000
+In this demo we're going to change our ClickOnce deployment configuration to have users install the app
+
+2
+00:00:08,000 --> 00:00:15,000
+from a website instead of from a file share. So let's review the current configuration.
+
+3
+00:00:15,000 --> 00:00:24,000
+We're currently deploying to this UNC path, and the currently deployed version is 1.0.0.3, and the next
+
+4
+00:00:24,000 --> 00:00:33,000
+publish will publish out 1.0.0.4. So now I want to change the Installation Folder to be a website,
+
+5
+00:00:33,000 --> 00:00:42,000
+I'm going to use this Azure website, so I'll come up and just grab the URL, come over to Visual Studio,
+
+6
+00:00:42,000 --> 00:00:50,000
+and change the Installation Folder to our website, and I'm going to create a folder underneath the root called install.
+
+7
+00:00:50,000 --> 00:00:55,000
+Now that I'm having the user install the app from a website, I need to make one additional change.
+
+8
+00:00:55,000 --> 00:01:01,000
+If we come over to our current installation files, we have the setup.exe, well we're not going to have the
+
+9
+00:01:01,000 --> 00:01:11,000
+user run setup.exe from a website, so we need a webpage. So what I'll do is come over to Options, and then
+
+10
+00:01:11,000 --> 00:01:24,000
+in Deployment, I'm going to indicate that the Deployment webpage should be publish.htm, and then click OK.
+
+11
+00:01:24,000 --> 00:01:30,000
+Now I should note that if I was to go through the Publish Wizard here, and make these changes through here,
+
+12
+00:01:30,000 --> 00:01:37,000
+I would get exactly the same results; the Installation Folder would've changed, and the publish.htm would
+
+13
+00:01:37,000 --> 00:01:47,000
+have been setup as the webpage for deployment. Alright, so with these changes made I can now Publish.
+
+14
+00:01:47,000 --> 00:01:55,000
+This updated our deployment files, and there's our publish.htm, but it hasn't pushed these files up to
+
+15
+00:01:55,000 --> 00:01:59,000
+the website; I'll use an FTP client to do that.
+
+16
+00:01:59,000 --> 00:02:06,000
+So I'll come over to my FTP client, I'll just Refresh the files here, and then I'll come over to my root
+
+17
+00:02:06,000 --> 00:02:17,000
+folder in my website and create a new directory called install, and then I'll copy the files from my
+
+18
+00:02:17,000 --> 00:02:23,000
+hard drive up to my website via FTP.
+
+19
+00:02:23,000 --> 00:02:28,000
+The upload is now complete, it took about 1/2 minute, and now I'll come back over to my browser,
+
+20
+00:02:28,000 --> 00:02:35,000
+and I'll go to my website/install/publish.htm.
+
+21
+00:02:35,000 --> 00:02:44,000
+So here's our published page; you can see it's saying we're going to install Version 1.0.0.4, and then I'll
+
+22
+00:02:44,000 --> 00:02:51,000
+click the Install button. Down here at the bottom in Internet Explorer it's asking me if I want to run or
+
+23
+00:02:51,000 --> 00:03:00,000
+save setup.exe, I'll choose to Run, and now the smart screen filter is going to jump in.
+
+24
+00:03:00,000 --> 00:03:05,000
+So it recognizes I'm trying to run a setup program from a website, and that that setup.exe is only signed
+
+25
+00:03:05,000 --> 00:03:11,000
+with a self-signed certificate, so it's really trying to discourage me from running it.
+
+26
+00:03:11,000 --> 00:03:20,000
+So if I click on Actions here, you can see: Don't run this program, Delete the program, and here you have Run anyway.
+
+27
+00:03:20,000 --> 00:03:23,000
+And sometimes when this dialog pops up you actually have to click a More Options button, which will be down
+
+28
+00:03:23,000 --> 00:03:33,000
+here, to be able to even see Run anyway. But in this case again we know this is safe, so I'll click Run anyway.
+
+29
+00:03:33,000 --> 00:03:40,000
+Then we get the Security Warning dialog we saw before, and now I click Install, and now I have my app,
+
+30
+00:03:40,000 --> 00:03:45,000
+but installed from the website as opposed to being installed from the file share.
+
+31
+00:03:45,000 --> 00:03:54,000
+And now I want to do an update to my program, so I'll come back over to Visual Studio, I'll go to the form
+
+32
+00:03:54,000 --> 00:03:58,000
+designer, and I'll do the same thing we did before, I'll just change the background colors here.
+
+33
+00:03:58,000 --> 00:04:08,000
+So instead of Cornsilk let's go down to something sort of blue or green, how about AliceBlue, there we go.
+
+34
+00:04:08,000 --> 00:04:15,000
+And then it will save, we'll come back over to our settings here, we'll Publish.
+
+35
+00:04:15,000 --> 00:04:21,000
+Now this piece is a little bit confusing, because what Visual Studio has done is open up the browser and
+
+36
+00:04:21,000 --> 00:04:28,000
+show me the published files, but those are the files we FTP'd up before, they're not the new files, so I'm
+
+37
+00:04:28,000 --> 00:04:36,000
+just going to close that window, come over to my FTP client here, and Refresh.
+
+38
+00:04:36,000 --> 00:04:40,000
+And now I just need a copy of the files that have changed; it's not all of them.
+
+39
+00:04:40,000 --> 00:04:52,000
+So I'm going to copy up publish and Explorer.application, and then under Application Files, I'm just going to
+
+40
+00:04:52,000 --> 00:04:58,000
+copy up the current version, so that's Version 5, so you can see here we have Version 3 and 4; I just need
+
+41
+00:04:58,000 --> 00:05:08,000
+to copy up Version 5. Alright, so the new version of our application is now up in the website, I can come back over
+
+42
+00:05:08,000 --> 00:05:15,000
+to Internet Explorer and Refresh the page, and you can see now it's showing that Version 5 is available,
+
+43
+00:05:15,000 --> 00:05:25,000
+but I'm not going to Install here, I'm going to run from my Start Menu, so Explorer, and then click Explorer,
+
+44
+00:05:25,000 --> 00:05:31,000
+and you can see it's recognizing there's a new version, click OK, get the new version, and then here's my
+
+45
+00:05:31,000 --> 00:59:00,000
+new app, with a beautiful new AliceBlue background.
+

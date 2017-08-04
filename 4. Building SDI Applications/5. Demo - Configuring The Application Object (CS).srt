@@ -1,0 +1,224 @@
+1
+00:00:01,000 --> 00:00:12,000
+In this demo I want to create and configure the application object for the C# version of our SDI project.
+
+2
+00:00:12,000 --> 00:00:20,000
+Here's the C# project, and so far I have the form, and I've added the menu, the toolbar, and the Rich TextBox;
+
+3
+00:00:20,000 --> 00:00:27,000
+I haven't done anything else yet. What I want to do now is add an application object that uses the
+
+4
+00:00:27,000 --> 00:00:33,000
+application framework functionality we saw in the VB version of the demo.
+
+5
+00:00:33,000 --> 00:00:38,000
+But since the application framework is part of the VB language, we're not going to have any Visual Studio
+
+6
+00:00:38,000 --> 00:00:47,000
+integration here in a C# project, so I'll have to write that code manually.
+
+7
+00:00:47,000 --> 00:00:59,000
+So I'll right-click on the project and choose Add-Class, I'll call the class SdiApplication, and just like
+
+8
+00:00:59,000 --> 00:01:10,000
+the other application objects we've seen, I want this to be a singleton.
+
+9
+00:01:10,000 --> 00:01:17,000
+So here I have a field which we'll use to hold the singleton instance, and then I have a property we can use
+
+10
+00:01:17,000 --> 00:01:26,000
+to access the instance. This checks to see if the instance has been created yet; if it hasn't it creates it;
+
+11
+00:01:26,000 --> 00:01:34,000
+if it has it just returns it. So as long as we only access SdiApplication through this instance property,
+
+12
+00:01:34,000 --> 00:01:41,000
+we'll never have more than one instance of the object at any given time.
+
+13
+00:01:41,000 --> 00:01:46,000
+So that makes SdiApplication a singleton; now we want to make it an application, one that implements the
+
+14
+00:01:46,000 --> 00:01:54,000
+application framework functionality. To do that, we'll have it inherit from WindowsFormsApplicationBase.
+
+15
+00:01:54,000 --> 00:02:02,000
+This type lives in the Microsoft.VisualBasic assembly, so we'll need to add an assembly reference.
+
+16
+00:02:02,000 --> 00:02:10,000
+So in the Framework section, Microsoft.VisualBasic, and then come back over here and indicate this inherits
+
+17
+00:02:10,000 --> 00:02:17,000
+from WindowsFormsApplicationBase. And then we just need to add the appropriate using statement,
+
+18
+00:02:17,000 --> 00:02:26,000
+that's Microsoft.VisualBasic.ApplicationServices. Next we'll add a constructor and set some properties.
+
+19
+00:02:26,000 --> 00:02:34,000
+So we'll come in here after the field, add the constructor. Now what properties do we need to set?
+
+20
+00:02:34,000 --> 00:02:41,000
+Well if we go back to our Visual Basic project, and then take a look at the project properties, we made two
+
+21
+00:02:41,000 --> 00:02:50,000
+changes; we set the Make single instance application on, or we checked that check box, and we changed the
+
+22
+00:02:50,000 --> 00:02:58,000
+Shutdown mode to When the last form closes. If we take a look at the generated code,
+
+23
+00:02:58,000 --> 00:03:06,000
+we can see here in the application object we have the setting of the IsSingleInstance to true, and setting of
+
+24
+00:03:06,000 --> 00:03:17,000
+the ShutDownStyle to ShutdownMode.AfterAllFormsClose. So we do the same thing here, so this.IsSingleInstance,
+
+25
+00:03:17,000 --> 00:03:33,000
+I'm going to set that = true, and then this.ShutdownStyle = ShutdownMode.AfterAllFormsClose.
+
+26
+00:03:33,000 --> 00:03:40,000
+The other thing we had in our VB project that we need to add to the C# project was handling of two events.
+
+27
+00:03:40,000 --> 00:03:48,000
+One was OnCreateMainForm; this was part of the generated code that we got, and the second is to handle the
+
+28
+00:03:48,000 --> 00:03:54,000
+StartupNextInstance, we added this through the application events.
+
+29
+00:03:54,000 --> 00:04:04,000
+And in both cases what we want to do is call the CreateForm helper method that we added to the DocForm.
+
+30
+00:04:04,000 --> 00:04:11,000
+So coming back to the C# project, let's go into full screen here, and then let's override those two methods,
+
+31
+00:04:11,000 --> 00:04:25,000
+so override OnCreateMainForm, and then override OnStartup next instance, and again in both cases we just want
+
+32
+00:04:25,000 --> 00:04:28,000
+to call DocForm.CreateForm.
+
+33
+00:04:28,000 --> 00:04:40,000
+(typing)
+
+34
+00:04:40,000 --> 00:04:46,000
+And now we just need to go implement CreateForm.
+
+35
+00:04:46,000 --> 00:04:57,000
+So if we go to full screen, and then go over to DocForm and view the code, below the constructor here,
+
+36
+00:04:57,000 --> 00:05:04,000
+we can add the implementation of CreateForm. So, we have a field for the counter, and then in CreateForm
+
+37
+00:05:04,000 --> 00:05:12,000
+we create a new instance of the DocForm, we set the form title using the counter.
+
+38
+00:05:12,000 --> 00:05:18,000
+We then set the form we just created to be the MainForm for the application, we Show the form and we return
+
+39
+00:05:18,000 --> 00:05:27,000
+the form reference. So with the implementation of the CreateForm helper added, our SDI application class
+
+40
+00:05:27,000 --> 00:05:37,000
+is now complete; oops, actually it's not complete because I added the wrong override here, let me fix that.
+
+41
+00:05:37,000 --> 00:05:46,000
+I wanted to override OnStartup next instance, not OnStartup; so we'll just take this code here and we'll cut
+
+42
+00:05:46,000 --> 00:05:56,000
+it and we'll paste it over here, and then we'll just get rid of this guy; okay, now it's complete.
+
+43
+00:05:56,000 --> 00:06:02,000
+So the final thing we need to do is modify the startup code for the application, so come over to program,
+
+44
+00:06:02,000 --> 00:06:17,000
+and we need to replace Application.Run with SdiApplication.Instance.Run, and this actually takes a parameter
+
+45
+00:06:17,000 --> 00:06:25,000
+here, which is the command line arguments, so we just need to change Main to accept those, so it's an array
+
+46
+00:06:25,000 --> 00:06:34,000
+of string, and we'll call it args, and then we'll pass that over here.
+
+47
+00:06:34,000 --> 00:06:41,000
+So that's everything we need to convert the Windows Forms application into an SDI application; let's test out our work.
+
+48
+00:06:41,000 --> 00:06:51,000
+So I'll go ahead and build, and then we'll minimize this, and we'll come over to the SDI project folder,
+
+49
+00:06:51,000 --> 00:06:57,000
+and then we'll right-click on the executable, and Send To Desktop, creating a shortcut,
+
+50
+00:06:57,000 --> 00:07:04,000
+and then we'll click here; actually, before I do that, let me just startup Task Manager.
+
+51
+00:07:04,000 --> 00:07:10,000
+So we see SDICS.vshost, again that's the one running in Visual Studio.
+
+52
+00:07:10,000 --> 00:07:22,000
+Now we run here, so we should now see SDICS.exe, and then let's run again using the shortcut, there we go,
+
+53
+00:07:22,000 --> 00:07:31,000
+New Document 2, run again, New Document 3, run again, New Document 4, but all using the same executable,
+
+54
+00:07:31,000 --> 00:07:42,000
+and then if I close these down, once I close the last one, the executable should go away.
+
+55
+00:07:42,000 --> 00:07:48,000
+So with the addition of the application object complete, in the next demo we'll move on to the implementation
+
+56
+00:07:48,000 --> 00:59:00,000
+of the menu items.
+

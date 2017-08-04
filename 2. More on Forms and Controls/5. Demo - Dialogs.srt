@@ -1,0 +1,216 @@
+1
+00:00:02,000 --> 00:00:09,000
+In this demo we'll take a look at working with dialogs. So here I have a project, it's a different project,
+
+2
+00:00:09,000 --> 00:00:16,000
+but the form is the same as the form from the last demo; I have the ListBox, the button, and the label.
+
+3
+00:00:16,000 --> 00:00:21,000
+If we take a look at the code behind, we have the same event handlers.
+
+4
+00:00:21,000 --> 00:00:28,000
+And if I run this, and just click the button right away, you notice there's no text in the label, and the
+
+5
+00:00:28,000 --> 00:00:36,000
+reason for that is there is no selected item in the ListBox, so the text property is empty.
+
+6
+00:00:36,000 --> 00:00:40,000
+Now if I actually go and select an item from the ListBox and then click the button, now we get the text down
+
+7
+00:00:40,000 --> 00:00:47,000
+here in the label. So what I want to do is add some code in the Click event handler for the button to check
+
+8
+00:00:47,000 --> 00:00:53,000
+to see whether or not there is the selected item in the ListBox, and if there isn't, let the user know they
+
+9
+00:00:53,000 --> 00:00:57,000
+need to select an item first before clicking the button.
+
+10
+00:00:57,000 --> 00:01:07,000
+So let's take a look at the code. What I could do is check the text property to see if that's empty, but the
+
+11
+00:01:07,000 --> 00:01:15,000
+more proper way, or more common way to check to see whether the ListBox has a selected item or not, is to
+
+12
+00:01:15,000 --> 00:01:21,000
+check the selected index property. So this property gives you the index of the item that's currently
+
+13
+00:01:21,000 --> 00:01:27,000
+selected, but if there isn't a currently selected item, it will give you back -1.
+
+14
+00:01:27,000 --> 00:01:40,000
+So you could write here: If ListBox1.SelectedIndex = -1, then I want to show the user or give the user a
+
+15
+00:01:40,000 --> 00:01:45,000
+message telling them that they need to select an item out of the ListBox.
+
+16
+00:01:45,000 --> 00:01:50,000
+So the message I want to show the user is "Please select an item from the list box," and now I just need some
+
+17
+00:01:50,000 --> 00:01:58,000
+way to put that up on the screen. And to do that I'm going to use the MsgBox function, this has been part of
+
+18
+00:01:58,000 --> 00:02:06,000
+the Visual Basic language probably as far back as VB1, but if not, definitely the early days of Visual Basic.
+
+19
+00:02:06,000 --> 00:02:11,000
+And then the one parameter I need to pass into this is what message do you want to show to the user,
+
+20
+00:02:11,000 --> 00:02:16,000
+and that's the message "Please select an item from the list box."
+
+21
+00:02:16,000 --> 00:02:22,000
+And then once I've shown the user that message, I just want to exit out of the Sub to let them select an item
+
+22
+00:02:22,000 --> 00:02:30,000
+and then click the button again. Alright, so let's run again, and I won't select an item, I'll click the
+
+23
+00:02:30,000 --> 00:02:37,000
+button, so there's our MessageBox, Please select an item from the list box, we have an OK button, the title
+
+24
+00:02:37,000 --> 00:02:45,000
+of the dialog is the same name as our project, so we'll click OK. And then if I select an item, then it
+
+25
+00:02:45,000 --> 00:02:54,000
+works as before. Now, MsgBox is a Visual Basic function, it's part of the Visual Basic language.
+
+26
+00:02:54,000 --> 00:03:01,000
+So while technically you could use this in C# by adding a reference to the Microsoft.VisualBasic assembly,
+
+27
+00:03:01,000 --> 00:03:07,000
+it's extremely unlikely that anybody would do that. Instead they'd use the MsgBox class that's in the
+
+28
+00:03:07,000 --> 00:03:15,000
+System.Windows.Forms namespace. We can also use the MsgBox class in Visual Basic, so let me comment out this
+
+29
+00:03:15,000 --> 00:03:25,000
+line, and then replace it using the MsgBox class, so that would be MessageBox.Show; it has a shared method
+
+30
+00:03:25,000 --> 00:03:32,000
+called Show, and Show takes the message you want to show to the user, so that's msg.
+
+31
+00:03:32,000 --> 00:03:38,000
+Now in the case of the MessageBox, the title by default is empty, so we want to specify that, and again the
+
+32
+00:03:38,000 --> 00:03:47,000
+title in MsgBox, is just the title of the form, the main form, so I'll just pass that in, such as Me.Text.
+
+33
+00:03:47,000 --> 00:03:57,000
+So now I'll run again and click the button, and we get exactly the same behavior we had when using MsgBox.
+
+34
+00:03:57,000 --> 00:04:02,000
+So that's presenting information to a user, what about asking the user a question?
+
+35
+00:04:02,000 --> 00:04:12,000
+Well we can use the same functionality to do that. So let's go and add an event handler for the form closing event.
+
+36
+00:04:12,000 --> 00:04:26,000
+So I'll drop down here and I'll go to Form1 Events, and then the event I want is actually FormClosing.
+
+37
+00:04:26,000 --> 00:04:31,000
+And then here I want to put up one of those "Are you sure?" dialogs to ask the user if they're sure they want
+
+38
+00:04:31,000 --> 00:04:36,000
+to leave the program. So here I want to ask: "Are you sure you want to close?"
+
+39
+00:04:36,000 --> 00:04:40,000
+And then I want to put up a dialog box where they can choose Yes or No.
+
+40
+00:04:40,000 --> 00:04:50,000
+So that's If MsgBox and then the message, and then here I have an option to say what buttons or what style
+
+41
+00:04:50,000 --> 00:04:59,000
+I want to show for the MessageBox. But, the option I want to choose out of here is MsgBoxStyle.YesNo,
+
+42
+00:04:59,000 --> 00:05:06,000
+so I want to show both Yes and No buttons to the user. And as you can see in the IntelliSense here that this
+
+43
+00:05:06,000 --> 00:05:15,000
+is going to return a MsgBox result. So I'm going to check to see, does = MsgBoxResult.No.
+
+44
+00:05:15,000 --> 00:05:23,000
+And if it does, then I want to cancel the close of the form. So if you take a look, the EventArgs we're
+
+45
+00:05:23,000 --> 00:05:30,000
+getting here are FormClosingEventArgs, and for most of the events in .NET that end with ing, you can cancel
+
+46
+00:05:30,000 --> 00:05:45,000
+them, and the way you cancel is just by putting e.Cancel = true. Alright, so let's run, hit F5, and then
+
+47
+00:05:45,000 --> 00:05:54,000
+I'll try to close the form, Are you sure you want to close? Yes, the form closes, hit F5, Are you sure you
+
+48
+00:05:54,000 --> 00:06:05,000
+want to close? No, and then the form stays open. And then just like in the previous example, if I choose
+
+49
+00:06:05,000 --> 00:06:16,000
+to use MessageBox.Show instead of MsgBox, then the code I would write would look like this.
+
+50
+00:06:16,000 --> 00:06:24,000
+MessageBox.Show, the message I want to show, the caption for the dialog, what buttons I want to show;
+
+51
+00:06:24,000 --> 00:06:34,000
+in this case instead of MessageBoxStyle it is the System.Windows.Forms.MessageBoxButtons enumeration,
+
+52
+00:06:34,000 --> 00:06:46,000
+and then for the response, instead of MessageBoxResult, it's System.Windows.Forms.DialogResult.
+
+53
+00:06:46,000 --> 00:06:50,000
+So that's how you use the built-in message dialogs. In the next section we'll take a look at how to build
+
+54
+00:06:50,000 --> 00:59:00,000
+a custom message dialog.
+

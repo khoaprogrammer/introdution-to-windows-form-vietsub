@@ -1,0 +1,244 @@
+1
+00:00:03,000 --> 00:00:09,000
+We can now go create our DataSet and add the binding support for it, so I'll get out of full screen,
+
+2
+00:00:09,000 --> 00:00:15,000
+and the first thing I'll do is come over to the Server Explorer here in Visual Studio, and you can see I have
+
+3
+00:00:15,000 --> 00:00:22,000
+a Data Connection, and if I expand this we can see it's the Northwind database.
+
+4
+00:00:22,000 --> 00:00:28,000
+Now I added this data connection by right-clicking on Data Connections, choosing Add Connection, choosing
+
+5
+00:00:28,000 --> 00:00:37,000
+Microsoft SQL Server, clicking Continue, putting the address of my server, which is the current machine,
+
+6
+00:00:37,000 --> 00:00:47,000
+so it's just localhost, and then under here going and selecting the Northwind database.
+
+7
+00:00:47,000 --> 00:00:55,000
+So our DataSet will be working with the Categories table or data from the Categories table and the Products table.
+
+8
+00:00:55,000 --> 00:01:03,000
+Alright, so let's go create our DataSet source class, so I'll right-click on the project and choose Add-Class,
+
+9
+00:01:03,000 --> 00:01:13,000
+I'll call this the DataSetSource and click Add, and then I want to indicate that this class will implement
+
+10
+00:01:13,000 --> 00:01:23,000
+the ISource interface. Hit Enter, and it will Sub in all of our methods.
+
+11
+00:01:23,000 --> 00:01:29,000
+Alright, so right now we'll just implement the methods to Get the data and populate the DataSet, and then
+
+12
+00:01:29,000 --> 00:01:37,000
+later on in the demo we'll add the implementation of the methods to update.
+
+13
+00:01:37,000 --> 00:01:47,000
+So I'll start by adding a field for our DataSet, so that will be Private_dataSet As DataSet, and then I'll
+
+14
+00:01:47,000 --> 00:02:03,000
+add a constructor, and in the constructor we'll create and populate the DataSet, so _dataSet = New DataSet,
+
+15
+00:02:03,000 --> 00:02:14,000
+and then Dim cn As New sqlconnection, so I'm going to be doing a connection to a SQL database, and let me
+
+16
+00:02:14,000 --> 00:02:23,000
+see if I can get the IntelliSense to popup here, SqlConnection, I guess I need to add the Using statement for
+
+17
+00:02:23,000 --> 00:02:31,000
+System.Data.SqlClient, and then what I need here is the connection string to the database.
+
+18
+00:02:31,000 --> 00:02:41,000
+Now I could hard code it on my application, but what I'm going to do instead is use the application settings in my project.
+
+19
+00:02:41,000 --> 00:02:49,000
+So let me get out of full screen here and then go to my project Properties, and then go to Settings, and I
+
+20
+00:02:49,000 --> 00:03:02,000
+want to create a new setting called NorthwindConnection, and it'll be a connection string, and this is
+
+21
+00:03:02,000 --> 00:03:09,000
+Application wide, and I want the value to be a connection string the way we set it up before.
+
+22
+00:03:09,000 --> 00:03:17,000
+So, I'll choose SQL Server, click Continue, I'll choose localhost here, and then I'll dropdown and choose
+
+23
+00:03:17,000 --> 00:03:26,000
+Northwind, and then click OK. So that adds a setting to our project which I can now use over here,
+
+24
+00:03:26,000 --> 00:03:37,000
+so it's just My.Settings.NorthwindConnection, and what it'll do is that will go read the settings file,
+
+25
+00:03:37,000 --> 00:03:43,000
+get that value, and use it here, and then later on if I want to change the connection string, I don't have
+
+26
+00:03:43,000 --> 00:03:47,000
+to recompile the application, I can just go into the Settings file, and we can find that by doing
+
+27
+00:03:47,000 --> 00:04:02,000
+Show All Files, and then under My Project we have the Settings here, and there is our Settings Designer,
+
+28
+00:04:02,000 --> 00:04:11,000
+and I believe I could actually open this up as an XML document,
+
+29
+00:04:11,000 --> 00:04:18,000
+and there you see our NorthwindConnection setting.
+
+30
+00:04:18,000 --> 00:04:33,000
+Alright, so now that we have the connection, I need to create a DataAdapter, so Dim da As New SqlDataAdapter,
+
+31
+00:04:33,000 --> 00:04:41,000
+and the command that I want to run is "Select * from categories". Actually, in this case we just need
+
+32
+00:04:41,000 --> 00:04:57,000
+the CategoryID and the CategoryName, so let's be specific, and that's from Categories.
+
+33
+00:04:57,000 --> 00:05:01,000
+And then the second parameter is the connection that I'm talking through.
+
+34
+00:05:01,000 --> 00:05:09,000
+And then finally I want to take the data out of the database and push it into the DataSet, so that's da.fill,
+
+35
+00:05:09,000 --> 00:05:21,000
+and then the reference to our DataSet, and the name of the table in the DataSet, and that will be Categories.
+
+36
+00:05:21,000 --> 00:05:27,000
+And then I want to do the same thing for Products, so let me just copy and paste this code here, and let me
+
+37
+00:05:27,000 --> 00:05:36,000
+just change these names; this will be the categories DataAdapter and this one will be the products DataAdapter,
+
+38
+00:05:36,000 --> 00:05:46,000
+and then here I want all of the columns from Products, so I will do Select *, and From Products, and the
+
+39
+00:05:46,000 --> 00:05:53,000
+name of this table in the DataSet will be Products. Alright, so now that we have our DataSet, we can
+
+40
+00:05:53,000 --> 00:06:00,000
+implement GetCategories and GetProducts. For GetCategories I just want to return the Categories table,
+
+41
+00:06:00,000 --> 00:06:20,000
+so that's Dim table = _dataSet.Tables, and I want the Categories table, and then it's just Return table.
+
+42
+00:06:20,000 --> 00:06:35,000
+And then for Products, I want to get the Products table, and I'm ready to return the table, but I don't want
+
+43
+00:06:35,000 --> 00:06:43,000
+to return all of the rows, I only want to return the rows that are of the current category.
+
+44
+00:06:43,000 --> 00:06:50,000
+So the way I'll do that here is by setting a row filter on the default view of the table.
+
+45
+00:06:50,000 --> 00:07:06,000
+So it's table.DefaultView.RowFilter = "CategoryID = "&amp; categoryId we passed in.
+
+46
+00:07:06,000 --> 00:07:13,000
+So that completes the implementation of the Get part of our DataSet source, now let's go to the form,
+
+47
+00:07:13,000 --> 00:07:21,000
+and add a data binding support. So I need to add another source to the ComboBox here for the DataSet,
+
+48
+00:07:21,000 --> 00:07:32,000
+so I'll go to Items and add DataSet. And now we'll go to the code for the form,
+
+49
+00:07:32,000 --> 00:07:44,000
+and get into full screen. So I need to add a field for the DataSet source, so Private _dataSetSource As
+
+50
+00:07:44,000 --> 00:07:54,000
+DataSetSource, and then I need to add the ability to get the DataSet source in SetSource, so I'll just
+
+51
+00:07:54,000 --> 00:08:10,000
+copy this Case statement here. So if the selected index is 1, that's DataSet, and this becomes dataSetSource
+
+52
+00:08:10,000 --> 00:08:24,000
+and just change that, and that, and that, and then this becomes DataSetSource.
+
+53
+00:08:24,000 --> 00:08:34,000
+And because we're using the interface, the rest of the code doesn't need to change, so we're ready to test out our work.
+
+54
+00:08:34,000 --> 00:08:39,000
+And before I run here, let me go into the DataSetSource and put some breakpoints, so I want to put a
+
+55
+00:08:39,000 --> 00:08:47,000
+breakpoint here for GetCategories and one for GetProducts, just to make sure that we're in this actual
+
+56
+00:08:47,000 --> 00:08:57,000
+DataSource, because in the UI it might not be obvious. Alright, so now I'll press F5, and we can see here
+
+57
+00:08:57,000 --> 00:09:06,000
+that I'm not hitting my breakpoint, so I'm in the ObjectDataSource, but if I switch over to the DataSetDataSource,
+
+58
+00:09:06,000 --> 00:09:15,000
+there we hit GetCategories, we just get out of full screen and continue to run, and there we hit GetProducts,
+
+59
+00:09:15,000 --> 00:09:26,000
+and then we come back to our UI, and now we're looking at the data from the actual DataSet.
+
+60
+00:09:26,000 --> 00:09:32,000
+So that completes the implementation of the Get part of our DataSetSource, and showing the data in our form.
+
+61
+00:09:32,000 --> 00:59:00,000
+I'll end this demo now and will implement the Add, Delete, and Save functionality in the next demo.
+

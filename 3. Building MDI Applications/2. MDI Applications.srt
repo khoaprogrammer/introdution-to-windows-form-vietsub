@@ -1,0 +1,36 @@
+1
+00:00:01,000 --> 00:00:12,000
+In an MDI application we have a main form, which contains some number of child forms, so some of the core
+
+2
+00:00:12,000 --> 00:00:20,000
+properties or methods of the main form. We need to set the IsMDIContainer property to true; that's really
+
+3
+00:00:20,000 --> 00:00:26,000
+the key in turning the Windows Forms application into an MDI application.
+
+4
+00:00:26,000 --> 00:00:32,000
+We use the ActiveMdiChild property to get a reference to the active child form.
+
+5
+00:00:32,000 --> 00:00:40,000
+We can use the MdiChildren property to get the collection of all child forms, and we can use the LayoutMdi
+
+6
+00:00:40,000 --> 00:00:50,000
+method to arrange the child forms. In the child form, the key property is the MdiParent; we're going to set
+
+7
+00:00:50,000 --> 00:00:56,000
+that when we create the child form, to indicate obviously it's a child of the main form, and then we can
+
+8
+00:00:56,000 --> 00:01:04,000
+also use the MdiParent property throughout the life of the child form to get a reference back to our parent.
+
+9
+00:01:04,000 --> 00:59:00,000
+The use of these properties and methods is covered in great detail in a series of demos which we'll move to now.
+

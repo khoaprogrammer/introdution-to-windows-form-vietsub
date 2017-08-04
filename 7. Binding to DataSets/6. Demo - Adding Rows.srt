@@ -1,0 +1,196 @@
+1
+00:00:01,000 --> 00:00:10,000
+In this demo we'll implement the functionality to add rows to our DataSet.
+
+2
+00:00:10,000 --> 00:00:16,000
+So let's come over to our DataSetSource and implement Add, so I'll come down here to AddProduct, let's get
+
+3
+00:00:16,000 --> 00:00:23,000
+into full screen. The first thing I need to do is get a reference to the Products table, so I'll just grab
+
+4
+00:00:23,000 --> 00:00:29,000
+that code, and I'm going to need that in Delete as well, so I might as well put it there.
+
+5
+00:00:29,000 --> 00:00:37,000
+And then to Add, we create a new row for the table, we populate the fields in the row, and then we add that
+
+6
+00:00:37,000 --> 00:00:50,000
+new row object to the table. So I'll say here Dim row = table.NewRow, so currently this row is detached from
+
+7
+00:00:50,000 --> 00:01:01,000
+the table, and then to actually add the row, we say table.Rows.Add and then pass in the new row, and then all
+
+8
+00:01:01,000 --> 00:01:10,000
+we need to do here is populate the properties, so we're being passed in a product As parameter, and most of
+
+9
+00:01:10,000 --> 00:01:16,000
+the properties we need are there, or most of the field values we need are there.
+
+10
+00:01:16,000 --> 00:01:22,000
+Now in the database, products have a SupplierID, we're not modeling that in this application, so I'm just
+
+11
+00:01:22,000 --> 00:01:29,000
+hard-coding that to 1, which is whatever the first Supplier is in the Supplier table, and products have a
+
+12
+00:01:29,000 --> 00:01:37,000
+ReorderLevel, I'm just setting that = 0. So now we should be able to add a product into our DataSet.
+
+13
+00:01:37,000 --> 00:01:42,000
+I'll put a breakpoint here, and then let's run,
+
+14
+00:01:42,000 --> 00:01:49,000
+and let's switch the Source to DataSet, and then click Add,
+
+15
+00:01:49,000 --> 00:01:58,000
+oh and we get an error. Okay, so it's trying to cast the CategoryToolStripComboBox.SelectedItem to Category
+
+16
+00:01:58,000 --> 00:02:08,000
+and it's saying you're unable to cast object of type 'System.Data.DataRowView' to type 'Data.Category'.
+
+17
+00:02:08,000 --> 00:02:15,000
+So why are we getting that? Well, in the object binding example, we were binding category objects to the
+
+18
+00:02:15,000 --> 00:02:23,000
+CategoryToolStripComboBox, but now we're binding a DataTable, and actually really what we're binding is a
+
+19
+00:02:23,000 --> 00:02:32,000
+view on the DataTable, so each of the items is of type DataRowView, so we can't cast the DataRowView to a
+
+20
+00:02:32,000 --> 00:02:37,000
+category, so this code isn't going to work. Alright, so let's get out of the full screen, and let's stop
+
+21
+00:02:37,000 --> 00:02:45,000
+debugging here, and let's go back into full screen. So what I need to do is replace this code to get the
+
+22
+00:02:45,000 --> 00:02:53,000
+currently selected category so I can pass that off to the AddProductForm, and the code we want instead that
+
+23
+00:02:53,000 --> 00:03:01,000
+will work in all the different scenarios is this. So we've set the ValueMember of the CategoryToolStripComboBox
+
+24
+00:03:01,000 --> 00:03:09,000
+to be the CategoryID, so this will get us the CategoryID, and the category name is the currently selected
+
+25
+00:03:09,000 --> 00:03:17,000
+text in the CategoryToolStripComboBox, so that will get us the category name, and that will allow us to
+
+26
+00:03:17,000 --> 00:03:27,000
+construct a category object, and then we can pass that off to the AddProductForm, so that should address that issue.
+
+27
+00:03:27,000 --> 00:03:36,000
+Alright, so let's put F5 again, and now let's switch to DataSet, and now let's click Add, and we'll call this
+
+28
+00:03:36,000 --> 00:03:47,000
+guy Text 1, and we'll put some text in here, and some numbers in here, and then click OK, and now we've
+
+29
+00:03:47,000 --> 00:03:54,000
+hit our breakpoint, so our row should have been added to the table; and to see that we could use the data tip
+
+30
+00:03:54,000 --> 00:04:00,000
+so if I just get into here, sometimes it's a little bit tricky, there we go, so that little magnifying glass,
+
+31
+00:04:00,000 --> 00:04:11,000
+I want the DataTable Visualizer, so here is our Products table, and if I scroll down, there's our new row, Test 1.
+
+32
+00:04:11,000 --> 00:04:20,000
+So SupplerID is 1, CategoryID is 1, QuantityPerUnit, and so on. Now notice that the ProductID is blank;
+
+33
+00:04:20,000 --> 00:04:28,000
+actually, its actual value is really dbnull. The ProductID is an auto increment field in the database,
+
+34
+00:04:28,000 --> 00:04:33,000
+so since the object is only in-memory at the moment, we won't know the ID.
+
+35
+00:04:33,000 --> 00:04:37,000
+Now we're going to implement the Delete functionality next, and we're going to see that not having a
+
+36
+00:04:37,000 --> 00:04:42,000
+ProductID here is going to be a little bit problematic, but we could implement a fairly simple solution to
+
+37
+00:04:42,000 --> 00:04:45,000
+address the issue.
+
+38
+00:04:45,000 --> 00:04:54,000
+And if I get out of full screen here, and then remove the breakpoint and continue running, we can come back
+
+39
+00:04:54,000 --> 00:05:01,000
+over to our app, and let's add one more item, just so we see this without the actual breakpoint in the middle,
+
+40
+00:05:01,000 --> 00:05:13,000
+so Test 2, and some values, and 200, and say 50, and 25, and then click OK.
+
+41
+00:05:13,000 --> 00:05:22,000
+So there's Test 2, there's the values. So that completes the implementation of Add, at least adding rows
+
+42
+00:05:22,000 --> 00:05:29,000
+to the DataSet. Remember, we just added rows in-memory, so if I was to stop the application and then run
+
+43
+00:05:29,000 --> 00:05:35,000
+again, and then set the Source to DataSet, you'll notice that those values or those rows aren't there,
+
+44
+00:05:35,000 --> 00:05:42,000
+because we never persisted them back to the database; we'll be doing that in a bit.
+
+45
+00:05:42,000 --> 00:05:51,000
+Actually, sorry, I forgot to mention one thing previously. You'll notice how we did a product, and I just
+
+46
+00:05:51,000 --> 00:06:00,000
+added the row to the table, but it showed up properly in the UI, and if I come back over to ObjectSource
+
+47
+00:06:00,000 --> 00:06:08,000
+here, and take a look, scroll down, you'll recall we had to add through the bindingSource to get that to work
+
+48
+00:06:08,000 --> 00:06:16,000
+when we're working just with objects. So the DataSet type actually has the proper notifications to know when
+
+49
+00:06:16,000 --> 00:59:00,000
+things have been added and removed; we don't have to go through the bindingSource when we're working with a DataSet.
+

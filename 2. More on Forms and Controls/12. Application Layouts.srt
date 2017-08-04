@@ -1,0 +1,48 @@
+1
+00:00:02,000 --> 00:00:08,000
+The last section in this module is on Application Layouts. This is actually a preview of the upcoming
+
+2
+00:00:08,000 --> 00:00:16,000
+modules, because in those modules we'll build an application using each of the three common layouts or styles
+
+3
+00:00:16,000 --> 00:00:21,000
+of Windows Forms applications we'll be discussing here.
+
+4
+00:00:21,000 --> 00:00:31,000
+The first of these layouts is the Multiple Document Interface, or MDI. Here we have a single main form that contains some number of child forms.
+
+5
+00:00:31,000 --> 00:00:38,000
+This layout was very commonly used in the '90s into the early to mid-2000s, but it's sort of fallen out of
+
+6
+00:00:38,000 --> 00:00:45,000
+favor since then. Today you're more likely to see our second layout, which is the Single Document Interface,
+
+7
+00:00:45,000 --> 00:00:54,000
+or SDI application. SDI applications are similar in many ways to an MDI application, just without the main form.
+
+8
+00:00:54,000 --> 00:01:01,000
+So each of what would have been the child forms now becomes its own top-level form.
+
+9
+00:01:01,000 --> 00:01:08,000
+The final layout we'll take a look at is the Explorer-Style application; this gets its name because of the
+
+10
+00:01:08,000 --> 00:01:15,000
+similar look and feel to Windows Explorer. In these types of applications we'll have item selection on the
+
+11
+00:01:15,000 --> 00:01:21,000
+left-hand side of the form, and then we'll have the details for the item on the right-hand side of the form,
+
+12
+00:01:21,000 --> 00:59:00,000
+and it's very common to see developers use a tree view for items selection, and a list view to display the details.
+

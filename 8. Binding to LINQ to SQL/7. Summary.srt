@@ -1,0 +1,20 @@
+1
+00:00:01,000 --> 00:00:11,000
+That concludes our look at LINQ to SQL, and it also concludes our foundational coverage of data binding in Windows Forms.
+
+2
+00:00:11,000 --> 00:00:16,000
+There's still lots to learn about data binding, we could do a whole course on this, but I think at this point
+
+3
+00:00:16,000 --> 00:00:23,000
+you should have a solid understanding of how data binding works. Now that you have that foundation, we can
+
+4
+00:00:23,000 --> 00:00:29,000
+take a look at the tools included in Visual Studio and Windows Forms that automate much of what we've done
+
+5
+00:00:29,000 --> 00:59:00,000
+manually to this point, and that's the focus of the next module.
+

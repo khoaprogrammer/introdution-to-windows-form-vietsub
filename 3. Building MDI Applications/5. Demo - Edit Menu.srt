@@ -1,0 +1,136 @@
+1
+00:00:03,000 --> 00:00:08,000
+In this demo we'll implement the Edit menu in our MDI Text Editor.
+
+2
+00:00:08,000 --> 00:00:14,000
+If we take a look at the Edit menu, I want all of the options that were given to us automatically.
+
+3
+00:00:14,000 --> 00:00:21,000
+Now if we look at these options, they apply to the text in the currently active child window.
+
+4
+00:00:21,000 --> 00:00:26,000
+So when I click on one of these, I'll need to get a reference to the form object for the active child
+
+5
+00:00:26,000 --> 00:00:34,000
+window, and then I'll need to get access to its RichTextBox control, which we called Document TextBox.
+
+6
+00:00:34,000 --> 00:00:41,000
+Alright, let's implement Undo. The first thing we need to do is get a reference to the active child window,
+
+7
+00:00:41,000 --> 00:00:47,000
+but there may not be an active child window; maybe you haven't created it yet, or maybe they're all minimized,
+
+8
+00:00:47,000 --> 00:01:00,000
+so we need to check for that. So If Me.ActiveMdiChild isnot Nothing Then I want to cast the ActiveMdiChild
+
+9
+00:01:00,000 --> 00:01:14,000
+property to ChildForm to be able to access the RichTextBox, so Dim childForm = CType(Me. ActiveMdiChild,
+
+10
+00:01:14,000 --> 00:01:24,000
+and I want to cast that to ChildForm). And then I want to access the functionality of the RichTextBox
+
+11
+00:01:24,000 --> 00:01:33,000
+control, so that's childForm.DocumentTextBox, and then we can take a look and see, does it have an Undo method?
+
+12
+00:01:33,000 --> 00:01:40,000
+It does. And if we take a look through the IntelliSense, we'll see that it also has Redo, it has Cut,
+
+13
+00:01:40,000 --> 00:01:48,000
+it has Copy; so basically all the operations we want to perform in our Edit menu are available as methods
+
+14
+00:01:48,000 --> 00:01:57,000
+on the RichTextBox control. So here we want to do Undo. And then the code for the rest of the methods is
+
+15
+00:01:57,000 --> 00:02:09,000
+basically just this code calling a different method of the RichTextBox control, so let's implement all of those.
+
+16
+00:02:09,000 --> 00:02:19,000
+So there's Redo, Cut, Copy, Paste, and SelectAll. So at this point we're ready to test out our work.
+
+17
+00:02:19,000 --> 00:02:23,000
+So I'll get a full screen and press F5.
+
+18
+00:02:23,000 --> 00:02:29,000
+And then I'll come over to this browser where I have the Wikipedia page for Windows Forms open, and I'll just
+
+19
+00:02:29,000 --> 00:02:38,000
+grab this text here, copy to the clipboard, come over, create a new child window, and then choose Edit and
+
+20
+00:02:38,000 --> 00:02:46,000
+Paste, you can see that that got pasted into there. I can grab patterns &amp; practices, and then do Edit, Cut,
+
+21
+00:02:46,000 --> 00:02:59,000
+that gets cut, come down here, Edit, Paste, and then I can Select All, and Delete, and so on.
+
+22
+00:02:59,000 --> 00:03:06,000
+So all the functionality we need for the Edit menu is provided for us by the RichTextBox control.
+
+23
+00:03:06,000 --> 00:03:12,000
+Now one quick note about the C# version of this program, if I come over to the C# project, you can see here's
+
+24
+00:03:12,000 --> 00:03:20,000
+the code for our Undo, so check to see is there an ActiveMdiChild? If there is then cast that, here let me
+
+25
+00:03:20,000 --> 00:03:28,000
+just get into full screen; I want to cast that to childForm, and then I want to use the functionality of
+
+26
+00:03:28,000 --> 00:03:37,000
+the RichTextBox control to Undo, Redo, Cut, Copy, Paste. But by default, the documentTextBox is not visible
+
+27
+00:03:37,000 --> 00:03:43,000
+off of the childForm. In C#, when you add a control to the form, so let's come over to our ChildForm,
+
+28
+00:03:43,000 --> 00:03:49,000
+there's our RichTextBox, the control is declared as private, which means it's internal to the form itself,
+
+29
+00:03:49,000 --> 00:03:55,000
+and we can't access it outside. So what I needed to do to get the code in the form to work the way it does
+
+30
+00:03:55,000 --> 00:04:04,000
+in the Visual Basic example is change this from being private to internal, and the way I did that was I went
+
+31
+00:04:04,000 --> 00:04:09,000
+to the Properties Window for the control and changed the Modifier here.
+
+32
+00:04:09,000 --> 00:04:18,000
+So initially it was Private, I changed it to Internal. And what that did is in the Designer generated code
+
+33
+00:04:18,000 --> 00:04:25,000
+down at the bottom, it just changed the visibility modifier on the control object.
+
+34
+00:04:25,000 --> 00:59:00,000
+So that completes the implementation of the Edit menu. In the next demo we'll implement the File menu.
+

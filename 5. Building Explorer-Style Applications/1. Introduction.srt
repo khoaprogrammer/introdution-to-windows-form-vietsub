@@ -1,0 +1,12 @@
+1
+00:00:01,000 --> 00:00:09,000
+Hi everybody, this is Rob Windsor, and this module, which is part of our Introduction to Windows Forms course,
+
+2
+00:00:09,000 --> 00:00:13,000
+is on Building Explorer-Style Applications.
+
+3
+00:00:13,000 --> 00:59:00,000
+In this module, we'll build an Explorer-Style application from start to finish.
+

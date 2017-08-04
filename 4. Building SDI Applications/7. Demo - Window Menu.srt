@@ -1,0 +1,160 @@
+1
+00:00:01,000 --> 00:00:11,000
+In this demo we'll complete the implementation of our SDI application by implementing the Window menu.
+
+2
+00:00:11,000 --> 00:00:17,000
+As I mentioned in the previous demo, we won't be having the Cascade, Tile Horizontally, and Tile Vertically
+
+3
+00:00:17,000 --> 00:00:23,000
+menu options, but we do want the Window menu option, and when the user clicks this, we want to show a list
+
+4
+00:00:23,000 --> 00:00:30,000
+of the open forms or open documents and allow the user to switch between them.
+
+5
+00:00:30,000 --> 00:00:36,000
+This functionality was provided for us automatically in the MDI application, but here in the SDI application
+
+6
+00:00:36,000 --> 00:00:44,000
+we'll have to implement it ourselves. So we'll do that in the event handler for the Windows DropDownOpening
+
+7
+00:00:44,000 --> 00:00:54,000
+event; that's this guy right here. When this event fires, we want to check to see if the Window menu option
+
+8
+00:00:54,000 --> 00:01:00,000
+has any children, so has the user clicked on the Window menu option previously?
+
+9
+00:01:00,000 --> 00:01:06,000
+If they have, we want to remove the existing items, and then go to the application object, find the current
+
+10
+00:01:06,000 --> 00:01:14,000
+list of open forms, and then repopulate the children of the Window menu item.
+
+11
+00:01:14,000 --> 00:01:19,000
+So the first step is to check to see if there are already children, and if there are remove them, so that's
+
+12
+00:01:19,000 --> 00:01:32,000
+If the WindowToolStripMenuItem.DropDownITems.Count &gt; 0 Then, and what we could do here is go and remove each
+
+13
+00:01:32,000 --> 00:01:38,000
+item individually, but there's actually a property called DropDown which contains the menu items, we can just
+
+14
+00:01:38,000 --> 00:01:50,000
+go ahead and remove that and then recreate it. So that's WindowToolStripMenuItem.DropDown.Dispose.
+
+15
+00:01:50,000 --> 00:01:54,000
+And then down here, once we know there are no children we'll recreate the DropDown, so
+
+16
+00:01:54,000 --> 00:02:12,000
+WindowToolStripMenuItem.DropDown = New ToolStripDropdown. Now we'll go through the list of open forms For
+
+17
+00:02:12,000 --> 00:02:28,000
+Each openForm As Form In My.Application.OpenForms, we'll create a new menu item to represent the form,
+
+18
+00:02:28,000 --> 00:02:42,000
+so Dim childItem As New ToolStripMenuItem, and then we'll set the text of the menu item to be the title of
+
+19
+00:02:42,000 --> 00:02:55,000
+the form, so childItem.Text = openForm.Text. And we also want to keep a reference to the form object,
+
+20
+00:02:55,000 --> 00:03:01,000
+we'll use that in the Click event handler for the menu item. To do that we'll need a property of the control
+
+21
+00:03:01,000 --> 00:03:07,000
+we can use to store the reference, and each control actually has a property called Tag, which you can use for
+
+22
+00:03:07,000 --> 00:03:11,000
+whatever purpose you want; you can store an object reference in there, you can store a value in there;
+
+23
+00:03:11,000 --> 00:03:20,000
+so we'll go ahead and use that. So it's childItem.Tag = openForm.
+
+24
+00:03:20,000 --> 00:03:24,000
+Then we need to add our new menu item to the dropdown items for the Window menu,
+
+25
+00:03:24,000 --> 00:03:35,000
+so that's WindowToolStripMenuItem.DropDownItems.Add(childItem).
+
+26
+00:03:35,000 --> 00:03:40,000
+And the last thing to do is hook up the Click event handler for our menu item, so that when the user clicks
+
+27
+00:03:40,000 --> 00:03:54,000
+on it, it will activate the associated form. So that's AddHandler childItem.Click, AddressOf, and the name
+
+28
+00:03:54,000 --> 00:04:04,000
+we'll give our event handler is WindowMenuItemClick. So now down here we'll implement the event handler,
+
+29
+00:04:04,000 --> 00:04:12,000
+so that's Private Sub WindowMenuItemClick, here let me just scroll up a little bit, and then we have
+
+30
+00:04:12,000 --> 00:04:27,000
+(sender As Object, e As EventArgs). When this gets called, sender will be a reference to the menu item that
+
+31
+00:04:27,000 --> 00:04:30,000
+was clicked, so let's get a variable to represent that that's properly typed,
+
+32
+00:04:30,000 --> 00:04:46,000
+so that's Dim menuItem = CType(sender, ToolStripMenuItem), and then the Tag property of the menu item
+
+33
+00:04:46,000 --> 00:04:51,000
+contains a reference to the form, but Tag is typed as object, so we'll have to do a cast here as well,
+
+34
+00:04:51,000 --> 00:05:06,000
+so Dim form = CType(menuItem.Tag, and we'll cast that to Form), and then finally we'll activate the form,
+
+35
+00:05:06,000 --> 00:05:13,000
+so form.Activate. Alright, that completes the code, so let's try this out.
+
+36
+00:05:13,000 --> 00:05:25,000
+Press F5, and then create some new forms, and then pick one of the windows, and then click the Window menu
+
+37
+00:05:25,000 --> 00:05:35,000
+option, and there we go, New Document, New Document 2, 3, 4, 5, 6, and so on, and if I click any one of these
+
+38
+00:05:35,000 --> 00:05:41,000
+it gets highlighted or activated; if I delete a couple and then come back over here and now click, you can
+
+39
+00:05:41,000 --> 00:05:49,000
+see this gets refreshed. So that completes the implementation of our Window menu, and it also completes the
+
+40
+00:05:49,000 --> 00:59:00,000
+implementation of our SDI application.
+

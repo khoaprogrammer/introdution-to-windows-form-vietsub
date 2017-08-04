@@ -1,0 +1,260 @@
+1
+00:00:02,000 --> 00:00:09,000
+Now I want to build the same program we built previously, but this time using the Windows Forms Tools and Designers.
+
+2
+00:00:09,000 --> 00:00:17,000
+So in Visual Studio, I'll choose File, New, Project, and then in the Windows section, I'll choose the
+
+3
+00:00:17,000 --> 00:00:27,000
+Windows Forms Application template. I'm going to name my project Designer, and then click OK.
+
+4
+00:00:27,000 --> 00:00:36,000
+This project template gives us a form by default, and this form has two views; it has the design view, and it
+
+5
+00:00:36,000 --> 00:00:43,000
+has the code view. I can switch to the code view by right-clicking and saying View Code.
+
+6
+00:00:43,000 --> 00:00:51,000
+Now, I don't want my class to be named Form1, I want it to be called MyForm, so I'll come over here in the
+
+7
+00:00:51,000 --> 00:00:59,000
+Solution Explorer, I'll right-click on Form1.vb, and choose Rename, and I'll rename it to MyForm, hit Enter,
+
+8
+00:00:59,000 --> 00:01:05,000
+and it's saying I'm renaming the file that contains the class definition, do I also want to rename the class,
+
+9
+00:01:05,000 --> 00:01:12,000
+and I do, so I'll click Yes, and notice now my Class has been renamed to MyForm.
+
+10
+00:01:12,000 --> 00:01:16,000
+Now I want to set some properties of the form, but instead of doing that in code in the constructor,
+
+11
+00:01:16,000 --> 00:01:23,000
+I'll come over to the Designer, and I'll click on the form, and then I can set properties over here in
+
+12
+00:01:23,000 --> 00:01:29,000
+the Properties Window. So, for example, if I want to change the title of the form to MyForm, that's the Text
+
+13
+00:01:29,000 --> 00:01:39,000
+property, so I'll just change this to MyForm, hit Enter, and notice that that change gets put over here.
+
+14
+00:01:39,000 --> 00:01:49,000
+And then if I want to resize the form I can come over to size, and instead of 300,300 let's make this 500,430
+
+15
+00:01:49,000 --> 00:01:57,000
+and hit Enter, and now you can see that my form is resized. With the form properties set, I can now add the
+
+16
+00:01:57,000 --> 00:02:05,000
+controls to the form, so I'll do that by opening up the Toolbox, and I'll pin the Toolbox open, and now I can
+
+17
+00:02:05,000 --> 00:02:12,000
+drag and drop the controls from the Toolbox over here onto the form design surface.
+
+18
+00:02:12,000 --> 00:02:25,000
+So, I want a TextBox, I want a Button, and I want a Label. Once I have the controls on the form, I can unpin
+
+19
+00:02:25,000 --> 00:02:32,000
+the Toolbox to give me more space here on my Designer, and then I can drag and drop the controls around.
+
+20
+00:02:32,000 --> 00:02:37,000
+So I want the TextBox to be up here. Now notice as I'm dragging I'm getting these snap lines, the Windows
+
+21
+00:02:37,000 --> 00:02:45,000
+Forms Designer gives us snap lines so that we can align and resize controls to be similar to each other,
+
+22
+00:02:45,000 --> 00:02:52,000
+and it also give us snap lines to help us conform to the Windows look and feel guidelines.
+
+23
+00:02:52,000 --> 00:02:57,000
+So, for example, if I take the button and I move it out below the TextBox, you'll see that I get the left and
+
+24
+00:02:57,000 --> 00:03:04,000
+right snap lines, but I'll also eventually get a small snap line in between the controls.
+
+25
+00:03:04,000 --> 00:03:09,000
+So this is saying that these controls meet the standard Windows Forms guidelines in terms of space between
+
+26
+00:03:09,000 --> 00:03:17,000
+the two controls. Also, if I move the TextBox up here towards the top left, notice there's a snap line here
+
+27
+00:03:17,000 --> 00:03:24,000
+to the left, and eventually there'll be a snap line near the top. So again, this is indicating that this
+
+28
+00:03:24,000 --> 00:03:30,000
+control is now positioned using the Windows Forms guidelines in terms of how far the control should be from
+
+29
+00:03:30,000 --> 00:03:35,000
+the top of the form, and how far it should be away from the left of the form.
+
+30
+00:03:35,000 --> 00:03:40,000
+Now in this particular case I'm not going to follow the guidelines exactly, because I want the properties of
+
+31
+00:03:40,000 --> 00:03:47,000
+the controls to be the same as they were in our previous example. So I'll start out with a TextBox,
+
+32
+00:03:47,000 --> 00:03:52,000
+I'll click on it to make sure it's highlighted, and then come over to the Properties Window; you can see this
+
+33
+00:03:52,000 --> 00:03:57,000
+dropdown at the top is indicating we're setting properties for the TextBox.
+
+34
+00:03:57,000 --> 00:04:09,000
+I want the name of the TextBox to be MessageTextBox, so I'll set the Name property.
+
+35
+00:04:09,000 --> 00:04:18,000
+I want the Left and Top to be both 25, so I'll scroll down here, and notice there's no left, and if you
+
+36
+00:04:18,000 --> 00:04:23,000
+scroll down to the Ts, there's no top, and by the way, I'm showing these in alphabetical order, I've done
+
+37
+00:04:23,000 --> 00:04:30,000
+that by clicking the alphabetical option. If you're not seeing them in alphabetical order, you probably
+
+38
+00:04:30,000 --> 00:04:37,000
+have your properties organized by category. I just find it's easier to find things if you sort them alphabetically.
+
+39
+00:04:37,000 --> 00:04:44,000
+So anyways, you won't find Left and Top in here, but you will find Location.
+
+40
+00:04:44,000 --> 00:04:50,000
+And then underneath Location we have X and Y; this is our Left and our Top, so I want these to be both 25,
+
+41
+00:04:50,000 --> 00:05:00,000
+so I'll set these to 25 and then 25. And then finally, I want the Width to be 200; I won't find a Width
+
+42
+00:05:00,000 --> 00:05:09,000
+property, but I will find Size, and if I expand that, I can set the Width here to be 200.
+
+43
+00:05:09,000 --> 00:05:22,000
+Now I can click on my button, I want to set the name to ShowMessageButton; I want to set the Left at 25,
+
+44
+00:05:22,000 --> 00:05:39,000
+and the Top to 75, so I'll come down to Location, so I want the Left to be 25, and I want the Top to be 75.
+
+45
+00:05:39,000 --> 00:05:45,000
+I want the Width to be 200, so I'll come down to size and set the Width to 200.
+
+46
+00:05:45,000 --> 00:05:57,000
+And then finally I want the Text to be ShowMessage. And then finally I'll click on my label, I want the name
+
+47
+00:05:57,000 --> 00:06:16,000
+of the label to be MessageLabel. I want the Position to be 25 and 125; I believe it is, so I actually can
+
+48
+00:06:16,000 --> 00:06:29,000
+just set this by the location, so 25,125. And I want the Width to be 200, so I'll just set the Width to 200.
+
+49
+00:06:29,000 --> 00:06:35,000
+And notice I typed 200 and hit Enter, but nothing changed, and that's because the label actually has a
+
+50
+00:06:35,000 --> 00:06:43,000
+property called AutoSize, and I want to change that, so I'll come up to AutoSize, set this to False, I want
+
+51
+00:06:43,000 --> 00:06:53,000
+take explicit control over that, and then now come back to size, and there you can see now my Width is set to 200.
+
+52
+00:06:53,000 --> 00:07:03,000
+And then finally, I want to set the default Text to be Label in square brackets the way we had it in our previous example.
+
+53
+00:07:03,000 --> 00:07:08,000
+And now I want to add the event handler for the button, so when I click the button the text from the TextBox
+
+54
+00:07:08,000 --> 00:07:15,000
+gets put into the label. So over here in our Properties Window, right now we're showing the properties
+
+55
+00:07:15,000 --> 00:07:22,000
+because this option is selected. If I want to switch to the Events view, I'll click the little lightning
+
+56
+00:07:22,000 --> 00:07:28,000
+bolt, and now we can see the different events for the button. And if I want to add the event handler for the
+
+57
+00:07:28,000 --> 00:07:35,000
+Click event, I'll make sure it's selected, and then over here in this space I'll just double-click.
+
+58
+00:07:35,000 --> 00:07:40,000
+So here's our event handler Sub routine; notice it has the signature we saw before, sender As Object,
+
+59
+00:07:40,000 --> 00:07:48,000
+e As EventArgs, and it's handling the ShowMessageButton.Click, or the Click event for the ShowMessageButton.
+
+60
+00:07:48,000 --> 00:08:08,000
+So now if I type in the same code we had before, so MessageLabel.Text = MessageTextBox.Text, and then hit F5,
+
+61
+00:08:08,000 --> 00:08:13,000
+and then type some text into the TextBox, and then click the button, we can see that the text from the
+
+62
+00:08:13,000 --> 00:08:21,000
+TextBox gets transferred over to the label. So functionally our application is the same, but the code that
+
+63
+00:08:21,000 --> 00:08:28,000
+we see for the form is greatly reduced from what we saw earlier. Now all the code we wrote earlier, at least
+
+64
+00:08:28,000 --> 00:08:34,000
+similar code, is there in the project, it's just not being shown to you or made obvious to you.
+
+65
+00:08:34,000 --> 00:59:00,000
+We'll explore this further in the next section.
+

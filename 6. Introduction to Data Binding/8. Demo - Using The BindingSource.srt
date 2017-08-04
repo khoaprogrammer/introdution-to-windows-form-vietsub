@@ -1,0 +1,240 @@
+1
+00:00:01,000 --> 00:00:11,000
+In this demo we'll take a look at working with BindingSources. So let's come over to the code behind for our form,
+
+2
+00:00:11,000 --> 00:00:18,000
+and go to the full screen, and I'll add the two fields to represent our two BindingSources, one for
+
+3
+00:00:18,000 --> 00:00:26,000
+categories and then one for products. And then here in the Form_Load, I'll say that the
+
+4
+00:00:26,000 --> 00:00:41,000
+categoriesBindingSource.DataSource = _source.GetCategories. So I set the DataSource here, and then I set the
+
+5
+00:00:41,000 --> 00:00:49,000
+DataSource for the control to be the BindingSource. So the BindingSource is an intermediary between the
+
+6
+00:00:49,000 --> 00:00:55,000
+object that contains the data and the control that's going to show and interact with the data.
+
+7
+00:00:55,000 --> 00:01:00,000
+And then for the product's BindingSource I'm going to use all this code, but I can actually move it out of
+
+8
+00:01:00,000 --> 00:01:15,000
+this event handler up into the Form_Load, so let me do that, and then here I can say that the DataSource for
+
+9
+00:01:15,000 --> 00:01:22,000
+the GridView is the productsBindingSource, the DataSource for the ListBox is also the productsBindingSource,
+
+10
+00:01:22,000 --> 00:01:33,000
+and the DataSource for all these controls is the productsBindingSource.
+
+11
+00:01:33,000 --> 00:01:40,000
+And because now I'm only defining these bindings once, I don't need to do the clear that I had in the event
+
+12
+00:01:40,000 --> 00:01:54,000
+handler, so I can get rid of all of these. And then the last change I need to do is down here in the
+
+13
+00:01:54,000 --> 00:02:01,000
+Category Click, instead of binding products here, I'm actually going to set the DataSource for
+
+14
+00:02:01,000 --> 00:02:12,000
+the productsBindinSource. So productsBindingSource.DataSource = _source.GetProducts, and the change to the
+
+15
+00:02:12,000 --> 00:02:24,000
+DataSource for the productsBindingSource here will be reflected in all of our bindings that we've defined here.
+
+16
+00:02:24,000 --> 00:02:31,000
+Alright, so let's go ahead and test out our work, so I'll get out of full screen and press F5.
+
+17
+00:02:31,000 --> 00:02:38,000
+So the first thing to check is if I can go and change the category, that works; if I scroll through these,
+
+18
+00:02:38,000 --> 00:02:46,000
+you can see we're getting the data for the selected product over here; if I go back to beverages and choose
+
+19
+00:02:46,000 --> 00:02:55,000
+Outback Lager and make the changes we've seen before, so this is 100 and that's 200, and then scroll around
+
+20
+00:02:55,000 --> 00:03:02,000
+and come back to Outback Lager, those changes are there, and they're also shown in the grid.
+
+21
+00:03:02,000 --> 00:03:11,000
+So all that previous functionality is working. Now let's go to Steeleye Stout and Delete, oh that didn't
+
+22
+00:03:11,000 --> 00:03:19,000
+delete, okay, why didn't it delete? Oh, I know why. I forgot to make two changes.
+
+23
+00:03:19,000 --> 00:03:29,000
+So let's come back to our form. I'm still removing and adding the products using the methods I added to the
+
+24
+00:03:29,000 --> 00:03:38,000
+ObjectSource class. So the appropriate notifications still aren't being given to the UI, but if I add the
+
+25
+00:03:38,000 --> 00:03:42,000
+product and delete the product using the BindingSource they will be.
+
+26
+00:03:42,000 --> 00:03:51,000
+So, let's comment out this line, and then here say _productsBindingSource.Add, so I'll do the add through
+
+27
+00:03:51,000 --> 00:04:00,000
+here, and it still takes a product, so the parameter will be form.Product, and then if I comment out this
+
+28
+00:04:00,000 --> 00:04:10,000
+line here and then come back and say _productsBindingSource.Remove, and then again this takes a product
+
+29
+00:04:10,000 --> 00:04:18,000
+reference, so I'll pass that in. So what these calls will do is add or remove the product from the
+
+30
+00:04:18,000 --> 00:04:25,000
+underlying collection, but also do the notification to the UI so that it updates properly.
+
+31
+00:04:25,000 --> 00:04:28,000
+So let's run again,
+
+32
+00:04:28,000 --> 00:04:35,000
+and then go pick Steeleye Stout and click Delete, and there it's gone, and then pick the last item,
+
+33
+00:04:35,000 --> 00:04:41,000
+which I can't pronounce, and click Delete, and there you can see it's gone as well.
+
+34
+00:04:41,000 --> 00:04:48,000
+And then let's just go to another category, how about produce, and click Add, here's our Add dialog,
+
+35
+00:04:48,000 --> 00:05:00,000
+so Test, and then some text, and then 100 and 100 and 50, and then click OK, and now you can see that Test
+
+36
+00:05:00,000 --> 00:05:07,000
+item has been added and there are its property values. So now by adding and deleting through the BindingSource,
+
+37
+00:05:07,000 --> 00:05:13,000
+we're getting the proper notifications and we're getting the expected behavior in our UI.
+
+38
+00:05:13,000 --> 00:05:21,000
+I mentioned we could also do navigation through the BindingSource, so let's implement our forward and back buttons.
+
+39
+00:05:21,000 --> 00:05:26,000
+So I'll come back to the Form Designer, and add the Click Event handler for Back, and this is just
+
+40
+00:05:26,000 --> 00:05:42,000
+_productsBindingSource.MovePrevious, and then over here Forward, and again it's _productsBindingSource.MoveNext.
+
+41
+00:05:42,000 --> 00:05:54,000
+And now hit F5, and then you can see that I'm able to now easily navigate through my items using these Toolbar buttons.
+
+42
+00:05:54,000 --> 00:06:03,000
+There's just one last item before we move on; it's not related to BindingSources but is important.
+
+43
+00:06:03,000 --> 00:06:11,000
+You may have noticed when I add an item here, that as I Tab through the TextBoxes, one we're tabbing into
+
+44
+00:06:11,000 --> 00:06:17,000
+beverages, which is read-only, which doesn't really help us because we're not going to change that value,
+
+45
+00:06:17,000 --> 00:06:24,000
+and then two, I'm going from unit price to units on order, and then back to unit stock.
+
+46
+00:06:24,000 --> 00:06:30,000
+So this is called the Tab Order of the form, and we can control that.
+
+47
+00:06:30,000 --> 00:06:37,000
+So if I go into the AddProductForm Designer, and take a look at any one of the controls, one of the
+
+48
+00:06:37,000 --> 00:06:45,000
+properties is TabIndex and another is TabStop. So when I press the Tab key on any control, Windows Forms
+
+49
+00:06:45,000 --> 00:06:52,000
+will go to the control with the next highest TabIndex whose TabStop is set to True.
+
+50
+00:06:52,000 --> 00:07:00,000
+So an easy way to set the TabIndex on all the controls is go to the View menu and choose Tab Order.
+
+51
+00:07:00,000 --> 00:07:04,000
+And you can just click on the controls in the order you want the tabbing.
+
+52
+00:07:04,000 --> 00:07:11,000
+So I can click this label and then this TextBox, and this guy, and this guy, and this guy, and this guy;
+
+53
+00:07:11,000 --> 00:07:23,000
+just keep going through them sequentially there, and once I've finished, View-Tab Order.
+
+54
+00:07:23,000 --> 00:07:32,000
+And then for the ReadOnly control, I'll just click on that and set TabStop = False.
+
+55
+00:07:32,000 --> 00:07:39,000
+So now when I run my program and click Add, you'll see that I start with Name, because it has the lowest tab
+
+56
+00:07:39,000 --> 00:07:46,000
+order where TabStop is equal to True, and if I Tab, the next one is quantity per unit, because we set TabStop
+
+57
+00:07:46,000 --> 00:07:57,000
+equal to False here, and then Tab, Tab, Tab, Tab, to the OK button, and then Tab to the Cancel button.
+
+58
+00:07:57,000 --> 00:08:06,000
+So when you're building your data entry forms, make sure you set the Tab Order so it's intuitive to your user.
+
+59
+00:08:06,000 --> 00:08:11,000
+That completes this demo on BindingSources. In the next section we'll take a look at working with database
+
+60
+00:08:11,000 --> 00:59:00,000
+data and working with data sets.
+

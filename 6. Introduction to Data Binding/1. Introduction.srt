@@ -1,0 +1,28 @@
+1
+00:00:01,000 --> 00:00:10,000
+Hi everybody, this is Rob Windsor, and this module, which is part of our Introduction to Windows Forms course,
+
+2
+00:00:10,000 --> 00:00:14,000
+is an Introduction to Data Binding.
+
+3
+00:00:14,000 --> 00:00:20,000
+In this module we'll examine what data binding is and how it works.
+
+4
+00:00:20,000 --> 00:00:27,000
+We'll look at simple data binding; that's binding to controls like a TextBox, a label, or a checkbox,
+
+5
+00:00:27,000 --> 00:00:35,000
+complex data binding; that's binding to controls like a ComboBox, a ListBox, or a data grid.
+
+6
+00:00:35,000 --> 00:00:41,000
+We'll look at the mechanics of binding to a set of objects in memory, and we'll finish off looking
+
+7
+00:00:41,000 --> 00:59:00,000
+at the BindingSource control.
+

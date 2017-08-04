@@ -1,0 +1,28 @@
+1
+00:00:01,000 --> 00:00:09,000
+That completes this module, and it also completes this course. I'd like to take this opportunity to say
+
+2
+00:00:09,000 --> 00:00:15,000
+thank you for watching the videos, especially for those of you that made it all the way through; I know this
+
+3
+00:00:15,000 --> 00:00:20,000
+course was probably long. If you have questions or comments, please feel free to leave these on the Course
+
+4
+00:00:20,000 --> 00:00:28,000
+Discussion Forum, or contact me via Twitter or my blog. If you'd like to see a follow-up course with more
+
+5
+00:00:28,000 --> 00:00:33,000
+on Windows Forms, or if there's another topic you'd like to see in the Pluralsight library, you can vote
+
+6
+00:00:33,000 --> 00:00:40,000
+and comment in the New Course Suggestions part of our support website, just go to support.Pluralsight.com,
+
+7
+00:00:40,000 --> 00:59:00,000
+and click on New Course Suggestions.
+

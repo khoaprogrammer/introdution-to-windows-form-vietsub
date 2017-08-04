@@ -1,0 +1,144 @@
+1
+00:00:02,000 --> 00:00:09,000
+In this demo, we'll take a look at working with user controls. So here's the project we'll be using,
+
+2
+00:00:09,000 --> 00:00:15,000
+and I've done a little bit of setup. I've added a class called Person; this class has FirstName, LastName,
+
+3
+00:00:15,000 --> 00:00:25,000
+and Age properties, and then in the load event for the form, I've created an instance of Person and set the properties.
+
+4
+00:00:25,000 --> 00:00:30,000
+And now what I want to do is create a user control that will work with the person data.
+
+5
+00:00:30,000 --> 00:00:42,000
+So I'll right-click on my project and choose Add, User Control; I'll call this the PersonControl.
+
+6
+00:00:42,000 --> 00:00:47,000
+And here we have the design surface, and we work with this just like we would with the form.
+
+7
+00:00:47,000 --> 00:00:57,000
+So let me resize it for now, and then open the Toolbox, and I want three TextBoxes, so 1, and then I'll
+
+8
+00:00:57,000 --> 00:01:04,000
+just copy and paste 2 and 3, and then I'll move these guys around a little bit.
+
+9
+00:01:04,000 --> 00:01:12,000
+And then I want three labels, so there's our Label, and then again just copy and paste a couple more,
+
+10
+00:01:12,000 --> 00:01:34,000
+and then now I can format the form a little bit. Okay, so this label's text will be First Name, and then this
+
+11
+00:01:34,000 --> 00:01:49,000
+TextBox will be called the FirstNameTextBox, and then I'll set the similar properties of the other controls,
+
+12
+00:01:49,000 --> 00:01:57,000
+and then come back to the video. And then I'll just move these controls a little bit, so I'm just going to
+
+13
+00:01:57,000 --> 00:02:09,000
+lasso all of them, they can go up into here, and then I'll resize the control to just take up that much space there.
+
+14
+00:02:09,000 --> 00:02:15,000
+Now we'll add the code for the control, so I'll right-click on the design area and choose View Code, I'll
+
+15
+00:02:15,000 --> 00:02:22,000
+unpin the Toolbox, and then I'll create a Person property here, so I'll use the Property code snippet,
+
+16
+00:02:22,000 --> 00:02:33,000
+and the name of our field will be _person, and this is of type Person, and the name of our Property will
+
+17
+00:02:33,000 --> 00:02:44,000
+also be Person, and again this is of type Person. And then in the Get I will return _person, but before I
+
+18
+00:02:44,000 --> 00:02:50,000
+do that I want to make sure that the values in the TextBoxes are reflected in the person object, so that
+
+19
+00:02:50,000 --> 00:03:12,000
+would be _person.FirstName = FirstTextBox.Text and _person.LastName = LastNameTextBox.Text and _person.Age =
+
+20
+00:03:12,000 --> 00:03:29,000
+CInt(ageTextBox.text). And then in the Set I'll do the reverse, so that'll be FirstTextBox.Text =
+
+21
+00:03:29,000 --> 00:03:57,000
+value.FirstName, and LastNameTExtBox.Text = Value.LastName, and AgeTextBox.Text = value.Age.
+
+22
+00:03:57,000 --> 00:04:01,000
+And for our simple demo that's sufficient, so now let's come over to the form,
+
+23
+00:04:01,000 --> 00:04:09,000
+and what I want to do is put a person control onto the form. So if I go to the Toolbox and then go up to
+
+24
+00:04:09,000 --> 00:04:14,000
+the top here, what I want to do is have the PersonControl show up over here in the Toolbox.
+
+25
+00:04:14,000 --> 00:04:22,000
+And the way I can get that is by building the project. So, I'll do Ctrl Shift B to build the project,
+
+26
+00:04:22,000 --> 00:04:29,000
+and then sometimes you need to Auto Hide and then reopen the Toolbox for this to show up; there we go,
+
+27
+00:04:29,000 --> 00:04:36,000
+there's our PersonControl, and then drag and drop that onto the form.
+
+28
+00:04:36,000 --> 00:04:41,000
+And I can move it around, I can put it with other controls; it's just like any other control.
+
+29
+00:04:41,000 --> 00:04:55,000
+And then over here in the form, what I want to do is just say PersonControl1.Person = p.
+
+30
+00:04:55,000 --> 00:05:00,000
+And then to show we're getting the values of the TextBoxes, actually let's just come back here and then put
+
+31
+00:05:00,000 --> 00:05:08,000
+down a button below this here, and then in the button Click event handler, let's write out the last name.
+
+32
+00:05:08,000 --> 00:05:33,000
+So, MsgBox(PersonControl1.Person.LastName). Alright, so let's press F5 to test out our work.
+
+33
+00:05:33,000 --> 00:05:40,000
+So there's our form with the person data, and right now if I click the button you can see the last name is
+
+34
+00:05:40,000 --> 00:05:50,000
+Windsor, and then if I change the last name to Smith and then click the button, you can see we get that value there.
+
+35
+00:05:50,000 --> 00:05:56,000
+So the process of building a user control is very similar to the process of building a form; it allows you
+
+36
+00:05:56,000 --> 00:59:00,000
+to consolidate commonly used UI and logic in one place.
+

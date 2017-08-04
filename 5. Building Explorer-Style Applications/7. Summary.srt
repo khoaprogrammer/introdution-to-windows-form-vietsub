@@ -1,0 +1,12 @@
+1
+00:00:03,000 --> 00:00:08,000
+That completes this module, and it also completes our look at the commonly used Application Layouts,
+
+2
+00:00:08,000 --> 00:00:15,000
+the Multiple Document Interface, the Single Document Interface, and the Explorer-Style Interface.
+
+3
+00:00:15,000 --> 00:59:00,000
+In the next module we'll turn our focus to data and look at the use of Data Binding.
+

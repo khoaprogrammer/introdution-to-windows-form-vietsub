@@ -1,0 +1,148 @@
+1
+00:00:02,000 --> 00:00:10,000
+Now that we have a form and we have controls in that form, we can talk about Events and Event Handlers.
+
+2
+00:00:10,000 --> 00:00:16,000
+Events are raised as the user interacts with the program. For example, they click on a button, they resize
+
+3
+00:00:16,000 --> 00:00:23,000
+a form, they change a selected item in a list box or a combo box; each of these user interactions causes
+
+4
+00:00:23,000 --> 00:00:30,000
+one or more events to be raised in the system. And what we can do as developers is write code called
+
+5
+00:00:30,000 --> 00:00:38,000
+event handlers that run when a specific event is raised. Event handlers are methods with a signature specific
+
+6
+00:00:38,000 --> 00:00:45,000
+to the kind of event that's being raised. The method is always a Sub routine or a void function, and the
+
+7
+00:00:45,000 --> 00:00:52,000
+method almost always takes two parameters. The first is of type object, and this is a reference to the
+
+8
+00:00:52,000 --> 00:01:00,000
+object that raised the event. And the second is of type EventArgs, or something that derives from EventArgs,
+
+9
+00:01:00,000 --> 00:01:07,000
+and this has information specific to the event. A couple of important things to note that may not be obvious
+
+10
+00:01:07,000 --> 00:01:16,000
+about event handlers is 1) A single event may have multiple event handlers, and 2) A single event handler
+
+11
+00:01:16,000 --> 00:01:24,000
+may handle multiple events. For the latter case to work, the two different events must have the same event handler signature.
+
+12
+00:01:24,000 --> 00:01:32,000
+We'll see an example of this when we build the MDI application later on in the course.
+
+13
+00:01:32,000 --> 00:01:41,000
+In Visual Basic there are two different ways to attach an event handler to an event.
+
+14
+00:01:41,000 --> 00:01:49,000
+We can do it statically or we can do it dynamically. To be able to attach an event handler statically,
+
+15
+00:01:49,000 --> 00:01:56,000
+the variable that represents the control must have been declared using the WithEvents keyword.
+
+16
+00:01:56,000 --> 00:02:01,000
+If this is the case, then we can add a Handles clause to the end of the signature for the event handler
+
+17
+00:02:01,000 --> 00:02:08,000
+method, indicating which event or events that this event handler handles.
+
+18
+00:02:08,000 --> 00:02:14,000
+So taking a look at the code snippet on the slide, you can see that the ShowMessageButton variable has been
+
+19
+00:02:14,000 --> 00:02:22,000
+declared WithEvents, and then after the parameter list in the ClickEvenHandler Sub routine, we can see that
+
+20
+00:02:22,000 --> 00:02:29,000
+this event handler handles the Click event of the ShowMessageButton.
+
+21
+00:02:29,000 --> 00:02:34,000
+When attaching an event handler dynamically, we don't have the requirement that the variable representing
+
+22
+00:02:34,000 --> 00:02:41,000
+the control was declared WithEvents. If it was, that's fine, but it doesn't have to be.
+
+23
+00:02:41,000 --> 00:02:49,000
+Then at some point in our code we can use the AddHandler statement to attach the event handler to the event.
+
+24
+00:02:49,000 --> 00:02:59,000
+The syntax is the AddHandler keyword, then the event we want to handle, and then a pointer to the event handler.
+
+25
+00:02:59,000 --> 00:03:04,000
+So taking a look at the code snippet, we can see that in the constructor for the form, we're using the
+
+26
+00:03:04,000 --> 00:03:11,000
+AddHandler statement to indicate that the ClickHandler method is the event handler for the click event of the
+
+27
+00:03:11,000 --> 00:03:19,000
+ShowMessage button. Notice there is no Handles clause in the signature for ClickHandler; the Handles clause
+
+28
+00:03:19,000 --> 00:03:28,000
+is only used in static event handling. Now if you've attached an event handler to an event dynamically using
+
+29
+00:03:28,000 --> 00:03:37,000
+the AddHandler statement, you can later detach that event handler from the event using the RemoveHandler statement.
+
+30
+00:03:37,000 --> 00:03:43,000
+There is no equivalent to RemoveHandler when you use static event handling.
+
+31
+00:03:43,000 --> 00:03:51,000
+When working with C#, we can only attach event handlers dynamically; there are no equivalents to WithEvents
+
+32
+00:03:51,000 --> 00:04:03,000
+and Handles in C#. The way we attach an event handler to an event is using the += operator.
+
+33
+00:04:03,000 --> 00:04:08,000
+On the left-hand side of the operator we have the event, and then on the right-hand side we have the name
+
+34
+00:04:08,000 --> 00:04:17,000
+of the event handler. So looking at the code snippet, ShowMessageButton.Click += ClickHandler, is attaching
+
+35
+00:04:17,000 --> 00:04:24,000
+a ClickHandler event handler to the click event of the ShowMessageButton.
+
+36
+00:04:24,000 --> 00:04:30,000
+Now that we understand the syntax for event handling, let's move on to the demo where we'll implement an
+
+37
+00:04:30,000 --> 00:59:00,000
+event handler for our ShowMessageButton.
+

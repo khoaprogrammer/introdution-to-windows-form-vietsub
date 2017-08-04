@@ -1,0 +1,20 @@
+1
+00:00:01,000 --> 00:00:09,000
+Hi everybody, this is Rob Windsor, and in this module, which is part of our Introduction to Windows Forms
+
+2
+00:00:09,000 --> 00:00:14,000
+course, we'll continue our examination of Forms and Controls.
+
+3
+00:00:14,000 --> 00:00:21,000
+In this module we'll take a look at the Form Lifecycle events, working with Dialogs, including building a
+
+4
+00:00:21,000 --> 00:00:29,000
+custom Dialog, working with Menus and Toolbars, and building User Controls.
+
+5
+00:00:29,000 --> 00:59:00,000
+The final section of the module introduces some common Application Layouts, and it previews the upcoming three modules.
+

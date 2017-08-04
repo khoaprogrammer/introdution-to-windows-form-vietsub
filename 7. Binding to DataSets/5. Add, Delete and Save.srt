@@ -1,0 +1,152 @@
+1
+00:00:01,000 --> 00:00:09,000
+In this section we'll take a look at how to Add and Delete rows in a DataTable, and how to Save the changes
+
+2
+00:00:09,000 --> 00:00:16,000
+made to the data in the DataTable back to the underlying data store.
+
+3
+00:00:16,000 --> 00:00:25,000
+To add a row to a DataTable, you call the NewRow method on the DataTable object, and this returns you a data row.
+
+4
+00:00:25,000 --> 00:00:31,000
+At this point the data row is disconnected, meaning it doesn't yet exist in the DataTable.
+
+5
+00:00:31,000 --> 00:00:38,000
+You then populate the column values in the data row, and then to actually add the row to the table, you call
+
+6
+00:00:38,000 --> 00:00:46,000
+the Add method on the tables Rows collection, passing in a reference to the data row object.
+
+7
+00:00:46,000 --> 00:00:53,000
+To Delete a row from a DataTable, we can either use the Delete method on the data row object, or we can call
+
+8
+00:00:53,000 --> 00:01:02,000
+the Remove method on the rows collection of the DataTable, passing in a reference to the data row we would like to remove.
+
+9
+00:01:02,000 --> 00:01:08,000
+So the general practice is to use a query or a filter or some other technique to get the row or the set of
+
+10
+00:01:08,000 --> 00:01:14,000
+rows you want to remove, and then to iterate through that result set using one of the two techniques I just
+
+11
+00:01:14,000 --> 00:01:22,000
+mentioned to actually remove the rows from the table. Now just a brief aside before we move on, if you're
+
+12
+00:01:22,000 --> 00:01:28,000
+not familiar to the LINQ query syntax we see here on the slide, this is LINQ to DataSet.
+
+13
+00:01:28,000 --> 00:01:35,000
+The key for LINQ to DataSet is the AsEnumerable extension method on the DataTable object.
+
+14
+00:01:35,000 --> 00:01:40,000
+This exposes the data rows that's compatible with the LINQ queries.
+
+15
+00:01:40,000 --> 00:01:48,000
+Another part of LINQ to DataSet that I'm using is the ability to get column values in a strongly type manner.
+
+16
+00:01:48,000 --> 00:01:54,000
+So using the generic Field method, I can pass in a type parameter, and internally the Field method will
+
+17
+00:01:54,000 --> 00:02:01,000
+cast the column value I want into the type I've indicated with the type parameter.
+
+18
+00:02:01,000 --> 00:02:09,000
+These extensions to DataTable and the associated types are really nice when you're frequently working with DataSets.
+
+19
+00:02:09,000 --> 00:02:17,000
+Finally we'll take a look at how to save the changes to data in a DataTable back to the underlying data store.
+
+20
+00:02:17,000 --> 00:02:25,000
+First we'll create a Connection object, then we'll open that connection, then we'll call the Update method
+
+21
+00:02:25,000 --> 00:02:34,000
+on the DataAdapter that's associated with the DataTable we're updating; this takes a reference to the DataSet
+
+22
+00:02:34,000 --> 00:02:43,000
+and the name of the DataTable as parameters. Calling Update internally calls the Insert, Update,
+
+23
+00:02:43,000 --> 00:02:51,000
+and DeleteCommands once for each row that's been added, updated, or deleted.
+
+24
+00:02:51,000 --> 00:02:58,000
+The Insert, Update, and DeleteCommands are not automatically created when you create the DataAdapter.
+
+25
+00:02:58,000 --> 00:03:04,000
+So you need to do one of two things, you either need to specify these commands using the InsertCommand,
+
+26
+00:03:04,000 --> 00:03:12,000
+UpdateCommand, and DeleteCommand properties, or, in many simple scenarios, you can create an instance of
+
+27
+00:03:12,000 --> 00:03:20,000
+the provider-specific command builder object, passing in a reference to the DataAdapter, and it will build
+
+28
+00:03:20,000 --> 00:03:26,000
+the Insert, Update, and DeleteCommands for you based on the Select command.
+
+29
+00:03:26,000 --> 00:03:35,000
+We'll see how this technique is used in the upcoming demo. After calling Update we'll close the connection,
+
+30
+00:03:35,000 --> 00:03:41,000
+and we also want to call Dispose on the Connection object to indicate to the underlying provider that it can
+
+31
+00:03:41,000 --> 00:03:49,000
+release any unmanaged resources. Notice that the call to Dispose is in a Finally block in the slide; this is
+
+32
+00:03:49,000 --> 00:03:58,000
+because we want this call to happen whether we have an exception or not within the Try block.
+
+33
+00:03:58,000 --> 00:04:03,000
+One final note before we move back to the demo, the Update code we have here will work fine if we're just
+
+34
+00:04:03,000 --> 00:04:11,000
+updating one table or maybe a few tables that are unrelated. But if you have related tables, for example
+
+35
+00:04:11,000 --> 00:04:18,000
+you have a Master-Child relationship, then you're going to need to use a little bit more complex update logic
+
+36
+00:04:18,000 --> 00:04:25,000
+to ensure that the rows in the child table and the parent table are inserted, updated, and deleted in the
+
+37
+00:04:25,000 --> 00:04:32,000
+proper order; in other words, in a way that doesn't break any referential integrity constraints.
+
+38
+00:04:32,000 --> 00:59:00,000
+Alright, so now let's move back to our demo, where we'll implement the code we've seen here on the slides.
+

@@ -1,0 +1,116 @@
+1
+00:00:01,000 --> 00:00:09,000
+In this demo we'll implement the File and Edit menu options in our SDI application.
+
+2
+00:00:09,000 --> 00:00:15,000
+So we've already added the menu in the toolbar, but we haven't implemented any of the event handlers yet,
+
+3
+00:00:15,000 --> 00:00:22,000
+so if I go over to the MDI application, again there are a lot of similarities here, so all I'll do is just
+
+4
+00:00:22,000 --> 00:00:35,000
+go and copy and paste all of the File and Edit event handlers we had; see Undo, Cut, Copy, Paste, SelectAll,
+
+5
+00:00:35,000 --> 00:00:47,000
+okay that would be those, and then come over here and paste those in; let's paste them above our CreateForm function.
+
+6
+00:00:47,000 --> 00:00:56,000
+And now let's go and fix up their implementations. Okay, so for File-New, we have our CreateForm method,
+
+7
+00:00:56,000 --> 00:01:10,000
+so I can just call that, and then for Open, we still want to show the OpenFileDialog; when the user clicks OK
+
+8
+00:01:10,000 --> 00:01:18,000
+we want to put the contents of the file that they chose, let me go into full screen, into the DocumentTextBox
+
+9
+00:01:18,000 --> 00:01:41,000
+of the current form not a new form. So that would be Me.DocumentTextBox.LoadFile, and then Me.Text = dialog.FileName.
+
+10
+00:01:41,000 --> 00:01:52,000
+For Close we're going to close the current form, so that will be Me.Close.
+
+11
+00:01:52,000 --> 00:01:58,000
+For Save we don't need to get the ActiveChild form, we're going to save the contents of our DocumentTextBox,
+
+12
+00:01:58,000 --> 00:02:07,000
+so let's just go and remove that If statement that surrounds this, and then here again this changes from
+
+13
+00:02:07,000 --> 00:02:20,000
+ChildForm to Me. Since there isn't a MainForm, we'll remove the Exit menu handler or Exit menu, so let me
+
+14
+00:02:20,000 --> 00:02:29,000
+just remove the event handler here, and then go back to the form and just get rid of this separator, and then
+
+15
+00:02:29,000 --> 00:02:39,000
+get rid of the Exit menu. So that completes the File menu, and now we should be into the Edit menu.
+
+16
+00:02:39,000 --> 00:02:47,000
+And here again we don't have to worry about the ActiveMdiChild, so let's just delete that and that, and then
+
+17
+00:02:47,000 --> 00:03:04,000
+it's just Me. So I'll just grab this and come down here, paste that in, change Undo to Redo, and then do
+
+18
+00:03:04,000 --> 00:03:44,000
+the same for Cut, Copy, Paste, and then finally SelectAll. Now in VB, because we have the handles clause on
+
+19
+00:03:44,000 --> 00:03:50,000
+our event handlers, our event handlers will be attached to the events automatically.
+
+20
+00:03:50,000 --> 00:03:59,000
+In C# you'll have to go back to the form, click on each of the events, and then using the Events view here,
+
+21
+00:03:59,000 --> 00:04:08,000
+go and attach them. So now if we hit F5, then we can create a new document using the toolbar, we can create
+
+22
+00:04:08,000 --> 00:04:18,000
+a new document using the menu, we can open one of the files we had before, we can save, here I'll save over
+
+23
+00:04:18,000 --> 00:04:29,000
+top of one of the other documents, we can close the form, so come over here File-Close, we can select all
+
+24
+00:04:29,000 --> 00:04:45,000
+the text, we can cut, undo that cut, we can redo that cut, we can paste, we can copy, and then we can paste again.
+
+25
+00:04:45,000 --> 00:04:50,000
+So that's the implementation of the File and Edit menus. For the Window menu we're not going to have
+
+26
+00:04:50,000 --> 00:04:56,000
+Cascade, Tile Horizontally, or Tile Vertically, but we do want to have the dropdown which shows all of the
+
+27
+00:04:56,000 --> 00:05:04,000
+open windows and allows us to switch between them. Now because we're in an SDI application and not an MDI
+
+28
+00:05:04,000 --> 00:05:10,000
+application, we won't get that functionality automatically; we'll have to write some code in an event handler
+
+29
+00:05:10,000 --> 00:59:00,000
+to do that, and that will be the next demo.
+

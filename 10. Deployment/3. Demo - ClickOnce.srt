@@ -1,0 +1,120 @@
+1
+00:00:01,000 --> 00:00:10,000
+In this demo, I'll use ClickOnce to publish and install the Explorer Style Application we created earlier in the course.
+
+2
+00:00:10,000 --> 00:00:15,000
+I have the application open here in Visual Studio. I'll go to the project in the Solution Explorer,
+
+3
+00:00:15,000 --> 00:00:23,000
+right-click, and choose Publish to open up the Publish Wizard. In the first page we'll be asked where we
+
+4
+00:00:23,000 --> 00:00:30,000
+want to put the files the Wizard is going to generate; by default there's a folder called publish; I want
+
+5
+00:00:30,000 --> 00:00:37,000
+to change that to a folder I created earlier that's called ExplorerInstall in my Downloads folder.
+
+6
+00:00:37,000 --> 00:00:44,000
+So I'll click Open, and then click Next. Now we'll be asked how the user will install the application; will
+
+7
+00:00:44,000 --> 00:00:53,000
+it be from a website, from a file share, or a from a DVD or CD? We're going to be using a file share.
+
+8
+00:00:53,000 --> 00:00:58,000
+Now if I click Browse, you can see I can choose the exact same folder I chose earlier, which is really what
+
+9
+00:00:58,000 --> 00:01:07,000
+I want, but if I click Open and then Next, you can see it's telling me I need to use an UNC path.
+
+10
+00:01:07,000 --> 00:01:14,000
+So I'll click OK, and I'll come over to the folder in Windows Explorer, and earlier I created Share so that
+
+11
+00:01:14,000 --> 00:01:23,000
+I'd have the UNC path, there's the path here, so let's copy that to the clipboard, click Cancel, come back
+
+12
+00:01:23,000 --> 00:01:31,000
+to Visual Studio and replace what I have with the UNC path. I'll click Next; now it's going to ask me the
+
+13
+00:01:31,000 --> 00:01:37,000
+installation mode. Do I want to have this installed, meaning I'm adding a shortcut to the Start Menu,
+
+14
+00:01:37,000 --> 00:01:43,000
+or do I want it launched where I won't. I'll use the default, which is install.
+
+15
+00:01:43,000 --> 00:01:50,000
+I'll click Next, and get some information about the install, I'll click Finish, and Visual Studio will build
+
+16
+00:01:50,000 --> 00:01:58,000
+my application, generate the deployment files, which is what you see here, and then copy them to the path
+
+17
+00:01:58,000 --> 00:02:05,000
+I indicated in the wizard, which is our ExplorerInstall folder, which we see is in the file path here,
+
+18
+00:02:05,000 --> 00:02:14,000
+and the UNC path over here. Now let's switch from the developer role to the user role.
+
+19
+00:02:14,000 --> 00:02:23,000
+I want to install the application on my machine, so I come over to the UNC path, and I double-click on setup.exe.
+
+20
+00:02:23,000 --> 00:02:29,000
+I get the Security Warning dialog, because the manifests that are included in the deployment files were
+
+21
+00:02:29,000 --> 00:02:35,000
+signed using a self-signed certificate; Windows doesn't know who the publisher is.
+
+22
+00:02:35,000 --> 00:02:41,000
+Now if I had a publisher's certificate, I could sign the manifest with that and then Windows would know who
+
+23
+00:02:41,000 --> 00:02:48,000
+the publisher is, and that either wouldn't show this dialog or it would show the publisher information here.
+
+24
+00:02:48,000 --> 00:02:53,000
+In this case I know that it's safe to install the application, so I'll click Install, and after a short
+
+25
+00:02:53,000 --> 00:03:01,000
+delay, here is my Explorer Style Application, and it has the same functionality I had when we ran it from
+
+26
+00:03:01,000 --> 00:03:11,000
+Visual Studio earlier in the course. Now that I have the application installed, I have two options to run it again.
+
+27
+00:03:11,000 --> 00:03:20,000
+I can come and double-click on setup.exe, and there's my application, or I can go to the Start Menu,
+
+28
+00:03:20,000 --> 00:03:27,000
+and the name of the application is Explorer, so just search for that, there it is there, click on Explorer,
+
+29
+00:03:27,000 --> 00:03:33,000
+and there's my application there. So that's the basic use of ClickOnce.
+
+30
+00:03:33,000 --> 00:59:00,000
+Next we'll take a look at handling application updates.
+

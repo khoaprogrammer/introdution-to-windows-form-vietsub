@@ -1,0 +1,232 @@
+1
+00:00:01,000 --> 00:00:09,000
+In this demo we'll implement the File menu for our MDI Text Editor.
+
+2
+00:00:09,000 --> 00:00:15,000
+Let's take a look at the existing items in the File menu. We won't be doing any printing, so I can remove
+
+3
+00:00:15,000 --> 00:00:24,000
+this separator, I'll click on it and click Delete, and I'll remove Print, and I'll remove Print Preview.
+
+4
+00:00:24,000 --> 00:00:31,000
+I also don't need Save As, so we'll delete that. And then I want to add a Close menu option between Open and
+
+5
+00:00:31,000 --> 00:00:40,000
+Save, so I'll click on this separator, and then right-click and insert a Menu Item, and I'll set the text
+
+6
+00:00:40,000 --> 00:00:58,000
+here to &amp;Close, and then I'll rename the menu item to close ToolStrip menu item.
+
+7
+00:00:58,000 --> 00:01:04,000
+We already have an implementation for New, but I want to change it a little bit; I want to make sure that
+
+8
+00:01:04,000 --> 00:01:11,000
+each of the child forms has a unique name or title. So, I'll add a field, which will be an integer we use
+
+9
+00:01:11,000 --> 00:01:23,000
+for a counter, so Private _counter As Integer = 0, and then when I create a form I'll use counter as part
+
+10
+00:01:23,000 --> 00:01:36,000
+of the title for the form. So down here I'll say _counter += 1, and then childForm.Text, that's the title
+
+11
+00:01:36,000 --> 00:01:48,000
+of the form, is = "New Document" and then the value of the counter.
+
+12
+00:01:48,000 --> 00:02:00,000
+So if we Run now, and then create a few child documents, you can see they each have a unique name.
+
+13
+00:02:00,000 --> 00:02:06,000
+And then in the Window menu we can see now we have the different names and we can choose between those.
+
+14
+00:02:06,000 --> 00:02:14,000
+Alright, so that's the New menu, now let's take a look at the Close menu.
+
+15
+00:02:14,000 --> 00:02:18,000
+So what I want to do here is close the active window if there is one.
+
+16
+00:02:18,000 --> 00:02:30,000
+So I'll just grab this If statement, and paste it down here. So If the ActiveMdiChild IsNot Nothing then
+
+17
+00:02:30,000 --> 00:02:41,000
+I want to call the Close method on the ActiveMdiChild. So that's Me.ActiveMdiChild.Close.
+
+18
+00:02:41,000 --> 00:02:49,000
+So that closes a child form, and then we also have Exit; Exit closes the main form and any children, but all
+
+19
+00:02:49,000 --> 00:02:57,000
+we need to do is just say Me.Close, and that will take care of that entire process.
+
+20
+00:02:57,000 --> 00:03:05,000
+So that takes care of New, Close, and Exit; what we have left are Save and Open, and to implement these we're
+
+21
+00:03:05,000 --> 00:03:10,000
+going to need to use some dialog boxes, or more specifically, two of the common dialog boxes that come with
+
+22
+00:03:10,000 --> 00:03:24,000
+the .NET framework. Let's implement Save first. So for Save I want to save the text in the ActiveMdiChild,
+
+23
+00:03:24,000 --> 00:03:35,000
+so again I need the code to get that; let's just go up here and grab it.
+
+24
+00:03:35,000 --> 00:03:45,000
+And then I don't need Select All, so if the ActiveMdiChild IsNot Nothing Then I'll cast it to childForm.
+
+25
+00:03:45,000 --> 00:03:51,000
+Then I need to put up a dialog box asking the user where they want to save the file.
+
+26
+00:03:51,000 --> 00:04:01,000
+So first I will need to go to full screen, and then add some new lines, and then add the code, Dim dialog
+
+27
+00:04:01,000 --> 00:04:12,000
+As New SaveFileDialog. And we're working with the RichTextEditor control, so this works with Rich Text
+
+28
+00:04:12,000 --> 00:04:29,000
+Files, or RTF files, so I'll say dialog.filter = "Rich text files, and then the pipe character, and *.rtf".
+
+29
+00:04:29,000 --> 00:04:37,000
+So in the FileSave dialog, the filter will be just rich text files. And then we'll also indicate that if the
+
+30
+00:04:37,000 --> 00:04:43,000
+user doesn't give us an extension on the file name, then we'll automatically set it to RTF; so that's
+
+31
+00:04:43,000 --> 00:04:54,000
+dialog.AddExtension, and we'll set that = true. And then we'll show the dialog by calling the ShowDialog method;
+
+32
+00:04:54,000 --> 00:05:00,000
+this returns a result indicating which button in the dialog the user selected, so it will be
+
+33
+00:05:00,000 --> 00:05:16,000
+Dim result = dialog.ShowDialog. Now we only want to save the file if the user clicks the OK button, so we'll
+
+34
+00:05:16,000 --> 00:05:29,000
+say here If result = Windows.Forms.DialogResult.OK Then we want to save the file, and we can do that using
+
+35
+00:05:29,000 --> 00:05:41,000
+a method off of the RichtTextBox control. So that's childForm.DocumentTextBox.SaveFile, and then we want to
+
+36
+00:05:41,000 --> 00:05:51,000
+save into the file that the user selected in the SaveFile dialog; so that's dialog.FileName.
+
+37
+00:05:51,000 --> 00:06:09,000
+We also want to change the title of the childForm to the file name, so that's childForm.Text = dialog.FileName.
+
+38
+00:06:09,000 --> 00:06:20,000
+Alright, to review, check to see if there's an active childForm; if there is, cast it to the childForm type,
+
+39
+00:06:20,000 --> 00:06:30,000
+create and configure and show the SaveFile dialog. If the user clicks OK, then save the text in the document
+
+40
+00:06:30,000 --> 00:06:41,000
+to the file the user chose and change the title of the form. Alright, let's give this a try.
+
+41
+00:06:41,000 --> 00:06:49,000
+So I'll press F5, and then I'll create a new child window, and then I'll put some text into that child window,
+
+42
+00:06:49,000 --> 00:06:59,000
+and then I'll choose File-Save; there's our SaveFile dialog; notice that the Save type is our filter.
+
+43
+00:06:59,000 --> 00:07:13,000
+I'll save it to my Downloads folder as Doc2.rtf. And now if we go over to my Downloads folder, there should
+
+44
+00:07:13,000 --> 00:07:26,000
+be Doc2.rtf, and if I open that up, there we can see the contents of the file.
+
+45
+00:07:26,000 --> 00:07:35,000
+And the final step in implementing our File menu is to implement the File-Open.
+
+46
+00:07:35,000 --> 00:07:47,000
+So here we'll use the OpenFile dialog, so Dim dialog As New OpenFileDialog, and again I want to set the
+
+47
+00:07:47,000 --> 00:07:59,000
+filter, so actually that's just this code right here, and then we want to show the dialog, so that's Dim
+
+48
+00:07:59,000 --> 00:08:22,000
+result = dialog.ShowDialog. And if the user clicks OK, so If result = Windows.Forms.DialogResult.OK,
+
+49
+00:08:22,000 --> 00:08:26,000
+then we want to create a new childForm and load up the file the user selected, so that's
+
+50
+00:08:26,000 --> 00:08:44,000
+Dim childForm As New ChildForm, and then childForm.DocumentTextBox.Loadfile, and that is the file the user
+
+51
+00:08:44,000 --> 00:09:01,000
+chose in the dialog, so dialog.FileName. And then childForm.Text = also the dialog FileName.
+
+52
+00:09:01,000 --> 00:09:15,000
+And the childForm.MdiParent is the main form, and then finally childForm.Show.
+
+53
+00:09:15,000 --> 00:09:24,000
+So now we can press F5, and then choose File-Open, and pick the file we just saved a moment ago, and there's
+
+54
+00:09:24,000 --> 00:09:31,000
+our file, again the title being the path of the file; if I expand this a little bit we should be able to see
+
+55
+00:09:31,000 --> 00:09:43,000
+the entire path. So File-New creates new documents, File-Open we just saw, File-Close closes the active
+
+56
+00:09:43,000 --> 00:09:53,000
+document, Save we saw just a moment ago, and then File-Exit closes the main form, and that in turn, actually
+
+57
+00:09:53,000 --> 00:10:01,000
+before the main form closes, closes the children. So at this point the implementation of the menu is complete.
+
+58
+00:10:01,000 --> 00:59:00,000
+The last step is to add the Toolbar, and that will be the next demo.
+

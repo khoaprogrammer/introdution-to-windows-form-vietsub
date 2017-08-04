@@ -1,0 +1,32 @@
+1
+00:00:02,000 --> 00:00:09,000
+In this section we'll take a look at building User Controls. A User Control is a _____ control, in other
+
+2
+00:00:09,000 --> 00:00:15,000
+words it's a control that's made up of other controls. And the process of building a user control is very
+
+3
+00:00:15,000 --> 00:00:21,000
+similar to the process of building a form. You have a design surface, you drag and drop controls onto the
+
+4
+00:00:21,000 --> 00:00:27,000
+design surface, you set their properties, you handle their events.
+
+5
+00:00:27,000 --> 00:00:35,000
+The advantage of working with user controls is that you can easily consolidate common UI and associated code behind.
+
+6
+00:00:35,000 --> 00:00:42,000
+Now one important thing to note about user controls is that they can only be used in the project where they're defined.
+
+7
+00:00:42,000 --> 00:00:48,000
+If you want to build a library of controls that you can use in multiple projects, then you're looking at
+
+8
+00:00:48,000 --> 00:59:00,000
+Custom Controls, which is a more advanced topic and one we're not going to cover here.
+

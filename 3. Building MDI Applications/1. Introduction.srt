@@ -1,0 +1,16 @@
+1
+00:00:01,000 --> 00:00:09,000
+Hi everybody, this is Rob Windsor, and this module, which is part of our Introduction to Windows Forms course
+
+2
+00:00:09,000 --> 00:00:12,000
+is on Building MDI Applications.
+
+3
+00:00:12,000 --> 00:00:21,000
+In this module I'll give a brief introduction to MDI applications, covering some of the core concepts,
+
+4
+00:00:21,000 --> 00:59:00,000
+and then we'll build an MDI Text Editor from start to finish.
+

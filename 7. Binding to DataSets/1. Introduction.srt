@@ -1,0 +1,44 @@
+1
+00:00:01,000 --> 00:00:11,000
+Hi everybody, this is Rob Windsor, and this module, which is part of our Introduction to Windows Forms course,
+
+2
+00:00:11,000 --> 00:00:14,000
+is on Binding to DataSets.
+
+3
+00:00:14,000 --> 00:00:19,000
+For this outline to make sense, I need to give you a very brief introduction to DataSets.
+
+4
+00:00:19,000 --> 00:00:26,000
+DataSets are basically in-memory databases. So traditionally what we'll do is when our form loads,
+
+5
+00:00:26,000 --> 00:00:33,000
+we'll go to a database, get some data, and put it into the DataSet, then we'll data bind to the DataSet,
+
+6
+00:00:33,000 --> 00:00:40,000
+and make all of our changes in-memory, and at some point we'll kick off a Save operation, where we take all
+
+7
+00:00:40,000 --> 00:00:47,000
+of the changes we've made in-memory in the DataSet, and push them back into the underlying database.
+
+8
+00:00:47,000 --> 00:00:52,000
+With that foundation covered, we can now get back to our outline. We'll begin the module with a little bit
+
+9
+00:00:52,000 --> 00:01:00,000
+less brief introduction or primer on ADO.NET and DataSets, we'll see how we can populate DataSets from a
+
+10
+00:01:00,000 --> 00:01:08,000
+database, we'll take a look at how to data bind to DataSets, we'll see how to Add and Remove Rows in a
+
+11
+00:01:08,000 --> 00:59:00,000
+table in a DataSet, and finally how to save the changes we've made in the DataSet back to the database.
+

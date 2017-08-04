@@ -1,0 +1,108 @@
+1
+00:00:01,000 --> 00:00:11,000
+In this demo I want to create the project and setup the main form for our Explorer-Style application.
+
+2
+00:00:11,000 --> 00:00:18,000
+So in Visual Studio I'll choose File-New-Project, and then I'll choose the Windows Forms Application template,
+
+3
+00:00:18,000 --> 00:00:37,000
+and I'll call the project Explorer. Click OK, and then rename the name form from Form1 to ExplorerForm.
+
+4
+00:00:37,000 --> 00:00:51,000
+And then I'll set the title to the main form to be Explorer-Style Application, and I'll resize the main form
+
+5
+00:00:51,000 --> 00:01:00,000
+to take up most of the design area. Eventually I'm going to need a ToolStrip, so let's add that now, so
+
+6
+00:01:00,000 --> 00:01:10,000
+that's in Menus &amp; Toolbars, and then the remainder of the interface I want to resemble Windows Explorer.
+
+7
+00:01:10,000 --> 00:01:16,000
+So, I want to have a tree view over here, I want to have a list view over here, and I want to have some way
+
+8
+00:01:16,000 --> 00:01:22,000
+to resize these two controls relative to each other.
+
+9
+00:01:22,000 --> 00:01:33,000
+So coming back to Visual Studio, I'll go open up the Toolbox, and then down here there is a section called Containers.
+
+10
+00:01:33,000 --> 00:01:37,000
+Now we haven't really talked about Container controls, so let's cover that first.
+
+11
+00:01:37,000 --> 00:01:45,000
+Let me put a panel onto the form, and then let me just change the background color of the panel to something
+
+12
+00:01:45,000 --> 00:01:54,000
+other than the color of the form, I don't know it doesn't really matter, Cornsilk, there that works.
+
+13
+00:01:54,000 --> 00:02:00,000
+Alright, now let me go and drag and drop some controls onto the form, so let's put a textbox on there,
+
+14
+00:02:00,000 --> 00:02:10,000
+and then let's put, I don't know, it doesn't really matter, a label, and how about a button?
+
+15
+00:02:10,000 --> 00:02:17,000
+Alright, now, if I go and highlight the panel and then move it, notice that the controls move with it.
+
+16
+00:02:17,000 --> 00:02:22,000
+So the panel is what's called a Container control, meaning that it has its own controls collection, and
+
+17
+00:02:22,000 --> 00:02:31,000
+controls you put on the container are children of the container. So the panel is part of the forms controls
+
+18
+00:02:31,000 --> 00:02:38,000
+collection, but the TextBox, the button, and the label, are part of the panel controls collection.
+
+19
+00:02:38,000 --> 00:02:47,000
+And again, if I move the panel they move, and if I delete the panel they go away.
+
+20
+00:02:47,000 --> 00:02:51,000
+In this instance we're going to use a container control called the SplitContainer.
+
+21
+00:02:51,000 --> 00:02:58,000
+So if I come down to Containers, here's SplitContainer, and I'll put that on my form, and here we have a
+
+22
+00:02:58,000 --> 00:03:05,000
+panel on the left side, a splitter, and then a panel on the right side, and then now all we need to do is put
+
+23
+00:03:05,000 --> 00:03:17,000
+the tree view over here on the left side and dock that into the panel, and then put my list view over here
+
+24
+00:03:17,000 --> 00:03:26,000
+on the right side, and then dock that into that panel. And now I have my application, so when I press F5
+
+25
+00:03:26,000 --> 00:03:33,000
+here, if I resize, everything resizes, and I have the splitter, or I can change the relative size of the
+
+26
+00:03:33,000 --> 00:03:39,000
+preview and the list view controls. So that gives us the form layout that we want.
+
+27
+00:03:39,000 --> 00:59:00,000
+In the next demo we'll look at populating the tree view control.
+

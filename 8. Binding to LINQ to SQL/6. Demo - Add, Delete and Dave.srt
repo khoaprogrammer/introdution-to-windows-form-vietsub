@@ -1,0 +1,316 @@
+1
+00:00:01,000 --> 00:00:11,000
+In this demo we'll implement the Add, Delete, and Save functionality in our LinqSource class, so I'll come
+
+2
+00:00:11,000 --> 00:00:17,000
+over to LinqSource, and I'll go full screen. We'll start by implementing Save.
+
+3
+00:00:17,000 --> 00:00:26,000
+In Save I want to call the SubmitChanges method off of our Northwind DataContext object.
+
+4
+00:00:26,000 --> 00:00:35,000
+I'll do that within a Try Catch in case there's an exception; so in the Try it's _context.SubmitChanges,
+
+5
+00:00:35,000 --> 00:00:43,000
+and then here, if there's an exception, I'm going to show that out in a MsgBox, and then I'll just re-throw
+
+6
+00:00:43,000 --> 00:00:54,000
+the Exception, whoops, I don't want the snippet, I just want to call Throw there.
+
+7
+00:00:54,000 --> 00:01:01,000
+Now let's take a look at Add. Here in AddProduct I've passed product object, but what I really need is a
+
+8
+00:01:01,000 --> 00:01:07,000
+linqProduct object, that's the entity in our LINQ to SQL model, so I'll create one of those.
+
+9
+00:01:07,000 --> 00:01:20,000
+Dim linqProduct As New LinqProduct, and then I'll just copy the property values from the product object over
+
+10
+00:01:20,000 --> 00:01:30,000
+into the linqProduct object. And finally I want to add the linqProduct to the linqProducts collection off of
+
+11
+00:01:30,000 --> 00:01:39,000
+the DataContext. So that's _context.linqProducts; and I've been saying collection, but really the type is
+
+12
+00:01:39,000 --> 00:01:47,000
+System.Data.Linq.Table(Of LinqProduct), to be more specific here.
+
+13
+00:01:47,000 --> 00:01:55,000
+Alright, so context.LinqProducts.Add, and we don't see any Add here.
+
+14
+00:01:55,000 --> 00:02:06,000
+And actually the method of the table I want to call to add my linqProduct is InsertOnSubmit.
+
+15
+00:02:06,000 --> 00:02:12,000
+So you can see it says Adds an entity in a pending insert state to this table; and this is actually going to
+
+16
+00:02:12,000 --> 00:02:19,000
+be important, the difference between Add and InsertOnSubmit here, we'll see this in a second.
+
+17
+00:02:19,000 --> 00:02:31,000
+Alright, so I want to say InsertOnSubmit, and then I want to pass in our linqProduct.
+
+18
+00:02:31,000 --> 00:02:40,000
+Alright, so now let's press F5, and let's switch to LINQ to SQL, and then come to Seafood, where we've been
+
+19
+00:02:40,000 --> 00:02:52,000
+adding our test items. And you can see we have Test 3 and Test 4, so let's add Test 5.
+
+20
+00:02:52,000 --> 00:03:01,000
+And then just add some text here, and some numeric values here, and then click OK.
+
+21
+00:03:01,000 --> 00:03:10,000
+Alright, so we don't see Test 5 here. If I switch over to another category, and then come back to Seafood
+
+22
+00:03:10,000 --> 00:03:23,000
+we still don't see Test 5. But if I save the changes, stop, press F5 again, switch to LINQ to SQL, and then
+
+23
+00:03:23,000 --> 00:03:33,000
+come back to Seafood, there is Test 5 with the values. So the Add code worked properly, but until we save
+
+24
+00:03:33,000 --> 00:03:40,000
+the changes back to the database, we saw no evidence of our new item in the UI.
+
+25
+00:03:40,000 --> 00:03:46,000
+Now if you recall back to when we were binding to objects, we had a similar issue, and we were able to solve
+
+26
+00:03:46,000 --> 00:03:56,000
+it by instead of inserting the object using the context in this case, to do it through the BindingSource.
+
+27
+00:03:56,000 --> 00:04:09,000
+So let's just change this to BindingSource.Add(linqProduct). And now let's press F5 and switch to LINQ to
+
+28
+00:04:09,000 --> 00:04:23,000
+SQL, and then come over to Seafood, and then let's add Test 6, and then I'm just adding some values here,
+
+29
+00:04:23,000 --> 00:04:34,000
+and then click OK, oh there we go; now we have Test 6 being added, all is good with the world, or sort of,
+
+30
+00:04:34,000 --> 00:04:43,000
+because if I switch over to Beverages and then come back to Seafood, well we don't get Test 6 back from our query.
+
+31
+00:04:43,000 --> 00:04:55,000
+But again, if I'm to save here, and then close, and then run again, switch to LINQ to SQL, come back to
+
+32
+00:04:55,000 --> 00:05:02,000
+Seafood, there is our Test 6.
+
+33
+00:05:02,000 --> 00:05:08,000
+So to this point in the demo we've been treating the DataContext as if it were a DataSet.
+
+34
+00:05:08,000 --> 00:05:14,000
+Now DataSets are designed to be an in-memory database; they're designed to have a long life, they're designed
+
+35
+00:05:14,000 --> 00:05:20,000
+to store several changes, which will later get pushed back to the database.
+
+36
+00:05:20,000 --> 00:05:26,000
+But the DataContext isn't meant to be used that way. In fact, if we come over to the documentation for the
+
+37
+00:05:26,000 --> 00:05:35,000
+DataContext, so let me open up my browser here, and then navigate to the documentation, and then scroll down
+
+38
+00:05:35,000 --> 00:05:43,000
+to the Remarks section, you can see here in the second paragraph it says that, a DataContext instance is
+
+39
+00:05:43,000 --> 00:05:51,000
+designed to last for one "unit of work" and that generally this is at the method scope or as a member of a
+
+40
+00:05:51,000 --> 00:06:00,000
+short-lived class. So while the DataContext does track changes in a similar way to the DataSet, it's meant
+
+41
+00:06:00,000 --> 00:06:06,000
+to track those changes over a short period of time and not a long period of time.
+
+42
+00:06:06,000 --> 00:06:17,000
+So to use the DataContext in the way that it was designed to be used, we need to make some changes to our application.
+
+43
+00:06:17,000 --> 00:06:23,000
+Through the magic of video editing, I've made most of the changes we need already; the last thing to do is
+
+44
+00:06:23,000 --> 00:06:29,000
+just go replace the implementation of LinqSource, so I'll remove the current implementation and replace it
+
+45
+00:06:29,000 --> 00:06:37,000
+with a new one, and then we can walk through the changes. The first thing to note is that there's no longer
+
+46
+00:06:37,000 --> 00:06:46,000
+a field for the Northwind DataContext. I'm now creating instances of the Northwind DataContext in each of
+
+47
+00:06:46,000 --> 00:06:53,000
+the methods, and notice I'm doing this with a Using statement, NorthwindDataContext is disposable, so I want
+
+48
+00:06:53,000 --> 00:07:02,000
+to ensure that I properly clean up after I'm finished using it. Now the fact that I'm getting the Categories
+
+49
+00:07:02,000 --> 00:07:08,000
+and getting the Products here in this Using statement actually introduced an issue.
+
+50
+00:07:08,000 --> 00:07:18,000
+Recall that LINQ uses divert execution. So originally I was just returning the LinqCategories, but when I do
+
+51
+00:07:18,000 --> 00:07:26,000
+this, LINQ to SQL doesn't actually query the database until I do the data binding, that's when it needs to get the data.
+
+52
+00:07:26,000 --> 00:07:32,000
+But at that point the Northwind DataContext has been disposed and that's a problem.
+
+53
+00:07:32,000 --> 00:07:44,000
+So I just modified the code here and down here to call the ToList method; this tells LINQ to take this table
+
+54
+00:07:44,000 --> 00:07:52,000
+and the results of this query and put them into a generic list; that causes the execution to happen right
+
+55
+00:07:52,000 --> 00:07:59,000
+then, and then the issue with the DataContext being disposed goes away.
+
+56
+00:07:59,000 --> 00:08:05,000
+And then coming down to our Add, Delete, and Save, here's our AddProduct, so I create a LinqProduct,
+
+57
+00:08:05,000 --> 00:08:13,000
+I populate the property values, and then I InsertOnSubmit the way we talked about earlier, but in this case
+
+58
+00:08:13,000 --> 00:08:19,000
+once this is complete I immediately save the changes to the database.
+
+59
+00:08:19,000 --> 00:08:28,000
+For Delete, I take the productId that was passed in, I find the LinqProduct object with that ID, and then I
+
+60
+00:08:28,000 --> 00:08:36,000
+call DeleteOnSubmit on the LinqProducts table to delete it and again I save right away.
+
+61
+00:08:36,000 --> 00:08:44,000
+And then down below here I created a Private method to save when I know the DataContext, and then I just
+
+62
+00:08:44,000 --> 00:08:54,000
+change the implementation of the Save on the interface to create the context and then call the Private method.
+
+63
+00:08:54,000 --> 00:09:01,000
+And then one final change, and this affected all of our data sources, is that I remove the BindingSource as
+
+64
+00:09:01,000 --> 00:09:09,000
+a parameter to AddProduct and DeleteProduct, and I change the method from a Sub routine to a function that
+
+65
+00:09:09,000 --> 00:09:16,000
+returns a Boolean. So instead of having our SourceObjects ensure that the UI gets updated after an Add or
+
+66
+00:09:16,000 --> 00:09:24,000
+Delete, I push that responsibility back to the form. And all I do in AddProduct and DeleteProduct is
+
+67
+00:09:24,000 --> 00:09:32,000
+indicate whether a rebind is necessary. So in the case of the LinqSource and the ObjectSource, I do need
+
+68
+00:09:32,000 --> 00:09:39,000
+the UI to rebind, so I return True. In the case of the DataSetSource, the UI will automatically rebind,
+
+69
+00:09:39,000 --> 00:09:49,000
+so I return False. And then over here in the form code, when I call Add or Delete, I just check to see
+
+70
+00:09:49,000 --> 00:09:59,000
+whether or not the source has indicated that a rebind is necessary, and if it is, then I just call BindProducts.
+
+71
+00:09:59,000 --> 00:10:09,000
+Alright, so with these changes complete, I can now press F5, and then switch over to LINQ to SQL,
+
+72
+00:10:09,000 --> 00:10:19,000
+and then go to our Seafood, and there's our Test items, so let's just delete a couple.
+
+73
+00:10:19,000 --> 00:10:26,000
+So that worked, and let's delete Test 3, that worked, and then without clicking Save I'm going to stop,
+
+74
+00:10:26,000 --> 00:10:35,000
+and then press F5 again, and then go to LINQ to SQL, and then go to Seafood, and we see we just have Test 4
+
+75
+00:10:35,000 --> 00:10:44,000
+and 5, so when I deleted those changes were saved automatically, but the UI was also updated properly.
+
+76
+00:10:44,000 --> 00:11:00,000
+And now if I go to Add, and we've got Test 6, so let's add 7, and then come in here, let's go 400, 800, and 1200,
+
+77
+00:11:00,000 --> 00:11:09,000
+and then click OK, so there's Test 7, there's our values. If I go over to Beverages, come back to Seafood
+
+78
+00:11:09,000 --> 00:11:20,000
+Test 7 is still there. And if I close the app and then press F5, and then switch to LINQ to SQL, and go to
+
+79
+00:11:20,000 --> 00:59:00,000
+Seafood, there's our Test items still there.
+

@@ -1,0 +1,120 @@
+1
+00:00:04,000 --> 00:00:10,000
+In this demo I'll walk through some changes I've made to the project from the last module to prepare it to
+
+2
+00:00:10,000 --> 00:00:18,000
+work with DataSets. 1) I've added a new interface called ISource, and if you notice the methods here are
+
+3
+00:00:18,000 --> 00:00:26,000
+pretty much the same as the methods we had for our ObjectSource, so I'm going to have multiple data sources;
+
+4
+00:00:26,000 --> 00:00:33,000
+we'll use objects, in this demo we use DataSets, and in a later demo we'll use LINQ to SQL, and I want the
+
+5
+00:00:33,000 --> 00:00:40,000
+objects that expose that data to have the same interface. So we take a look at the implementation of
+
+6
+00:00:40,000 --> 00:00:48,000
+ObjectSource, now it implements the ISource interface. So we can see GetCategories Implements
+
+7
+00:00:48,000 --> 00:00:58,000
+ISource.GetCategories, GetProducts. For Delete and AddProduct, I changed the implementation.
+
+8
+00:00:58,000 --> 00:01:04,000
+These methods now take a BindingSource and a product, and you can see in this implementation they're using
+
+9
+00:01:04,000 --> 00:01:12,000
+the bindingSource.Remove and bindingSource.Add. So in the previous demo this code was in the form, now it's
+
+10
+00:01:12,000 --> 00:01:18,000
+in the ObjectSource class. And then finally I've added a Save method.
+
+11
+00:01:18,000 --> 00:01:24,000
+In the case of objects in-memory, there's nothing really to do here, but with the DataSet and later with LINQ
+
+12
+00:01:24,000 --> 00:01:34,000
+to SQL, we'll need to push the changes made by the user back to underlying data store.
+
+13
+00:01:34,000 --> 00:01:40,000
+I've also made some changes to the code in the form, so let's take a look at that.
+
+14
+00:01:40,000 --> 00:01:47,000
+So here is the field that represents our ObjectSource, and I've added a new field called currentSource,
+
+15
+00:01:47,000 --> 00:01:54,000
+which is of type ISource, so we'll have three different data sources, Objects, DataSet, LINQ to SQL; this
+
+16
+00:01:54,000 --> 00:01:59,000
+will point to whatever the currentSource is.
+
+17
+00:01:59,000 --> 00:02:07,000
+In the form, I've now added one value to the Sources dropdown, so if we come over here to its Properties and
+
+18
+00:02:07,000 --> 00:02:15,000
+take a look at Items, I have Objects, and in this demo we'll be adding DataSet, and in a later demo I'll be
+
+19
+00:02:15,000 --> 00:02:25,000
+adding LINQ to SQL. So in the Form_Load, I set the selected index of that dropdown to be 0, meaning Object
+
+20
+00:02:25,000 --> 00:02:31,000
+is the default data source, and then I call this method called SetSource, and then call this method
+
+21
+00:02:31,000 --> 00:02:38,000
+called BindCategories. So let's take a look at their implementation.
+
+22
+00:02:38,000 --> 00:02:45,000
+When I change the source, I want to 1) Set the data source, meaning get the instance of the Object, DataSet,
+
+23
+00:02:45,000 --> 00:02:53,000
+or LINQ to SQL source, and set it as the current source, and then I want to bind the categories, and I want
+
+24
+00:02:53,000 --> 00:03:04,000
+to bind the products. If I just change the category, I only want to bind the products.
+
+25
+00:03:04,000 --> 00:03:11,000
+Now here in SetSource, what I'll do is check the SelectedIndex of the SourceComboBox; if it's 0, that's
+
+26
+00:03:11,000 --> 00:03:18,000
+objects, so I'll check to see if I've already created an objectSource instance; if I haven't I will, and then
+
+27
+00:03:18,000 --> 00:03:25,000
+I'll set that as the currentSource. In BindCategories I just go get these set of categories from
+
+28
+00:03:25,000 --> 00:03:35,000
+currentSource and bind those to the categoriesBindingSource, and then in BindProducts, I find the currently
+
+29
+00:03:35,000 --> 00:03:45,000
+selected category, I go get the products based on the current category from the currentSource, and then
+
+30
+00:03:45,000 --> 00:59:00,000
+bind that to the productsBindingSource. The remainder of the code is the same as in the previous demo.
+

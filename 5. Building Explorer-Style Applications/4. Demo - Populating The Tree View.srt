@@ -1,0 +1,236 @@
+1
+00:00:04,000 --> 00:00:09,000
+In this demo, we'll populate the tree view in our Explorer-Style application.
+
+2
+00:00:09,000 --> 00:00:14,000
+So since we're building an Explorer-Style application, we'll build something that looks like Explorer.
+
+3
+00:00:14,000 --> 00:00:21,000
+What I'll do is over here in the tree view; I'll show all the folders underneath the user's My Documents folder,
+
+4
+00:00:21,000 --> 00:00:29,000
+and then when the user selects a folder we'll show the files for that folder over here in the list view.
+
+5
+00:00:29,000 --> 00:00:34,000
+Before we write the code to populate the tree view, let's take a look at how the tree view works.
+
+6
+00:00:34,000 --> 00:00:41,000
+The tree view contains a set of nodes and those nodes are laid out in a tree structure; so in this case,
+
+7
+00:00:41,000 --> 00:00:47,000
+Libraries is a node, Documents is a node, My Documents is a node, and so on.
+
+8
+00:00:47,000 --> 00:00:53,000
+And the tree view has a nodes collection, and each node has a nodes collection.
+
+9
+00:00:53,000 --> 00:00:59,000
+So if I add a node into the nodes collection for the tree view, it becomes a root node, that's a node that
+
+10
+00:00:59,000 --> 00:01:06,000
+has no parent, and if I add a node into the nodes collection of another node, for example, if I add
+
+11
+00:01:06,000 --> 00:01:13,000
+ArchitectureExplorer into the nodes collection for Visual Studio 2012, then ArchitectureExplorer becomes a
+
+12
+00:01:13,000 --> 00:01:21,000
+child of Visual Studio 2012. So what we'll be doing is adding My Documents as a root node, and then build up
+
+13
+00:01:21,000 --> 00:01:30,000
+the nodes below that by recursively traversing its child folders. Okay, so coming back to Visual Studio,
+
+14
+00:01:30,000 --> 00:01:37,000
+let's add the Form_Load event handler, and in here I want to create the tree node for My Documents,
+
+15
+00:01:37,000 --> 00:01:46,000
+so that's Dim docs As New TreeNode, and the constructor or one of the overloads for the constructor takes the
+
+16
+00:01:46,000 --> 00:01:55,000
+text that's going to be shown for that node, so that's "My Documents."
+
+17
+00:01:55,000 --> 00:02:01,000
+And then I want to store the path to the My Documents folder in the tagged property for the tree node control;
+
+18
+00:02:01,000 --> 00:02:07,000
+again the tag property is a property we can use to store any value that we like; we'll store the path to the
+
+19
+00:02:07,000 --> 00:02:15,000
+folder so that we can eventually get the files for that folder when the user clicks on the associated tree node.
+
+20
+00:02:15,000 --> 00:02:29,000
+So that's just docs.Tag = My.Computer.FileSystem.SpecialDirectories.MyDocuments, and then we'll add the
+
+21
+00:02:29,000 --> 00:02:44,000
+MyDocuments node into the nodes collection of the tree view, so that's TreeView1.Nodes.Add(docs).
+
+22
+00:02:44,000 --> 00:02:52,000
+So that adds the root node, now we want to add the child nodes by traversing the folder structure underneath My Documents.
+
+23
+00:02:52,000 --> 00:03:02,000
+So we'll create a function called GetFolders that will do that, and the parameter to GetFolders will be the tree node.
+
+24
+00:03:02,000 --> 00:03:12,000
+So now let's create GetFolders, so that's Private Sub GetFolders, and the parameter is a tree node,
+
+25
+00:03:12,000 --> 00:03:21,000
+so (node As TreeNode). And the first thing I'll do inside of GetFolders is to get an object that represents
+
+26
+00:03:21,000 --> 00:03:39,000
+a directory associated with this tree node, so that's Dim dir As New, and the type I want is called DirectoryInfo.
+
+27
+00:03:39,000 --> 00:03:47,000
+And then I'll just use Ctrl . to add the import statement that I need, and then the parameter here is the
+
+28
+00:03:47,000 --> 00:03:55,000
+path to the folder, and we've stored that in the tagged property of the node, so that's just node.Tag.
+
+29
+00:03:55,000 --> 00:04:01,000
+So now that I have the object representing the folder, I can use its GetDirectory method to get a list
+
+30
+00:04:01,000 --> 00:04:08,000
+of the child folders, and then we'll iterate through that and create nodes for each of those.
+
+31
+00:04:08,000 --> 00:04:20,000
+So that's For Each childDir In dir, that's the parent directory, dir.GetDirectories.
+
+32
+00:04:20,000 --> 00:04:32,000
+I want to create a new tree node that will be a child of the node parameter, so that's Dim childNode As New TreeNode,
+
+33
+00:04:32,000 --> 00:04:45,000
+and the text of the tree node will be the name of the folder, so that's childDir.Name, and then just like I
+
+34
+00:04:45,000 --> 00:04:51,000
+did with the My Documents, I want to store the folder path in the Tag property, so that's
+
+35
+00:04:51,000 --> 00:05:07,000
+childNode.Tag = childDir.FullName, and then I want to add the new node into the nodes collection of the node parameter;
+
+36
+00:05:07,000 --> 00:05:22,000
+so node.Nodes.Add(childNode). So this code will get us all the folders underneath My Documents, but we also
+
+37
+00:05:22,000 --> 00:05:34,000
+want to show their child folders, so we'll call GetFolders recursively, so GetFolders, passing in the childNode.
+
+38
+00:05:34,000 --> 00:05:39,000
+Alright, so that should be enough to let us test out our work, so let's press F5,
+
+39
+00:05:39,000 --> 00:05:47,000
+and there's My Documents, and there's Fiddler, IIS Express, and My Music, but that's it.
+
+40
+00:05:47,000 --> 00:05:56,000
+And if we come over here, we can see that there are a few more folders here that don't show up in our application.
+
+41
+00:05:56,000 --> 00:05:59,000
+So let's stop and then flip back over to
+
+42
+00:05:59,000 --> 00:06:05,000
+Visual Studio, and then let's take a look at the Output window here.
+
+43
+00:06:05,000 --> 00:06:16,000
+And here we see a first chance exception of type 'System.UnauthorizedAccessException' occurred in mscorlib.dll.
+
+44
+00:06:16,000 --> 00:06:23,000
+So an error occurred, but it wasn't surfaced into Visual Studio or our application, and that's actually the
+
+45
+00:06:23,000 --> 00:06:31,000
+behavior you get in your FormLoad event handler, unless you specifically trap for exceptions, they get silently handled.
+
+46
+00:06:31,000 --> 00:06:38,000
+So what we can do is just modify our GetFolders method, so let's add a Try Catch block in here, and then
+
+47
+00:06:38,000 --> 00:06:48,000
+let's take our For loop and put it inside of the Try block, and then in the Catch block, let's just show the
+
+48
+00:06:48,000 --> 00:07:01,000
+error message, so that's MsgBox(ex.Message). Alright, so now let's try again, F5, and there we get access
+
+49
+00:07:01,000 --> 00:07:11,000
+to the path Documents\My Music' is denied, Documents\My Picture' is denied, and Documents\My Videos' is denied.
+
+50
+00:07:11,000 --> 00:07:18,000
+But now we can see we have all of the folders, including these three where we had the errors.
+
+51
+00:07:18,000 --> 00:07:25,000
+So the reason we're getting these errors is because My Music, My Pictures, and My Videos aren't really
+
+52
+00:07:25,000 --> 00:07:31,000
+folders under My Documents, they're actually links to other folders, so we just need to filter those out as
+
+53
+00:07:31,000 --> 00:07:39,000
+we go through and populate the folders structure here. I can do that by checking the attributes of the
+
+54
+00:07:39,000 --> 00:08:00,000
+folder to see if it's hidden. So in here I'll add If childDir.Attributes.HasFlag(fileAttributes.Hidden)
+
+55
+00:08:00,000 --> 00:08:15,000
+Then Continue For, so just skip this folder. Alright, so now if we run, we don't get any errors, and we get
+
+56
+00:08:15,000 --> 00:08:22,000
+the folders that we want for our application. And then one last cosmetic change, when the application starts
+
+57
+00:08:22,000 --> 00:08:30,000
+up, I don't want my folders to be collapsed, I want them to be expanded, so then just up here under
+
+58
+00:08:30,000 --> 00:08:42,000
+GetFolders I'll say docs.Expand, press F5 one last time, and there we get the behavior that we want.
+
+59
+00:08:42,000 --> 00:59:00,000
+Okay, so that's populating the tree view; in the next demo we'll take a look at populating the list view.
+

@@ -1,0 +1,16 @@
+1
+00:00:01,000 --> 00:00:08,000
+So that's building SDI applications; as we saw, except for the creation and/or configuration of the
+
+2
+00:00:08,000 --> 00:00:14,000
+application object, a very similar process to building the MDI applications.
+
+3
+00:00:14,000 --> 00:00:19,000
+In the next module we'll take a look at an application layout that's not similar to MDI applications,
+
+4
+00:00:19,000 --> 00:59:00,000
+and that is Explore Style applications.
+

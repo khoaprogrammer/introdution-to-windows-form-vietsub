@@ -1,0 +1,136 @@
+1
+00:00:01,000 --> 00:00:10,000
+In this demo we'll take a look at how to handle application updates when using ClickOnce deployment.
+
+2
+00:00:10,000 --> 00:00:16,000
+So here in my Visual Studio project, I'll go to the project properties by double-clicking on My Project in
+
+3
+00:00:16,000 --> 00:00:23,000
+the Solution Explorer, and then I'll go to the Publish tab to see our ClickOnce settings.
+
+4
+00:00:23,000 --> 00:00:31,000
+So here we see the settings from the Wizard, our publish location, or install location, the fact that we want
+
+5
+00:00:31,000 --> 00:00:39,000
+to use install mode as opposed to launch mode, but we have the ability to set additional settings using these buttons.
+
+6
+00:00:39,000 --> 00:00:47,000
+And what we're interested in, in this case, is application updates, so I'll click the Updates button.
+
+7
+00:00:47,000 --> 00:00:52,000
+So as you can see here, when we used the Publish Wizard, even though it didn't ask us, it automatically
+
+8
+00:00:52,000 --> 00:01:02,000
+configured the application to check for updates. And it set the application to do that at application startup time.
+
+9
+00:01:02,000 --> 00:01:08,000
+So when we click the shortcut to the application in the Start Menu, it will go to the server, see if there's
+
+10
+00:01:08,000 --> 00:01:15,000
+a new version, and if it is it will tell us and ask us if we want to download.
+
+11
+00:01:15,000 --> 00:01:21,000
+Now the other option is to have the application check in the background after it started up.
+
+12
+00:01:21,000 --> 00:01:27,000
+So if the user is currently using say Version 1 of the application, and we publish 1.5, the next time the
+
+13
+00:01:27,000 --> 00:01:35,000
+user starts the application it will start up 1, but in the background it will recognize 1.5 is available,
+
+14
+00:01:35,000 --> 00:01:41,000
+and then the next time we startup the application, it will indicate there's a new version available.
+
+15
+00:01:41,000 --> 00:01:46,000
+In our case we want the check to happen at startup, so we'll leave the default settings.
+
+16
+00:01:46,000 --> 00:01:50,000
+Now I should mention that all of this only applies to installed applications; for launched applications
+
+17
+00:01:50,000 --> 00:01:56,000
+you're effectively running the setup every single time, so it knows right away whether or not you're running
+
+18
+00:01:56,000 --> 00:02:01,000
+a new version. So let's close this dialog, go back to our application,
+
+19
+00:02:01,000 --> 00:02:07,000
+and make a change, and we'll make a very small change but one that we can see; I'll change the background
+
+20
+00:02:07,000 --> 00:02:17,000
+color of our tree view and our list view. So let's set that to something not too garish, how about Moccasin,
+
+21
+00:02:17,000 --> 00:02:26,000
+there we go, well that's a little bit too dark, maybe how about Cornsilk, there we go.
+
+22
+00:02:26,000 --> 00:02:31,000
+Alright, so I'll save that change, come back over to our project properties, and notice that the current
+
+23
+00:02:31,000 --> 00:02:40,000
+version is 1.0.0.1, so now I'll click Publish Now. So that built the application and updated the deployment
+
+24
+00:02:40,000 --> 00:02:50,000
+files, and I'll come over to my Start Menu, and I'll search for Explorer, and then click Explorer here,
+
+25
+00:02:50,000 --> 00:02:56,000
+and there you can see the check, and now you can see it's indicating that there's a new version available.
+
+26
+00:02:56,000 --> 00:03:00,000
+So when you run the application that little dialog pops up indicating it's communicating with the server,
+
+27
+00:03:00,000 --> 00:03:06,000
+and then either the application runs or you're notified there's a new version.
+
+28
+00:03:06,000 --> 00:03:12,000
+So to run the new version I'll click OK to download it and then now you can see we have the new version,
+
+29
+00:03:12,000 --> 00:03:23,000
+which should be 1.0.0.2, and if we close and come back to our project properties, we can see that that's the case.
+
+30
+00:03:23,000 --> 00:03:29,000
+One final thing I want to mention before I complete the demo. Earlier I talked about the ability to sign
+
+31
+00:03:29,000 --> 00:03:36,000
+the deployment manifest; if we want to do that we can do that in the Signing tab here.
+
+32
+00:03:36,000 --> 00:03:40,000
+As I mentioned it's currently using a self-signed certificate, but we can change that to use our publisher's
+
+33
+00:03:40,000 --> 00:03:48,000
+certificate if we have one. Alright, so that's handling updates in ClickOnce; next we'll take a look at
+
+34
+00:03:48,000 --> 00:59:00,000
+publishing to a website instead of a file share.
+

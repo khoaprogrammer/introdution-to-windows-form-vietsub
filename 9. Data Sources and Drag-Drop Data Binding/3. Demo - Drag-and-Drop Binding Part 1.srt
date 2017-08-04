@@ -1,0 +1,332 @@
+1
+00:00:02,000 --> 00:00:07,000
+Now we can take a look at the Drag-and-Drop data binding. We'll start out with the simplest case where
+
+2
+00:00:07,000 --> 00:00:15,000
+we'll use all of the data in the Products table. So I'll come over here to Products in the DataSources,
+
+3
+00:00:15,000 --> 00:00:21,000
+and I'll drop this little dropdown, and I'll make sure that DataGridView is selected, and then I'll drag and
+
+4
+00:00:21,000 --> 00:00:30,000
+drop Product onto my form. So you can see that several things happened; a DataGridView control was added,
+
+5
+00:00:30,000 --> 00:00:36,000
+a BindingNavigator control was added, and a BindingSource was added.
+
+6
+00:00:36,000 --> 00:00:42,000
+If we take a look at the properties of the BindingSource, we can see that we're indicating that the Product
+
+7
+00:00:42,000 --> 00:00:49,000
+class that's part of our LINQ to SQL model is the DataSource for the BindingSource.
+
+8
+00:00:49,000 --> 00:00:54,000
+If we come over to the DataGridView, and open up the smart tag here, we can see that this has been bound to
+
+9
+00:00:54,000 --> 00:01:02,000
+the ProductsBindingSource. We can also see that in the Properties for the control in the Properties Window,
+
+10
+00:01:02,000 --> 00:01:11,000
+and if we take a look at the BindingNavigator, it's also been bound to the ProductsBindingSource.
+
+11
+00:01:11,000 --> 00:01:18,000
+Now before I run this, let's come over to our DataSet project, and then expand both Categories and Products;
+
+12
+00:01:18,000 --> 00:01:26,000
+you can see we have a similar view to what we had over here on the LINQ side, and then I'll go to Products,
+
+13
+00:01:26,000 --> 00:01:35,000
+I'll drop down the dropdown, I'll choose DataGridView, and I'll drag and drop Products onto our form.
+
+14
+00:01:35,000 --> 00:01:41,000
+So you can see we get a similar behavior, but there are a few extra things now on the form that we didn't
+
+15
+00:01:41,000 --> 00:01:50,000
+have in our LINQ to SQL example. So we have our DataGridView, we have the BindingNavigator, we have the
+
+16
+00:01:50,000 --> 00:02:00,000
+BindingSource, but we also have a NorthwindDataSet, we have a ProductsTableAdapter, and we have this thing
+
+17
+00:02:00,000 --> 00:02:10,000
+called the TableAdapterManager. I'll explain the purpose of the TableAdapterManager in just a bit.
+
+18
+00:02:10,000 --> 00:02:17,000
+Now taking a look at the properties of these controls, our ProductsBindingSource is bound to the
+
+19
+00:02:17,000 --> 00:02:25,000
+NorthwindDataSet, and its DataMember has been set to Products, so it's a Products DataTable inside of this DataSet.
+
+20
+00:02:25,000 --> 00:02:33,000
+And then taking a look at the DataGridView, this is bound to the ProductsBindingSource.
+
+21
+00:02:33,000 --> 00:02:39,000
+And if we take a look at the properties for the BindingNavigator, and scroll down, we can see that its
+
+22
+00:02:39,000 --> 00:02:48,000
+BindingSource is also the ProductsBindingSource. Now when we use Drag-and-Drop data binding with the type
+
+23
+00:02:48,000 --> 00:02:56,000
+DataSet, the designer also omits some code into the code behind for the form.
+
+24
+00:02:56,000 --> 00:03:07,000
+So if we take a look here, in the Form_Load, the code has been added to Fill the Products table in the
+
+25
+00:03:07,000 --> 00:03:15,000
+NorthwindDataSet using the Fill method of the ProductsTableAdapter.
+
+26
+00:03:15,000 --> 00:03:21,000
+And then also the Click event handler for the Save button in the BindingNavigator has been implemented,
+
+27
+00:03:21,000 --> 00:03:29,000
+so when it's clicked, we Validate the form, we make sure the BindingSource ends any current edits, and then
+
+28
+00:03:29,000 --> 00:03:40,000
+we have the TableAdapterManager Update the NorthwindDataSet. So what is the TableAdapterManager?
+
+29
+00:03:40,000 --> 00:03:44,000
+Well it's a type that was generated along with our NorthwindDataSet.
+
+30
+00:03:44,000 --> 00:03:50,000
+As I mentioned, when we use the DataSources window to generate our Categories and Products and DataSources,
+
+31
+00:03:50,000 --> 00:03:58,000
+we also got the NorthwindDataSet. And as we've seen previously, in order to populate a DataSet and take
+
+32
+00:03:58,000 --> 00:04:02,000
+the changes from the DataSet and push them back into the database, we need DataAdapters.
+
+33
+00:04:02,000 --> 00:04:09,000
+So two DataAdapters were created, one for the Products table and one for the Categories table.
+
+34
+00:04:09,000 --> 00:04:15,000
+But because the DataSource's wizard was able to look at the underlying database, it was also able to generate
+
+35
+00:04:15,000 --> 00:04:23,000
+a sort of super DataAdapter, which is a TableAdapterManager. It knows about the ProductsTableAdapter,
+
+36
+00:04:23,000 --> 00:04:28,000
+it knows about the CategoriesTableAdapter, and it also knows there's a foreign key relationship between
+
+37
+00:04:28,000 --> 00:04:36,000
+Products and Categories. So the generated code inside the TableAdapterManager is able to update both
+
+38
+00:04:36,000 --> 00:04:44,000
+Categories and Products, keeping the foreign key and other database constraints in mind.
+
+39
+00:04:44,000 --> 00:04:50,000
+So when working with a type DataSet, we can make a single call to update all the tables in the DataSet via
+
+40
+00:04:50,000 --> 00:04:58,000
+the TableAdapterManager, instead of having to make a call for each table.
+
+41
+00:04:58,000 --> 00:05:01,000
+Alright, so now that we've seen what was generated, let's actually run our program.
+
+42
+00:05:01,000 --> 00:05:07,000
+I'll get out of full screen and come back to the designer here, and I'll do one thing, I'll dock this in
+
+43
+00:05:07,000 --> 00:05:15,000
+the Parent Container, and then I'll click F5 or press F5 to the run the program.
+
+44
+00:05:15,000 --> 00:05:22,000
+And there we can see our form with the grid populated, can expand this, we can see more information, I can
+
+45
+00:05:22,000 --> 00:05:30,000
+use the navigator here to navigate through the results set, I can go to the end, I can go to the beginning.
+
+46
+00:05:30,000 --> 00:05:39,000
+If I go to the end here and then pick Test 7, click on that, and then click Delete, that gets deleted from
+
+47
+00:05:39,000 --> 00:05:46,000
+the DataSet, so if I stopped and run again, that delete shouldn't have been persisted because we just made
+
+48
+00:05:46,000 --> 00:05:51,000
+it in-memory; alright so if I go to the end there's Test 7 again.
+
+49
+00:05:51,000 --> 00:05:58,000
+But if I click on Test 7 and then click Delete, and then click Save to push that change back to the database,
+
+50
+00:05:58,000 --> 00:06:10,000
+and then get out of here, and then press F5, again expand this, go to the end, we can see that Test 7 has been removed.
+
+51
+00:06:10,000 --> 00:06:18,000
+Alright, so that's the basics of the DataSet project, now let's come over to our LINQ project.
+
+52
+00:06:18,000 --> 00:06:26,000
+In the case of the LINQ project, we don't get the same code behind generation we had in the DataSet example.
+
+53
+00:06:26,000 --> 00:06:29,000
+So, if I come over to the form and then go to its code behind,
+
+54
+00:06:29,000 --> 00:06:36,000
+you can see we don't get anything. So in this case we'll need to write the code to populate the form and
+
+55
+00:06:36,000 --> 00:06:40,000
+persist any changes. Alright, so let's get the form populated.
+
+56
+00:06:40,000 --> 00:06:48,000
+I'll come back to the designer, and then double-click here to add the Form_Load event handler, and then I'll
+
+57
+00:06:48,000 --> 00:06:56,000
+create an instance of our LINQ to SQL DataContext, so that's Dim context As New NorthwindDataContext,
+
+58
+00:06:56,000 --> 00:07:04,000
+and then I'll set the DataSource on the products BindingSource to be the Products table off the DataContext,
+
+59
+00:07:04,000 --> 00:07:20,000
+so that's ProductBindingSource.DataSource = context.Products. So now I can press F5,
+
+60
+00:07:20,000 --> 00:07:27,000
+and again we have the data coming out of the database; I can expand the form here, again I can use the
+
+61
+00:07:27,000 --> 00:07:36,000
+navigator to navigate through the results set, I can go to the end, I can go to the beginning, and so on.
+
+62
+00:07:36,000 --> 00:07:41,000
+Now to complete the demo I want to add the Update functionality to our LINQ project.
+
+63
+00:07:41,000 --> 00:07:49,000
+But to do this I'm going to have to do something I told you not to do, and that's use our DataContext at the class level.
+
+64
+00:07:49,000 --> 00:07:55,000
+Now I can do the unit-of-work pattern here, but unfortunately there's a lot more code that I want to show you
+
+65
+00:07:55,000 --> 00:08:03,000
+in this very simple demo, so I'm just going to put this context as a Private field in the form,
+
+66
+00:08:03,000 --> 00:08:12,000
+so private _context As New NorthwindDataContext, and then I just need to set this to _context,
+
+67
+00:08:12,000 --> 00:08:21,000
+and then I'll come over to the designer here, and I'll enable this button, so I'll click on the button,
+
+68
+00:08:21,000 --> 00:08:30,000
+and choose Enabled = True, and then I'll add the event handler for the button, and then I'll come back over
+
+69
+00:08:30,000 --> 00:08:37,000
+here and just grab most of this, or at least the first two lines of the code we have in the Save here because
+
+70
+00:08:37,000 --> 00:08:45,000
+I want to do the same things over in my LINQ project. And then here instead of using the TableAdapterManager
+
+71
+00:08:45,000 --> 00:08:54,000
+I'll use the context, and it's just _context.SubmitChanges. Alright, I just need to change
+
+72
+00:08:54,000 --> 00:09:00,000
+ProductsBindingSource to ProductBindingSource in this case, and there we are good to go.
+
+73
+00:09:00,000 --> 00:09:09,000
+So now I can press F5, I can expand my form here, let's come down to the bottom.
+
+74
+00:09:09,000 --> 00:09:17,000
+Alright, so for Test 4, let's set the Supplier to 2 instead of 1, and let's set the Unit Price to something,
+
+75
+00:09:17,000 --> 00:09:24,000
+you know, really high just so that we'll sort of be able to recognize it, and then let's come in here and
+
+76
+00:09:24,000 --> 00:09:38,000
+delete Test 8, and then finally let's add a new item, so this will be Test 10, Supplier is 1, Category is 1,
+
+77
+00:09:38,000 --> 00:09:46,000
+this is some value there, this is a number, that's a number, that's a number, that's a number, and actually
+
+78
+00:09:46,000 --> 00:09:55,000
+let's just check Discontinued here for this one. Alright, so Test 4, Supplier is 2, a very high unit price.
+
+79
+00:09:55,000 --> 00:10:03,000
+Test 10 is our new item, and we deleted one other item. Now let's save our changes, let's close the form
+
+80
+00:10:03,000 --> 00:10:13,000
+down, press F5, expand the form, and then go to the end. There's Test 4, there's the SupplierID, there is
+
+81
+00:10:13,000 --> 00:10:21,000
+our big Unit Price, and there is Test 10. Alright, so that's the simple case of using the DataSources window
+
+82
+00:10:21,000 --> 00:10:28,000
+and using the Drag-and-Drop data binding. In the next demo we'll take a look at Drag-and-Drop data binding
+
+83
+00:10:28,000 --> 00:59:00,000
+with more traditional data entry controls like labels, textboxes, and checkboxes.
+

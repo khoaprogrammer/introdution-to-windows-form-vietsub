@@ -1,0 +1,172 @@
+1
+00:00:01,000 --> 00:00:10,000
+In this demo we'll enable users to change views in the list view in our Explorer-Style application, and we'll
+
+2
+00:00:10,000 --> 00:00:21,000
+add support for the details view. So just one note before I get started, I did modify the code a little bit.
+
+3
+00:00:21,000 --> 00:00:29,000
+In the AfterSelect event handler for the tree view, I'm populating both the large and small image lists.
+
+4
+00:00:29,000 --> 00:00:36,000
+Now getting back to the views, I want something in the UI that the user can use to switch between views,
+
+5
+00:00:36,000 --> 00:00:44,000
+and for this we'll use the Toolbar, so I'll add a label, and I'll just set this label, let me go to full
+
+6
+00:00:44,000 --> 00:00:58,000
+screen here, and I'll just set the text of the label to View, and then beside this I'll add a ComboBox,
+
+7
+00:00:58,000 --> 00:01:08,000
+and I'll call this the ViewToolStripComboBox, so let me just make this a little bit bigger so we have some
+
+8
+00:01:08,000 --> 00:01:18,000
+more space here, so ViewToolStripComboBox. And in here I want to have the different views it will support,
+
+9
+00:01:18,000 --> 00:01:35,000
+so I'll come down to the Items, and this will be Large Icons, Small Icons, and finally Details.
+
+10
+00:01:35,000 --> 00:01:43,000
+And then when the user selects an item out of the ComboBox, I want to switch the view in the list view.
+
+11
+00:01:43,000 --> 00:01:50,000
+To do that I'll add an event handler for the SelectedIndexChanged event, so I'll scroll down here,
+
+12
+00:01:50,000 --> 00:02:01,000
+SelectedIndexChanged, and now I just need a Select statement to change the view based on what the user selected.
+
+13
+00:02:01,000 --> 00:02:11,000
+So if they selected Large Icons, I'll change the view to be Large Icons in the list view, Small Icons in Details.
+
+14
+00:02:11,000 --> 00:02:16,000
+And coming back to the ComboBox, I want to set it, so again let me get out of full screen here, when the
+
+15
+00:02:16,000 --> 00:02:23,000
+application first starts up we see large icons, because that's the default view here.
+
+16
+00:02:23,000 --> 00:02:31,000
+So if I come over to the properties, what I want to set is the SelectedIndex, and we can't do that here in
+
+17
+00:02:31,000 --> 00:02:41,000
+the Properties Windows, so I'll have to do it in the Form_Load event, and here let me just again resize this.
+
+18
+00:02:41,000 --> 00:02:55,000
+So I want to say ViewToolStripComboBox.SelectedIndex = 0, the first item, which is large icons.
+
+19
+00:02:55,000 --> 00:02:58,000
+Alright, so with that changed, I can press F5,
+
+20
+00:02:58,000 --> 00:03:04,000
+and there's large icons, actually let me just go to some place that has a few more files in here,
+
+21
+00:03:04,000 --> 00:03:17,000
+Projects, our SDI application, and then here, okay there's a few more, and then we can go to Small Icons,
+
+22
+00:03:17,000 --> 00:03:25,000
+and then we can go to Details. And you notice nothing shows in Details here, and that's because we haven't
+
+23
+00:03:25,000 --> 00:03:33,000
+told the list view what columns we want to have in the details view, so let's do that now.
+
+24
+00:03:33,000 --> 00:03:40,000
+So coming back over to the form designer, I can click on the list view, and I believe there is a property
+
+25
+00:03:40,000 --> 00:03:47,000
+called Columns, and there's this Columns Editor here; I find it's easier to just define the columns in code,
+
+26
+00:03:47,000 --> 00:03:58,000
+so I'll do that here in the Form-Load. So we'll have three columns; one is the name of the file, one is the
+
+27
+00:03:58,000 --> 00:04:06,000
+date modified, and then the last is the size. The second parameter indicates how wide the column should be,
+
+28
+00:04:06,000 --> 00:04:14,000
+and the third parameter indicates its alignment. So if we run again,
+
+29
+00:04:14,000 --> 00:04:25,000
+and then go find a folder, so Projects-SDI-SDI, and then switch to Details view, now we can see in the Name
+
+30
+00:04:25,000 --> 00:04:31,000
+column we have the icon and we have the file name, but we don't have the date modified or size because we
+
+31
+00:04:31,000 --> 00:04:37,000
+haven't populated these yet, and that's the last step to complete the application.
+
+32
+00:04:37,000 --> 00:04:44,000
+So as I mentioned, when working with the list view and details view, this is the item information, and then
+
+33
+00:04:44,000 --> 00:04:52,000
+these are considered the sub-items, so I need to add the information for these columns as sub-items of the
+
+34
+00:04:52,000 --> 00:05:04,000
+list view item. So coming back to our code here, down in the TreeView1_AfterSelect, once I create the item
+
+35
+00:05:04,000 --> 00:05:10,000
+I want to populate the sub-items. So the first thing I'll do is create a variable that gets the
+
+36
+00:05:10,000 --> 00:05:19,000
+LastWriteTime for the file, again I've changed the file name here so let me just fix that, and then in the
+
+37
+00:05:19,000 --> 00:05:26,000
+first sub-time for the list view item, I put down the date and time it was last modified, so I'm going to
+
+38
+00:05:26,000 --> 00:05:32,000
+write out the ShortDateString and then a space, and then the ShortTimeString.
+
+39
+00:05:32,000 --> 00:05:39,000
+And then in the second sub-item, I want to write out the size of the file in kilobytes, so I'll take the
+
+40
+00:05:39,000 --> 00:05:50,000
+file size in bytes, divide by 1024, get the ceiling of that value, and then append KB to the string.
+
+41
+00:05:50,000 --> 00:06:01,000
+So with that done, now if we go to F5, and again go to our SDI application here, and then switch to details view,
+
+42
+00:06:01,000 --> 00:06:09,000
+we have the item information populated, but we also have the date modified and the file size.
+
+43
+00:06:09,000 --> 00:59:00,000
+And with that done, our Explorer-Style application is now complete.
+

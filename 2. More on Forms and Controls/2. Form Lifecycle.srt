@@ -1,0 +1,60 @@
+1
+00:00:03,000 --> 00:00:09,000
+In the last module we talked about events, but we focused on events for controls.
+
+2
+00:00:09,000 --> 00:00:15,000
+Forms also have events; most of these events relate to user interaction, for example, the user clicks on a
+
+3
+00:00:15,000 --> 00:00:23,000
+form, moves it, resizes it, and so on. But some of these events are related to the Lifecycle of the form,
+
+4
+00:00:23,000 --> 00:00:34,000
+and it's on these events that we'll focus in this section. The first pair of events we'll examine is
+
+5
+00:00:34,000 --> 00:00:36,000
+Load and Shown. Load fires after the constructor for the form is run, but just before the form is shown on
+
+6
+00:00:36,000 --> 00:00:42,000
+the screen, and Shown is fired after the form has been shown on the screen.
+
+7
+00:00:42,000 --> 00:00:49,000
+The load event is the event we'll handle for the form most often by far; it's generally used to populate the
+
+8
+00:00:49,000 --> 00:00:56,000
+data for controls and do any kind of conditional formatting. The form load event handler we see on the slide
+
+9
+00:00:56,000 --> 00:01:05,000
+is from a project we'll build later on in the course. The event handler we have in the upcoming demo is much simpler.
+
+10
+00:01:05,000 --> 00:01:13,000
+The next pair of events is Activated and Deactivate; these fire when the form gets focus and then loses focus.
+
+11
+00:01:13,000 --> 00:01:19,000
+We generally use these events to start and pause any Realtime processing.
+
+12
+00:01:19,000 --> 00:01:25,000
+And the final pair of events is Closing and Closed; closing fires just before the form is closed, and can be
+
+13
+00:01:25,000 --> 00:01:32,000
+cancelled and closed fires just after the form has been closed. In the demo we're about to see, we'll
+
+14
+00:01:32,000 --> 00:01:38,000
+implement the form load event, and then in the demo for the following section, after we talk a little bit
+
+15
+00:01:38,000 --> 00:59:00,000
+about dialogs, we'll see the implementation of the closing event and how to cancel the form closed.
+

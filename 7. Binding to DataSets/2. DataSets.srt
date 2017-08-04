@@ -1,0 +1,200 @@
+1
+00:00:01,000 --> 00:00:10,000
+In this section I'll give you a very brief primer to ADO.NET, with a strong focus on DataSets, the object
+
+2
+00:00:10,000 --> 00:00:17,000
+to which we'll be binding in our demos. ADO.NET is a data access technology that's been in the .NET
+
+3
+00:00:17,000 --> 00:00:23,000
+framework since the beginning, and it provides easy access to relational data stores.
+
+4
+00:00:23,000 --> 00:00:32,000
+Some of the classes in ADO.NET are database or provider-specific and some are provider-agnostic.
+
+5
+00:00:32,000 --> 00:00:41,000
+ADO.NET comes with several providers out-of-the-box. There's SqlClient for use with SQL Server, SqlServerCe
+
+6
+00:00:41,000 --> 00:00:50,000
+for use with SQL Server Compact edition, EntityClient for use with the Entity Data Model, OleDb for use with
+
+7
+00:00:50,000 --> 00:01:02,000
+OleDb providers, Odbc for use with ODBC drivers, and OracleClient for use with Oracle databases.
+
+8
+00:01:02,000 --> 00:01:09,000
+The Microsoft implementation of the OrcaleClient provider has been deprecated in .NET 4.5.
+
+9
+00:01:09,000 --> 00:01:16,000
+In addition to the providers you get out-of-the-box with ADO.NET, there are several third-party providers;
+
+10
+00:01:16,000 --> 00:01:22,000
+generally these are developed by the database vendors. Some of the third-party providers that are available
+
+11
+00:01:22,000 --> 00:01:33,000
+are MySql, Oracle, Progress, DB2, Informix, and SQL Anywhere. For a more complete list of the third-party
+
+12
+00:01:33,000 --> 00:01:40,000
+providers, see the link on the slide. One of the important things about the providers I've mentioned is that
+
+13
+00:01:40,000 --> 00:01:47,000
+their types all derive from the same base classes, and they all implement the same interfaces.
+
+14
+00:01:47,000 --> 00:01:53,000
+So coding against one provider will be very similar to coding against any of the other providers.
+
+15
+00:01:53,000 --> 00:02:00,000
+The key class in each of the providers is the connection. The connection represents a connection to the
+
+16
+00:02:00,000 --> 00:02:09,000
+underlying data store. To establish this connection, we need to provide a connection object, a connection string.
+
+17
+00:02:09,000 --> 00:02:15,000
+This string contains information like the name of the database server we want to connect to, the name of
+
+18
+00:02:15,000 --> 00:02:22,000
+the database we'll be using, how we're going to authenticate with that database, and so on.
+
+19
+00:02:22,000 --> 00:02:28,000
+The connection string you use will be specific to the provider that you're targeting.
+
+20
+00:02:28,000 --> 00:02:35,000
+The connection string shown on the slide will be used in our examples to talk to a SQL Server database.
+
+21
+00:02:35,000 --> 00:02:44,000
+So our SQL Server instance is sqlexpress on our local machine; we'll be using the Northwind database,
+
+22
+00:02:44,000 --> 00:02:50,000
+and we'll be using Windows authentication to authenticate with SQL Server.
+
+23
+00:02:50,000 --> 00:02:57,000
+The key class in terms of the application we're building in our demos is the DataSet.
+
+24
+00:02:57,000 --> 00:03:04,000
+The DataSet is effectively an in-memory database. The data in the DataSet is stored in DataTables,
+
+25
+00:03:04,000 --> 00:03:11,000
+those tables are defined by DataColumns, they're related by DataRelations, and we can sort and filter the
+
+26
+00:03:11,000 --> 00:03:18,000
+data in the DataTables using DataViews. So for the more part the functionality that we think of when we
+
+27
+00:03:18,000 --> 00:03:27,000
+think of a relational data store is available in a DataSet. Now two key things about the DataSet:
+
+28
+00:03:27,000 --> 00:03:33,000
+1) It's disconnected from any data store, and 2) It's provider agnostic.
+
+29
+00:03:33,000 --> 00:03:39,000
+In fact, the DataSet doesn't know and doesn't care where the data it's storing came from; that's the
+
+30
+00:03:39,000 --> 00:03:46,000
+responsibility of an object called the DataAdapter, which we'll take a look at next.
+
+31
+00:03:46,000 --> 00:03:53,000
+For each DataTable we have in a DataSet, we'll have an associated DataAdapter, and it's the DataAdapter's
+
+32
+00:03:53,000 --> 00:04:00,000
+responsibility to get data out of the underlying data store and put it into the associated DataTable, we do
+
+33
+00:04:00,000 --> 00:04:08,000
+this using the Fill method, and then later to take the changes made to the DataTable and push them back into
+
+34
+00:04:08,000 --> 00:04:15,000
+the underlying data store, we do this using the DataAdapter's Update method.
+
+35
+00:04:15,000 --> 00:04:22,000
+To accomplish this task we need to give the DataAdapter four commands it can use in the underlying data store.
+
+36
+00:04:22,000 --> 00:04:29,000
+The Select command is used when we call Fill to populate the DataTable, and the Insert, Update, and Delete
+
+37
+00:04:29,000 --> 00:04:38,000
+commands are used when we call Update to push the changes in the DataTable back to the underlying data store.
+
+38
+00:04:38,000 --> 00:04:44,000
+In the upcoming set of demos, we'll take a look a look at how to create and populate the DataSet and then
+
+39
+00:04:44,000 --> 00:04:50,000
+how to bind it to the controls in our application. We'll take a look at pushing the changes we made to the
+
+40
+00:04:50,000 --> 00:04:56,000
+data in the DataSet back to the database in a later set of demos.
+
+41
+00:04:56,000 --> 00:05:01,000
+To populate the DataSet, we'll create the DataSet object; we'll create a connection object appropriate to
+
+42
+00:05:01,000 --> 00:05:06,000
+the database we're using; in this case that will be a SqlConnection object.
+
+43
+00:05:06,000 --> 00:05:11,000
+We'll create the DataAdapter that we'll use to create the DataTable within the DataSet.
+
+44
+00:05:11,000 --> 00:05:20,000
+To do this we'll need to give the DataAdapter object the Select command we'll use to retrieve the data from the database.
+
+45
+00:05:20,000 --> 00:05:27,000
+And then finally we'll create the DataTable in the DataSet by using the DataAdapter's Fill command.
+
+46
+00:05:27,000 --> 00:05:33,000
+We don't need to explicitly call Open and Close on the Connection object when using the Fill method, it does
+
+47
+00:05:33,000 --> 00:05:41,000
+that for us internally. The process of binding a DataTable to controls in a form is very similar to binding
+
+48
+00:05:41,000 --> 00:05:49,000
+a collection of objects. Where before we were binding the collection to a data source, we're now binding the DataTable.
+
+49
+00:05:49,000 --> 00:05:55,000
+And before, where we were specifying the property names on the objects, we're now specifying the column names
+
+50
+00:05:55,000 --> 00:59:00,000
+on the table. We'll see this in the upcoming set of demos, which we'll move to now.
+

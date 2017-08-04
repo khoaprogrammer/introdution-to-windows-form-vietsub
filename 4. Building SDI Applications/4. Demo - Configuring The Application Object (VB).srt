@@ -1,0 +1,248 @@
+1
+00:00:03,000 --> 00:00:09,000
+In this demo we'll configure the application object for the Visual Basic version of our SDI project.
+
+2
+00:00:09,000 --> 00:00:15,000
+This process is relatively easy because of Visual Basic's application framework.
+
+3
+00:00:15,000 --> 00:00:21,000
+So to access the application framework properties I can go to the project's properties, I can do that by
+
+4
+00:00:21,000 --> 00:00:27,000
+right-clicking my project and selecting Properties, or just double-clicking on the MyProject node.
+
+5
+00:00:27,000 --> 00:00:36,000
+And then in the Application tab, we have the startup form, and then we have the application framework properties.
+
+6
+00:00:36,000 --> 00:00:41,000
+The startup form is already set to DocForm, that's what I want, and then here in the application framework
+
+7
+00:00:41,000 --> 00:00:47,000
+properties, I want to make this a single instance application, meaning that if the user tries to run the
+
+8
+00:00:47,000 --> 00:00:53,000
+application, but there's already an instance running, it won't try to create a second one.
+
+9
+00:00:53,000 --> 00:01:02,000
+And I want to change the shutdown mode to when the startup form closes to when the last form closes.
+
+10
+00:01:02,000 --> 00:01:11,000
+So if I save this off and then go to the Solution Explorer and choose Show All Files, then under My Project,
+
+11
+00:01:11,000 --> 00:01:18,000
+we have MyApplication.myapp, and inside of there we have Application.Designer.vb, and here's where we can
+
+12
+00:01:18,000 --> 00:01:26,000
+see the result of the changes we made. So here in the MyApplication class, we have the constructor,
+
+13
+00:01:26,000 --> 00:01:32,000
+and here's where we can see setting the single instance property on, here's where we can see the change to
+
+14
+00:01:32,000 --> 00:01:46,000
+the shutdown style, that is now after all forms close, and here's where we can see how the startup form gets set.
+
+15
+00:01:46,000 --> 00:01:53,000
+Now this method, OnCreateMainForm, is responsible for showing the form when the application first starts up,
+
+16
+00:01:53,000 --> 00:01:57,000
+but the user might try to start up another instance of the application, and we need to tell the program what
+
+17
+00:01:57,000 --> 00:02:02,000
+to do in that case. So if I get out of full screen,
+
+18
+00:02:02,000 --> 00:02:07,000
+and then go back to the Properties, we can see here in the application framework properties, there's this
+
+19
+00:02:07,000 --> 00:02:16,000
+button, View Application Events. So, if I turn off Show All Files, and then I click that button, you'll see
+
+20
+00:02:16,000 --> 00:02:23,000
+now we'll get a file ApplicationEvents.vb. And you'll see that there are several events we can handle,
+
+21
+00:02:23,000 --> 00:02:29,000
+Startup, actually, let me get into the full screen here, so Startup, Shutdown, UnhandledException,
+
+22
+00:02:29,000 --> 00:02:38,000
+StartupNextInstance, and NetworkAvailabilityChanged. So we're interested in this case in handling the
+
+23
+00:02:38,000 --> 00:02:46,000
+StartupNextInstance event. So I'll come into the MyApplication class, and then I'll drop down here and
+
+24
+00:02:46,000 --> 00:02:52,000
+choose the events, and then here I'll choose the StartupNextInstance event.
+
+25
+00:02:52,000 --> 00:02:58,000
+And what I want to do here is create a new instance of the DocForm and show it, but I'm going to be using
+
+26
+00:02:58,000 --> 00:03:04,000
+that same code in a few different places, so I'm going to centralize it inside of the DocForm itself.
+
+27
+00:03:04,000 --> 00:03:13,000
+So let me get out of full screen, save my work, and then go to DocForm here, and then right-click and choose
+
+28
+00:03:13,000 --> 00:03:20,000
+to View Code. And the code we want is similar to the code we had in our MDI program, so let's go back over
+
+29
+00:03:20,000 --> 00:03:28,000
+there, and then let's go to the code for the main form; we can see the code here, so I'll just copy and paste it;
+
+30
+00:03:28,000 --> 00:03:32,000
+actually let's just do it piece by piece, so let's do the field first.
+
+31
+00:03:32,000 --> 00:03:41,000
+Come back over here, and paste that in, and then I want to create a function called CreateForm, so that will
+
+32
+00:03:41,000 --> 00:03:55,000
+be Public Function CreateForm As DocForm, and then we'll go back over to the MDI application,
+
+33
+00:03:55,000 --> 00:04:06,000
+and then grab this code, and come back over here and paste it, and then just modify it.
+
+34
+00:04:06,000 --> 00:04:14,000
+So we'll change this from chidlForm to form, and we'll change this from childForm to DocForm.
+
+35
+00:04:14,000 --> 00:04:20,000
+We don't need to set the MdiParent, so I can remove that. I do want to increment the counter, I do want
+
+36
+00:04:20,000 --> 00:04:27,000
+to change the Text property, and I do want to Show the form.
+
+37
+00:04:27,000 --> 00:04:32,000
+And then the last thing I want to do is change this to a shared function, because this creates and instance
+
+38
+00:04:32,000 --> 00:04:38,000
+of the DocForm, but right now I can only call it if I have an instance of the DocForm, but if I had an
+
+39
+00:04:38,000 --> 00:04:43,000
+instance of the DocForm I wouldn't need to call the method, so I wouldn't be able to call this just by having the type,
+
+40
+00:04:43,000 --> 00:04:53,000
+so we'll change this to Shared Function, and that means I also need to change this field to a Shard field.
+
+41
+00:04:53,000 --> 00:04:59,000
+And then two final changes, this is a function, so I just need to return the form that I've created,
+
+42
+00:04:59,000 --> 00:05:05,000
+so that's just Return form. And also, each time I create a new form, it's going to be the form that has
+
+43
+00:05:05,000 --> 00:05:13,000
+prominence, so I want to indicate that it's the main form of the application or becomes the main form of the application.
+
+44
+00:05:13,000 --> 00:05:23,000
+So here I'll add, My.Application, this gives me access to the application object, and then I want to set the
+
+45
+00:05:23,000 --> 00:05:29,000
+main form property. Well, the application object itself doesn't have a main form property, but it has an
+
+46
+00:05:29,000 --> 00:05:38,000
+application context, and that has a main form property, and it's that that we'll set.
+
+47
+00:05:38,000 --> 00:05:47,000
+And now I can go back to my ApplicationEvents, and then here in my event handler I can say DocForm.CreateForm,
+
+48
+00:05:47,000 --> 00:05:53,000
+and that will create a new instance of the DocForm and show it on the screen.
+
+49
+00:05:53,000 --> 00:06:02,000
+Alright, so to see this in action, let's build our project, and then let's minimize everything here,
+
+50
+00:06:02,000 --> 00:06:15,000
+and let's come over to where our project is, so that is Visual Studio 2012-Projects-SDI-bin-Debug,
+
+51
+00:06:15,000 --> 00:06:23,000
+and then let's take this guy and let's send that to the Desktop as a shortcut, and then come over
+
+52
+00:06:23,000 --> 00:06:33,000
+to our Desktop here, and actually let's startup the Task Manager, and let's sort these backwards,
+
+53
+00:06:33,000 --> 00:06:40,000
+because SDI is going to be here. So you have SDI.vshost, that's the one that's running inside of Visual Studio.
+
+54
+00:06:40,000 --> 00:06:47,000
+Now let's double-click on the SDI shortcut; there we see the SDI application running that's hosting this form,
+
+55
+00:06:47,000 --> 00:06:54,000
+right, and if I double-click on the shortcut again, now we see the next document come up, but notice there is
+
+56
+00:06:54,000 --> 00:07:02,000
+no other instance of SDI. So the same application instance that handled the first form is handling the second form.
+
+57
+00:07:02,000 --> 00:07:10,000
+You can see that every time I double-click here, we get a new form created, but we only have a single instance.
+
+58
+00:07:10,000 --> 00:07:20,000
+And then if I go and close all of these, there you can see that the SDI application goes away.
+
+59
+00:07:20,000 --> 00:07:27,000
+So that's configuring the application object in VB. C# doesn't have the application framework, but we could
+
+60
+00:07:27,000 --> 00:07:36,000
+actually use the base types from the Microsoft.VisualBasic namespace in our C# application to get the same
+
+61
+00:07:36,000 --> 00:07:43,000
+behavior; we're just going to have to write about 20 or 30 lines of code to replace the settings that we set
+
+62
+00:07:43,000 --> 00:59:00,000
+in our VB application; we'll see that next.
+

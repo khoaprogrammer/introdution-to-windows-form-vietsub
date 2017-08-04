@@ -1,0 +1,8 @@
+1
+00:00:01,000 --> 00:00:08,000
+That completes our look at Data Binding. Up next is the final module of the course, where we'll take a look
+
+2
+00:00:08,000 --> 00:59:00,000
+Deployment Options for Windows Forms Applications, with a specific focus on ClickOnce.
+

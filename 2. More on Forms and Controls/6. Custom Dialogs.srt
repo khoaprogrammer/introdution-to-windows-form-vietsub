@@ -1,0 +1,68 @@
+1
+00:00:02,000 --> 00:00:07,000
+Now that we've seen how to show simple dialogs using the built-in functionality of the .NET framework,
+
+2
+00:00:07,000 --> 00:00:15,000
+let's take a look at how to build Custom Dialogs. You create a custom dialog as you would any other Windows form.
+
+3
+00:00:15,000 --> 00:00:23,000
+You add the form to the project, you add controls to the form, you set their properties, and add their event handlers.
+
+4
+00:00:23,000 --> 00:00:31,000
+There are just a few additional properties you need to set to make your form look, feel, and behave like a dialog.
+
+5
+00:00:31,000 --> 00:00:37,000
+The first of these is the FormBorderStyle, which you'll want to set to FixedDialog; this changes the visual
+
+6
+00:00:37,000 --> 00:00:41,000
+style of the border and disables resizing of the form.
+
+7
+00:00:41,000 --> 00:00:47,000
+Next you'll want to set the ControlBox property to false; this removes the minimize, maximize, and close
+
+8
+00:00:47,000 --> 00:00:55,000
+buttons in the title bar of the form. And then finally you'll want to set the Accept and Cancel buttons.
+
+9
+00:00:55,000 --> 00:01:00,000
+Setting one of the buttons on the form to be the AcceptButton means that if the user presses Enter,
+
+10
+00:01:00,000 --> 00:01:05,000
+that's the same as them clicking the button. And setting the button to be the Cancel button means that if
+
+11
+00:01:05,000 --> 00:01:10,000
+the user presses the Escape key, that's the same as clicking the button.
+
+12
+00:01:10,000 --> 00:01:17,000
+And then finally, when the user does click one of the buttons, you want to set the return value for the dialog.
+
+13
+00:01:17,000 --> 00:01:23,000
+You can do this in one of two ways; you can do it in the event handler for the button click, or if the only
+
+14
+00:01:23,000 --> 00:01:27,000
+thing you want to do when the user clicks the button is set the return value, then you can use the
+
+15
+00:01:27,000 --> 00:01:36,000
+DialogResult property of the button. One important thing to note is as soon as you set the DialogResult property of a
+
+16
+00:01:36,000 --> 00:01:44,000
+dialog, the dialog will close. So if you're doing this in the event handler, make sure that setting the
+
+17
+00:01:44,000 --> 00:59:00,000
+dialog result is the last line of code in the event handler Sub routine.
+

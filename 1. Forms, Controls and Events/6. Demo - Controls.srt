@@ -1,0 +1,140 @@
+1
+00:00:01,000 --> 00:00:09,000
+So I'm back in my Visual Studio project, and I have the code for the form open, and I want to add three
+
+2
+00:00:09,000 --> 00:00:16,000
+controls; a TextBox, a button, and a label. And in the next section, we add event handlers, we'll take the
+
+3
+00:00:16,000 --> 00:00:22,000
+text out of the TextBox and put it into the label when the user clicks the button, but for right now we'll
+
+4
+00:00:22,000 --> 00:00:27,000
+just actually create the controls. So the first thing I'll do is create a field to represent each of the controls.
+
+5
+00:00:27,000 --> 00:00:41,000
+Our TextBox will be called the Message TextBox, so that's Private MessageTextBox, and that'll be a TextBox.
+
+6
+00:00:41,000 --> 00:00:49,000
+Then we'll create our label, which will be called MessageLabel, and finally we'll create the button,
+
+7
+00:00:49,000 --> 00:01:02,000
+and that'll be ShowmMessageButton. Now down in the constructor, we'll create instances of each of these
+
+8
+00:01:02,000 --> 00:01:10,000
+controls and add them to the controls collection of the form. So we'll start with a TextBox,
+
+9
+00:01:10,000 --> 00:01:19,000
+so MessageTextBox = New TextBox, and then we'll add this to the controls collection of the form, so that's
+
+10
+00:01:19,000 --> 00:01:29,000
+Me., me is a reference to the form, and we want its Controls collection, and we want to Add in MessageTextBox.
+
+11
+00:01:29,000 --> 00:01:34,000
+Below the TextBox I want the button, so I'll just copy and paste the name of the button here, and we'll say
+
+12
+00:01:34,000 --> 00:01:45,000
+ShowMessageButton = New Button, and then again we'll add this to the Controls collection.
+
+13
+00:01:45,000 --> 00:01:56,000
+And then finally, we'll add our label that will be below the button.
+
+14
+00:01:56,000 --> 00:02:03,000
+(typing)
+
+15
+00:02:03,000 --> 00:02:09,000
+Now I need to set the properties of each of the controls, so we'll start out with a TextBox, so we'll set
+
+16
+00:02:09,000 --> 00:02:16,000
+the Left property, so we'll set that = 25. So I want the left edge of the control to be 25 pixels away from
+
+17
+00:02:16,000 --> 00:02:26,000
+the left edge of the form. I'm also going to set the Top property, and I'll also set that to 25, so the
+
+18
+00:02:26,000 --> 00:02:37,000
+top of the TextBox will be 25 pixels down from the top of the form, and then I'll also set the Width, and
+
+19
+00:02:37,000 --> 00:02:46,000
+we'll set that = 200. Then for the button, I'll also set those three properties, Top, Left, and Width.
+
+20
+00:02:46,000 --> 00:02:55,000
+So, for Left, I want this to be = to 25, so basically I want the TextBox and the button to align on the left side.
+
+21
+00:02:55,000 --> 00:03:02,000
+I want the button to show below the TextBox, so I set the Top property to a number higher than 25, we'll
+
+22
+00:03:02,000 --> 00:03:09,000
+increment it by 50, so the top of the button will be 50 pixels below the top of the TextBox.
+
+23
+00:03:09,000 --> 00:03:17,000
+And then for the Width, we'll just keep it at 200. And then I want to do the same thing for the Label here.
+
+24
+00:03:17,000 --> 00:03:31,000
+So, the Left is again 25, for the Top we'll go 50 below the top of the button, so that'll be 125, and then
+
+25
+00:03:31,000 --> 00:03:39,000
+for the Width we'll stay consistent and just set that = 200. So with this code down, we should be able to Run,
+
+26
+00:03:39,000 --> 00:03:46,000
+so let's hit F5, and now we have our form. What we don't have is any text, so I forgot to add that,
+
+27
+00:03:46,000 --> 00:03:52,000
+so let's just stop this and come back down here. I want the TextBox to start out being empty.
+
+28
+00:03:52,000 --> 00:04:04,000
+I want the button to say ShowMessage, so our ShowMessageButton.Text = Show Message.
+
+29
+00:04:04,000 --> 00:04:10,000
+And when the form first shows I want the text of the label just to be Label, so we could actually see it,
+
+30
+00:04:10,000 --> 00:04:25,000
+so our MessageLabel.Text = "(Label)" in square brackets. Alright, now let's run again.
+
+31
+00:04:25,000 --> 00:04:31,000
+Alright, so there's our TextBox, there's our button, and there's our Label.
+
+32
+00:04:31,000 --> 00:04:35,000
+And again in the next section we'll talk about event handlers, where we'll take the text that's in here and
+
+33
+00:04:35,000 --> 00:04:42,000
+when we click the button, we'll put it into the label here. Alright, so just to review, we create our
+
+34
+00:04:42,000 --> 00:04:49,000
+fields to represent each of the controls, we then instantiate the controls here in the constructor,
+
+35
+00:04:49,000 --> 00:59:00,000
+we set the properties, and then we add the control to the controls collection of the form.
+

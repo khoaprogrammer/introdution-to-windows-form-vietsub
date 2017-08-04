@@ -1,0 +1,224 @@
+1
+00:00:02,000 --> 00:00:08,000
+In this demo we'll begin our examination of the form lifecycle, or form events; we'll take a look a look at
+
+2
+00:00:08,000 --> 00:00:14,000
+using the load event. Our examination will continue on in the next section after we talk a little bit about
+
+3
+00:00:14,000 --> 00:00:20,000
+dialogs, we'll take a look at the form closing event, and virtually all of the demos in the remainder of the
+
+4
+00:00:20,000 --> 00:00:29,000
+course will use the form events in some fashion. I've already laid out the form we're going to use for the
+
+5
+00:00:29,000 --> 00:00:33,000
+demo; it's basically the same as the form that we had at the end of the last module, the only difference is
+
+6
+00:00:33,000 --> 00:00:40,000
+that instead of a TextBox here at the top I have a ListBox, and then below that I have a button, and then
+
+7
+00:00:40,000 --> 00:00:45,000
+below that I have a label; you can't see the label because I've set its text property to be empty, but if I
+
+8
+00:00:45,000 --> 00:00:52,000
+come over to the Properties Window, and in the dropdown at the top I choose Label1, then there you can see
+
+9
+00:00:52,000 --> 00:00:59,000
+the label right there. So as I mentioned in the slides, the load event is the event we'll handle most often
+
+10
+00:00:59,000 --> 00:01:07,000
+for the form, so to add its event handler I can just double-click on the form anywhere outside of its controls,
+
+11
+00:01:07,000 --> 00:01:12,000
+and the title bar is a good place to do that because we can't put controls on the title bar.
+
+12
+00:01:12,000 --> 00:01:19,000
+So we just double-click here, and you can see we get the event handler for the form load event.
+
+13
+00:01:19,000 --> 00:01:25,000
+This event is most commonly used to put data inside controls. So normally we'll go to a database or maybe
+
+14
+00:01:25,000 --> 00:01:31,000
+call a web service, or get information from another system, like even the Windows File System, as we'll see
+
+15
+00:01:31,000 --> 00:01:39,000
+later on, and then we'll take that data and put it into the controls, most often using a process called Data Binding.
+
+16
+00:01:39,000 --> 00:01:45,000
+But since we haven't covered any of those topics yet, we'll just manually add some items into the ListBox.
+
+17
+00:01:45,000 --> 00:01:52,000
+So let me go into full screen, and then it's ListBox1; in this case I didn't give the controls meaningful
+
+18
+00:01:52,000 --> 00:02:00,000
+names, so we have ListBox1, Button1, and Label1. And it has a property called Items, which is its items
+
+19
+00:02:00,000 --> 00:02:12,000
+collection, and into the items we want to Add, and we'll just put the names of some fruits here, so Oranges.
+
+20
+00:02:12,000 --> 00:02:21,000
+And then I'm going to call this a few times, so let me just paste a few more items in here, and then we'll
+
+21
+00:02:21,000 --> 00:02:36,000
+put in Grapes, and then how about Bananas, and then finally how about Peaches.
+
+22
+00:02:36,000 --> 00:02:44,000
+Okay. So the variable for the control, the creation of the control, setting properties like location and
+
+23
+00:02:44,000 --> 00:02:50,000
+size, that's all still being done in Initialize Component in the designer file, we're just actually setting
+
+24
+00:02:50,000 --> 00:02:57,000
+the data that goes into the control here in form load. We also want to add the event handler for the click
+
+25
+00:02:57,000 --> 00:03:04,000
+of the button, so let me get Button1 here, and then go at its Click event handler.
+
+26
+00:03:04,000 --> 00:03:11,000
+And in here we want to take the text for the selected item in the ListBox and put it into the label.
+
+27
+00:03:11,000 --> 00:03:25,000
+So that's Label1.Text = ListBox1, and the text for the selected item, the property name is just Text.
+
+28
+00:03:25,000 --> 00:03:32,000
+With these events implemented, I can now run the program, so I'll press F5, and we can see there are fruit
+
+29
+00:03:32,000 --> 00:03:39,000
+names in the ListBox, and I can select one of these, and then click Show Selected Item, and then that text
+
+30
+00:03:39,000 --> 00:03:46,000
+will show down here in the label. So that's a simple example of form load.
+
+31
+00:03:46,000 --> 00:03:52,000
+As I mentioned previously, we'll see other examples, more complex examples, as we go on throughout the course
+
+32
+00:03:52,000 --> 00:03:58,000
+and we'll also see the implementation of the form closing event in the next demo.
+
+33
+00:03:58,000 --> 00:04:03,000
+Now there is one more topic I want to cover; it's not really related to the form lifecycle, but it is
+
+34
+00:04:03,000 --> 00:04:12,000
+important overall for the course. So if I come over to my running form, and I resize it, you notice that the
+
+35
+00:04:12,000 --> 00:04:18,000
+controls just sort of stay where they are. And if I resize it larger or if I resize it smaller, you can see
+
+36
+00:04:18,000 --> 00:04:23,000
+we actually can't see some of the controls now. So let me show you how we can address this issue using the
+
+37
+00:04:23,000 --> 00:04:27,000
+Anchor property of the controls.
+
+38
+00:04:27,000 --> 00:04:34,000
+If I get out of full screen, and then go to the Designer, we have our three controls, there's a label which
+
+39
+00:04:34,000 --> 00:04:38,000
+is kind of down here, and then we have our button, and we have our ListBox.
+
+40
+00:04:38,000 --> 00:04:48,000
+So what I want to do is as I resize the form, as this grows here, I want the label to stay relative to the
+
+41
+00:04:48,000 --> 00:04:56,000
+bottom left of the form, and I want the button to also stay relative to the bottom left, and I want the
+
+42
+00:04:56,000 --> 00:05:04,000
+ListBox to grow or shrink with the form. And I could indicate that I want these things to happen using the
+
+43
+00:05:04,000 --> 00:05:13,000
+anchor property of the controls. So I'll click on the ListBox, and then we'll scroll up to Anchor.
+
+44
+00:05:13,000 --> 00:05:20,000
+And you can see by dropping this down here that it's currently anchored to the top right of the form.
+
+45
+00:05:20,000 --> 00:05:26,000
+Well, as I mentioned, I want the ListBox to grow and shrink as the form grows and shrinks, so I'm going to
+
+46
+00:05:26,000 --> 00:05:33,000
+anchor it on all four points, which means keep the relative difference between the left, right, top, and
+
+47
+00:05:33,000 --> 00:05:41,000
+bottom of the control to the form. So I want this distance to remain consistent, I want that distance to
+
+48
+00:05:41,000 --> 00:05:50,000
+remain consistent, and the same thing over here. And then for the button and for the label, I want the
+
+49
+00:05:50,000 --> 00:05:57,000
+relative distance from here and here to remain the same, so I want them to go down as the form grows,
+
+50
+00:05:57,000 --> 00:06:06,000
+and then go up as the form shrinks. So again, I'll go find the Anchor property, and then I'll say that I
+
+51
+00:06:06,000 --> 00:06:13,000
+want to anchor them bottom left. And for the label again because I can't see it, I'll just select it here
+
+52
+00:06:13,000 --> 00:06:28,000
+out of the dropdown, and put Anchor, and go bottom left. Alright, now I'll run again, and then now as I grow
+
+53
+00:06:28,000 --> 00:06:36,000
+my form, we see it remains sort of the same look and feel, behavior obviously remains the same, and then if
+
+54
+00:06:36,000 --> 00:06:45,000
+I shrink the form, then the behavior and look and feel remain the same.
+
+55
+00:06:45,000 --> 00:06:51,000
+So that's anchoring controls. In a later demo we'll see the use of docking controls, where we can dock a
+
+56
+00:06:51,000 --> 00:59:00,000
+control to the top of the form, the side, bottom, or we can have the control take up the entire space of the form.
+

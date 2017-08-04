@@ -1,0 +1,128 @@
+1
+00:00:01,000 --> 00:00:07,000
+Now I want to complete the scenario we discussed in the slides by adding in three TextBoxes; one to show the
+
+2
+00:00:07,000 --> 00:00:14,000
+currently selected product name, one to show the unit price, and one to show the units in stock.
+
+3
+00:00:14,000 --> 00:00:21,000
+So I'll get out of full screen and come over to my form designer, and then just paste in those TextBoxes,
+
+4
+00:00:21,000 --> 00:00:29,000
+so I have Name TextBox, Price TextBox, and Stock TextBox, and then I'll come back over to our code,
+
+5
+00:00:29,000 --> 00:00:35,000
+and I'll add in the code to bind those controls here. Now I'm going to bind them to the same DataSource
+
+6
+00:00:35,000 --> 00:00:47,000
+as the ListBox, so I'll created a variable for that, so Dim products = to the result of our query, and then
+
+7
+00:00:47,000 --> 00:00:56,000
+I'll bind the products to the ListBox, and then down here I'll create a binding for our NameTextBox,
+
+8
+00:00:56,000 --> 00:01:09,000
+so that's NameTextBox.DataBindings.Add. I want to bind to the Text property of the TextBox; the object I'll
+
+9
+00:01:09,000 --> 00:01:21,000
+be binding is the products object, and the name of the property of the product I'll be binding is ProductName.
+
+10
+00:01:21,000 --> 00:01:29,000
+And I'll do the same thing for the price and units in stock TextBoxes, so I'll just copy and paste this twice
+
+11
+00:01:29,000 --> 00:01:42,000
+and this will be the PriceTextBox, and this will be the StockTextBox, and the property name here will be
+
+12
+00:01:42,000 --> 00:01:59,000
+UnitPrice, and the property name here will be UnitsInStock. So now if I press F5, we'll see that we see the
+
+13
+00:01:59,000 --> 00:02:06,000
+beverages, and as I select different items here in the ListBox, we'll see the properties for that item
+
+14
+00:02:06,000 --> 00:02:15,000
+show in the TextBoxes. So because I've bound the ListBox and the TextBoxes to the same DataSource,
+
+15
+00:02:15,000 --> 00:02:22,000
+the underlying pointer to the current item will be the same for all the controls.
+
+16
+00:02:22,000 --> 00:02:29,000
+Now I will have a problem if I go and change the category here; you can see that I'm getting an error,
+
+17
+00:02:29,000 --> 00:02:33,000
+and it says "This causes two bindings in the collection to bind to the same property."
+
+18
+00:02:33,000 --> 00:02:39,000
+So to address this issue I need to clear the binding first before I add it, so let me just get out of the
+
+19
+00:02:39,000 --> 00:02:54,000
+debug mode here, and then come back down to our code, and I can say NameTextBox.DataBindings.Clear.
+
+20
+00:02:54,000 --> 00:03:02,000
+And then I can do the same thing for the PriceTextBox and the StockTextBox, so let me just grab this, and do
+
+21
+00:03:02,000 --> 00:03:17,000
+that, and then do that, and change this to PriceTextBox, and change this to StockTextBox.
+
+22
+00:03:17,000 --> 00:03:26,000
+Alright, so now I'll press F5, and now I can change the category, and you can see we get the proper behavior.
+
+23
+00:03:26,000 --> 00:03:32,000
+So the final thing to examine on our form is the second part of the two-way data binding.
+
+24
+00:03:32,000 --> 00:03:39,000
+So if I come back to beverages, and then pick one of the items, let's pick Outback Lager, and then change
+
+25
+00:03:39,000 --> 00:03:52,000
+these two values from 15 to be 100 and then 200, and then go to say produce, go through those items, and then
+
+26
+00:03:52,000 --> 00:04:00,000
+come back to beverages and go back to Outback Lager, there we can see 100 and 200.
+
+27
+00:04:00,000 --> 00:04:08,000
+So because those TextBoxes are bound to the unit price and the units in stock property of the object in- memory,
+
+28
+00:04:08,000 --> 00:04:15,000
+once I change the value and Tab out of the TextBox, those changes get propagated back into the object.
+
+29
+00:04:15,000 --> 00:04:22,000
+Now these are just objects in memory, so if I stop running and then run again, and then go back to
+
+30
+00:04:22,000 --> 00:04:28,000
+Outback Lager, you'll see we have the original values. But in the next few sections of this module, we'll be
+
+31
+00:04:28,000 --> 00:04:34,000
+working with data from a SQL Server database, and we'll see how we can push those changes, not only to
+
+32
+00:04:34,000 --> 00:59:00,000
+objects in memory but back out to the underlying data store.
+

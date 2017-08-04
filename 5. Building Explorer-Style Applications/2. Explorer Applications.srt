@@ -1,0 +1,40 @@
+1
+00:00:01,000 --> 00:00:08,000
+The demos of this module don't require a lot of setup; the Explorer-Style interface is familiar to anybody
+
+2
+00:00:08,000 --> 00:00:15,000
+who has used Windows, so all I have is a little bit of guidance. The first is to spend some time and
+
+3
+00:00:15,000 --> 00:00:22,000
+consider if this is really the best layout for your application, and if you determine it is, then spend
+
+4
+00:00:22,000 --> 00:00:30,000
+some more time and think about how you want to present information to the user on the right-hand pane of the application.
+
+5
+00:00:30,000 --> 00:00:35,000
+I see a lot of people use the Explorer-Style interface where it really doesn't fit, and using these
+
+6
+00:00:35,000 --> 00:00:42,000
+applications quite often felt like the proverbial square peg in a round hole.
+
+7
+00:00:42,000 --> 00:00:47,000
+Also, if you do feel that this layout is suitable for your application, don't assume you have to use a list
+
+8
+00:00:47,000 --> 00:00:54,000
+view on the right-hand side. In a lot of scenarios, a user control is a better choice.
+
+9
+00:00:54,000 --> 00:00:59,000
+Now in our application we're going to build a file explorer, so the list view is a perfect choice for the
+
+10
+00:00:59,000 --> 00:59:00,000
+right-hand side of the application.
+

@@ -1,0 +1,8 @@
+1
+00:00:02,000 --> 00:00:10,000
+That ends this module where we covered the three core elements of a Windows Forms application; that's Forms,
+
+2
+00:00:10,000 --> 00:59:00,000
+Controls, and Events, and laid the foundation for understanding the remaining material in the course.
+

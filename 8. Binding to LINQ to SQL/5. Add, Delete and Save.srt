@@ -1,0 +1,116 @@
+1
+00:00:01,000 --> 00:00:10,000
+In this section we'll be examining how to Add, Delete, and Save when working with LINQ to SQL.
+
+2
+00:00:10,000 --> 00:00:15,000
+But before we get to those topics, I want to briefly revisit the DataContext.
+
+3
+00:00:15,000 --> 00:00:22,000
+To this point in the module we've been using the DataContext in the same way we used the DataSet in the last module,
+
+4
+00:00:22,000 --> 00:00:28,000
+but the DataContext really isn't designed to be used this way. While the DataSet was designed to be able
+
+5
+00:00:28,000 --> 00:00:35,000
+to store several changes over long periods of time, the DataContext was built to store changes over short
+
+6
+00:00:35,000 --> 00:00:43,000
+periods of time or units-of-work. So instead of creating a field for the DataContext and using it at the
+
+7
+00:00:43,000 --> 00:00:50,000
+class scope, we really should be using it at the methods scope. I'll cover the proper use of the DataContext
+
+8
+00:00:50,000 --> 00:01:00,000
+in more detail in the demo, but I wanted to touch on it now to setup the code you're going to see in the next two slides.
+
+9
+00:01:00,000 --> 00:01:07,000
+Inserting rows when working with LINQ to SQL on the surface looks similar to what we saw with the DataSet,
+
+10
+00:01:07,000 --> 00:01:15,000
+but in reality it's quite a bit different. First we'll create an instance of our entity object on the slide
+
+11
+00:01:15,000 --> 00:01:22,000
+that's the linqProduct, and then we'll set its properties, and then we'll call the InsertOnSubmit method off
+
+12
+00:01:22,000 --> 00:01:31,000
+of the entity collection on the slide that's LinqProducts, passing a reference to our newly created entity object.
+
+13
+00:01:31,000 --> 00:01:38,000
+Now the equivalent code in our DataSet example added the object to the in-memory table, and if we were to
+
+14
+00:01:38,000 --> 00:01:43,000
+take a look at the contents of the in-memory table we would see our new object.
+
+15
+00:01:43,000 --> 00:01:50,000
+In the case of LINQ to SQL, the object is just marked as a pending Insert; it doesn't get added into the
+
+16
+00:01:50,000 --> 00:01:58,000
+entity collection, so until we actually push the Insert down to the database by calling SubmitChanges on
+
+17
+00:01:58,000 --> 00:02:04,000
+the DataContext, we won't see our new object in the entity collection.
+
+18
+00:02:04,000 --> 00:02:10,000
+So as you see in the code on the slide, the first thing we do after calling InsertOnSubmit is to actually
+
+19
+00:02:10,000 --> 00:02:17,000
+submit that change to the database. Now you don't need to submit after every single change; if you have a
+
+20
+00:02:17,000 --> 00:02:24,000
+logical unit, say for example an invoice, where you'll be inserting and perhaps updating several rows in
+
+21
+00:02:24,000 --> 00:02:31,000
+several different tables, you can do the SubmitChanges after that logical unit.
+
+22
+00:02:31,000 --> 00:02:39,000
+Deleting rows in LINQ to SQL is again similar on the surface to what we saw in the DataSet example, but also
+
+23
+00:02:39,000 --> 00:02:45,000
+again different in the same way we talked about on the Insert slide.
+
+24
+00:02:45,000 --> 00:02:52,000
+To do the Delete or the Deletes, we'll use a query to find the entity or the entities we want to delete,
+
+25
+00:02:52,000 --> 00:02:59,000
+and then we'll loop through the results set calling DeleteOnSubmit on the appropriate entity collection.
+
+26
+00:02:59,000 --> 00:03:06,000
+And then finally we'll call SubmitChanges on the DataContext to push those Deletes down to the SQL Server database.
+
+27
+00:03:06,000 --> 00:03:14,000
+That's sufficient background on Adding, Deleting, and Saving in LINQ to SQL, to allow us to move back to our demo.
+
+28
+00:03:14,000 --> 00:03:20,000
+So we'll implement this functionality, and we'll also see the changes required to make proper use of the
+
+29
+00:03:20,000 --> 00:59:00,000
+DataContext, changing from using it at the class level to using it at the method level.
+

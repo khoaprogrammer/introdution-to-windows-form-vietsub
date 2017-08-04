@@ -1,0 +1,144 @@
+1
+00:00:03,000 --> 00:00:09,000
+In this demo we'll add a Toolbar to our MDI Text Editor application.
+
+2
+00:00:09,000 --> 00:00:17,000
+So in the Designer for the MainForm, I'll open the Toolbox, and then in the Menus &amp; Toolbars section I'll
+
+3
+00:00:17,000 --> 00:00:26,000
+add a ToolStrip. And then just like I did for the MenuStrip, I'll use the smart tag of the TooStrip to
+
+4
+00:00:26,000 --> 00:00:34,000
+insert standard items. So there's New, Open, Save, Print, we don't need Print, so I'll right-click on that
+
+5
+00:00:34,000 --> 00:00:42,000
+and choose Delete. Cut, Copy, and Paste, that's fine, and then we don't have Help, so I'll right-click and
+
+6
+00:00:42,000 --> 00:00:51,000
+delete that, and then I'll right click on the separator there and delete that.
+
+7
+00:00:51,000 --> 00:00:56,000
+Now that we have the buttons we want, we can take a look at the Click event handlers, and as you can imagine,
+
+8
+00:00:56,000 --> 00:01:01,000
+the Click event handler for an item in the Toolbar is going to be the same as the Click event handler for an
+
+9
+00:01:01,000 --> 00:01:06,000
+item in the Menu. So if I double-click on New here,
+
+10
+00:01:06,000 --> 00:01:14,000
+and then it's going to grab this and cut it and move it up to the top just above the Click event handler
+
+11
+00:01:14,000 --> 00:01:24,000
+for the new item in the Menu. So here you see we have NewToolStripMenuItem_Click; this is NewToolStripButton_Click.
+
+12
+00:01:24,000 --> 00:01:31,000
+The signature of the event handler is the same and then of course we have our Handles clause.
+
+13
+00:01:31,000 --> 00:01:38,000
+So what we could do is say well we already have the implementation we want for New, so let's just call this method;
+
+14
+00:01:38,000 --> 00:01:47,000
+so I'll just grab this and paste it here, and then I have the same parameter, so I can just say sender, e.
+
+15
+00:01:47,000 --> 00:01:56,000
+And that will work, if I hit F5, and then I click New, we get a new document.
+
+16
+00:01:56,000 --> 00:02:05,000
+But a more elegant way to handle this is to just say that this event handler handles the Click event for
+
+17
+00:02:05,000 --> 00:02:15,000
+the MenuItem, and it also handles the Click event for the ToolStripButton.
+
+18
+00:02:15,000 --> 00:02:22,000
+And we can do this because the signature of the event handler, or basically the arguments it takes, are the same.
+
+19
+00:02:22,000 --> 00:02:24,000
+So now if I hit F5,
+
+20
+00:02:24,000 --> 00:02:34,000
+and then click the New button, we get exactly the same behavior.
+
+21
+00:02:34,000 --> 00:02:38,000
+Now I could repeat this process for each of the other existing event handlers for which we have a
+
+22
+00:02:38,000 --> 00:02:43,000
+ToolStripButton, and that will work fine in our Visual Basic application, but it won't work in our C#
+
+23
+00:02:43,000 --> 00:02:49,000
+application, because obviously we don't have a Handles clause. So instead I'll use a technique that will
+
+24
+00:02:49,000 --> 00:02:54,000
+work equally well in both VB and C#.
+
+25
+00:02:54,000 --> 00:03:00,000
+So I'll switch over to the Designer, and we've already got the New button, so I'll click the Open button,
+
+26
+00:03:00,000 --> 00:03:07,000
+and then I'll come over to the Properties Window, and I'll switch to the Events view, and then for the Click
+
+27
+00:03:07,000 --> 00:03:16,000
+event, I'll just choose the existing OpenToolStripMenuItem_Click to be the event handler for that event.
+
+28
+00:03:16,000 --> 00:03:39,000
+And then I'll come over to Save, and here we'll choose Save, and then Cut, Cut, Copy, Copy, and finally Paste, Paste.
+
+29
+00:03:39,000 --> 00:03:46,000
+So with the VB application, what that did is just do the same thing I did using the Text Editor, it just
+
+30
+00:03:46,000 --> 00:03:55,000
+added the extra Handles clause, or the extra option in the Handles clause for the existing event handlers.
+
+31
+00:03:55,000 --> 00:04:01,000
+In the C# project, that would modify the Designer.cs for the form, attaching the event handlers using the
+
+32
+00:04:01,000 --> 00:04:09,000
+dynamic event handling. So the last thing to do is test out our work.
+
+33
+00:04:09,000 --> 00:04:21,000
+Let's press F5, and then use New, that creates a new document; Open will open the document we had before;
+
+34
+00:04:21,000 --> 00:04:32,000
+Save we can save that off to a different file name; Cut, so let me just select this text and then Cut,
+
+35
+00:04:32,000 --> 00:04:43,000
+and then type in some next text, then come down, and there's Paste, and we'll assume that the Copy works correctly.
+
+36
+00:04:43,000 --> 00:59:00,000
+So that completes the implementation of our Toolbar, and it also completes the implementation of our MDI application.
+

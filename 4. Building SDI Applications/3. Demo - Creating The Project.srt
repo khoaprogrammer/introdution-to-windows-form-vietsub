@@ -1,0 +1,64 @@
+1
+00:00:01,000 --> 00:00:09,000
+In this demo we'll create the project and the form for our SDI application.
+
+2
+00:00:09,000 --> 00:00:16,000
+So in Visual Studio I'll choose File-New-Project, and then I'll choose the Windows Forms Application template,
+
+3
+00:00:16,000 --> 00:00:27,000
+and we'll call our project SDI, click OK, and then for the form that's given to us we'll rename this to DocForm,
+
+4
+00:00:27,000 --> 00:00:36,000
+so right-click on the Form-Rename, and then DocForm, press Enter; we want to rename both the file and the
+
+5
+00:00:36,000 --> 00:00:45,000
+class, so we'll choose Yes here. We'll make the form a little bit larger, and we'll change the title of the
+
+6
+00:00:45,000 --> 00:00:55,000
+form to New Document. And then what we want to do is go over to our MDI application; I have the main form
+
+7
+00:00:55,000 --> 00:01:03,000
+open, and I want to copy the menu and the toolbar from the form here to the form here.
+
+8
+00:01:03,000 --> 00:01:11,000
+In our SDI application there will be no main form, so each of the document forms has its own menu and toolbar.
+
+9
+00:01:11,000 --> 00:01:20,000
+So I'll come over to MDI, I'll click on the Menu, copy that to the clipboard, come over here and paste.
+
+10
+00:01:20,000 --> 00:01:29,000
+And then I'll come back to the MDI application, click on the toolbar, again copy, and paste.
+
+11
+00:01:29,000 --> 00:01:35,000
+And then finally I want a RichTextBox control to take up the remainder of the form, so I'll come over to
+
+12
+00:01:35,000 --> 00:01:42,000
+Common Controls, grab the RichTextBox, drag and drop it on the form, and dock it, and then rename it to
+
+13
+00:01:42,000 --> 00:01:55,000
+the DocumentTextBox. Alright, so at this point I have a program I could execute; I can click the Start
+
+14
+00:01:55,000 --> 00:02:01,000
+button and we'll see we get a form here; obviously it doesn't do anything yet.
+
+15
+00:02:01,000 --> 00:02:07,000
+But it's also not an SDI application. We need to configure the properties of the application object,
+
+16
+00:02:07,000 --> 00:59:00,000
+and we'll see that that's very simple to do in VB because of the application framework; it takes a little bit more code in C#.
+

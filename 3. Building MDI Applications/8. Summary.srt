@@ -1,0 +1,28 @@
+1
+00:00:01,000 --> 00:00:11,000
+So that's how to build an MDI application. The use of the MDI interface was very popular in the 90's and
+
+2
+00:00:11,000 --> 00:00:18,000
+into the early 2000's, and because of that there's really good support for building MDI applications in
+
+3
+00:00:18,000 --> 00:00:26,000
+the .NET framework. Now since the early to mid-2000's, over the last 10 years or so, the use of the
+
+4
+00:00:26,000 --> 00:00:33,000
+interface has sort of fallen out of favor, and more and more applications that would have been built using
+
+5
+00:00:33,000 --> 00:00:40,000
+MDI in the past are now being built using SDI or the Single Document Interface.
+
+6
+00:00:40,000 --> 00:00:47,000
+The process of building an SDI application is similar to what we just saw in building an MDI application,
+
+7
+00:00:47,000 --> 00:59:00,000
+so much of what we just learned will transfer over. We'll see this in the next module, which covers building SDI applications.
+

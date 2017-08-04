@@ -1,0 +1,60 @@
+1
+00:00:02,000 --> 00:00:10,000
+In this section we'll take a look at working with Dialogs. Dialogs are forms that either provide information
+
+2
+00:00:10,000 --> 00:00:18,000
+to the user or request information from the user. Dialogs are almost always modal, meaning that you can't
+
+3
+00:00:18,000 --> 00:00:23,000
+switch from the dialog to the other forms on the application; the only way you can get back to the other
+
+4
+00:00:23,000 --> 00:00:32,000
+forms is by closing the dialog. Windows Forms includes several dialog types we can use; we'll see the use
+
+5
+00:00:32,000 --> 00:00:39,000
+of MessageBox in the upcoming demo, and we'll see the use of the OpenFile and SaveFile dialogs in a demo
+
+6
+00:00:39,000 --> 00:00:48,000
+later on in the course. We could also create our own custom dialogs; we'll see this in the next section.
+
+7
+00:00:48,000 --> 00:00:58,000
+To show a simple dialog on the screen, we can us VB's MsgBox function or we can use the Show method of the
+
+8
+00:00:58,000 --> 00:01:05,000
+MessageBox type that's in a System.Windows.Form namespace. For more complex dialogs, we'll create an
+
+9
+00:01:05,000 --> 00:01:12,000
+instance of the dialog type and set its properties, and then we'll display the dialog using the ShowDialog
+
+10
+00:01:12,000 --> 00:01:22,000
+method of the form type. The ShowDialog method is expected to return a member of the DialogResult enumeration.
+
+11
+00:01:22,000 --> 00:01:28,000
+This value represents the button the user clicked to close the dialog.
+
+12
+00:01:28,000 --> 00:01:35,000
+So taking a look at the snippet on this slide that uses the SaveFile dialog, when the dialog closes, we check
+
+13
+00:01:35,000 --> 00:01:41,000
+to see whether or not the user clicked the OK button, and then if they did, we save the contents of the
+
+14
+00:01:41,000 --> 00:01:49,000
+RichTextBox to the file the user selected in the dialog. The name of that file is exposed through the file
+
+15
+00:01:49,000 --> 00:59:00,000
+name property of the dialog type.
+

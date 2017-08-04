@@ -1,0 +1,145 @@
+1
+00:00:01,000 --> 00:00:10,000
+Hi everybody, this is Rob Windsor, and thank you for choosing to watch Introduction to Windows Forms.
+chào các bạn , đây là Rob , và cảm ơn các bạn đã chọn xem phần giới thiệu winform
+
+2
+00:00:10,000 --> 00:00:15,000
+This module will introduce the course, and then move on to cover the three main topics for Windows Forms
+modulm này giới thiều về khóa học , và rồi sẻ học hết 3 chủ đề chính của winform 
+
+3
+00:00:15,000 --> 00:00:21,000
+applications, Forms, Controls, and Events.
+những ứng dụng , form , controls , và sự kiện
+
+4
+00:00:21,000 --> 00:00:27,000
+Just a couple notes before we get to the discussion of Windows Forms.
+có 2 chú ý trước khi chúng ta thảo luận về winform
+
+5
+00:00:27,000 --> 00:00:34,000
+Developers viewing this course are assumed to be reasonably familiar with either VB or C#, and with the use
+những developer xem khóa học này thì đãm bảo sẻ hiểu biết về VB or C# và việc sử dụng
+6
+00:00:34,000 --> 00:00:42,000
+of Visual Studio. I've recommended a few courses you can use to brush up on these skills if you feel you
+visual stdio , tôi đã đưa ra 1 vài khóa học , bạn có thể sử dụng để đánh bóng những skill nếu bạn cảm thấy
+
+7
+00:00:42,000 --> 00:00:46,000
+need to do so.
+bạn cần thiết để làm vậy
+8
+00:00:46,000 --> 00:00:50,000
+The demonstrations in this course will primarily be done in Visual Basic.
+những minh chứng trong khóa học này sẻ là đk hoàn thành trước trong VB
+9
+00:00:50,000 --> 00:00:55,000
+I'm only going to be showing C# examples where there is a significant difference between what needs to be
+tôi chỉ hiển thị vi dụ về c# , nơi có 1 sự khác biệt quan trọng giữa cái gì thì cần đk
+10
+00:00:55,000 --> 00:01:06,000
+done in C# and what was done in VB. However, the downloadable code samples have complete solutions in both languages.
+hoàn thành trong c# và cái gì đk hoàn thành trong VB , tuy nhiên những ví dụ code có thể download đã đk hoàn chỉnh trong cả 2 ngôn ngữ 
+11
+00:01:06,000 --> 00:01:12,000
+With that housekeeping complete, we can now move on to the topic for the course.
+bây h có thể tới khóa học
+12
+00:01:12,000 --> 00:01:19,000
+Windows Forms is a combination of classes in the .NET framework and tooling in Visual Studio that enables you
+winform là sự kết hợp những class in .net và những công cụ trong VS mà cho phép bạn
+13
+00:01:19,000 --> 00:01:26,000
+to build traditional Windows applications. Windows Forms has been part of .NET since the beginning,
+xây dựng ứng dụng form truyền thống , winform là thành phần của .net ngay từ lúc đầu
+14
+00:01:26,000 --> 00:01:35,000
+but its evolution really ended with the .NET framework 3.5 and Visual Studio 2008.
+nhưng sự phát triển thực sự của nó đã kết thúc với .net 3.5 và VS 2008 ( thôi mấy cái giới thiệu ,mình chẳng dịch đâu , lâu la, mất thời gian )
+15
+00:01:35,000 --> 00:01:41,000
+This is in some ways a good thing; as Kate Gregory puts it, Windows Forms is in the "Safe Zone," meaning it's
+
+16
+00:01:41,000 --> 00:01:48,000
+not continually evolving like many other .NET framework technologies, so the skills you had five years ago
+
+17
+00:01:48,000 --> 00:01:58,000
+still apply today. But in some ways it's a bad thing, because Windows is evolving, and Windows Forms isn't.
+
+18
+00:01:58,000 --> 00:02:04,000
+One example of this that we'll see in the course is that there are no controls in Windows Forms that enable
+
+19
+00:02:04,000 --> 00:02:12,000
+you to add a ribbon to your application. So like any other technology, there are pros and cons to using
+
+20
+00:02:12,000 --> 00:02:19,000
+Windows Forms, but if you're going to build applications that have tight integration with Windows, I think
+
+21
+00:02:19,000 --> 00:02:26,000
+Windows Forms is still the most productive way to build those applications.
+
+22
+00:02:26,000 --> 00:02:33,000
+This course is made up of 10 modules. This module is on Forms, Controls, and Events.
+
+23
+00:02:33,000 --> 00:02:38,000
+I'll discuss the contents of this module in more detail in just a moment.
+
+24
+00:02:38,000 --> 00:02:42,000
+The next module has some additional information on Forms and Controls.
+
+25
+00:02:42,000 --> 00:02:51,000
+Here we'll cover some specifics about the Form lifecycle, the use of dialogs, menus, toolbars, and user controls.
+
+26
+00:02:51,000 --> 00:02:56,000
+The coverage of these topics is required setup for the next three modules, where we'll build three
+
+27
+00:02:56,000 --> 00:03:04,000
+applications from start to finish. First we'll build a Multiple Document Interface Application, then we'll
+
+28
+00:03:04,000 --> 00:03:11,000
+build a Single Document Interface Application, and finally we'll build an Explorer-Style Application.
+
+29
+00:03:11,000 --> 00:03:17,000
+The next four modules focus on the Data Binding features of Windows Forms and Visual Studio.
+
+30
+00:03:17,000 --> 00:03:25,000
+We'll see an introduction to Data Binding, we'll take a look at Data Binding to DataSets, Data Binding to a
+
+31
+00:03:25,000 --> 00:03:32,000
+LINQ to SQL model, and then finally using the DataSources window and the Drag-and-Drop Data Binding features
+
+32
+00:03:32,000 --> 00:03:40,000
+included in Visual Studio. I'd just like to mention at this point that these four modules cover Data Binding.
+
+33
+00:03:40,000 --> 00:03:47,000
+Now I will include some material that introduces ADO.NET, and DataSets, and LINQ to SQL, but the focus is on
+
+34
+00:03:47,000 --> 00:03:55,000
+Data Binding, not the data access technology. The final module in the course covers Deployment options,
+
+35
+00:03:55,000 --> 00:59:00,000
+with a specific focus on ClickOnce.
+

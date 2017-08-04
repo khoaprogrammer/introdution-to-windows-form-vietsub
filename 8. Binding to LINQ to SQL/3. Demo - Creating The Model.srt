@@ -1,0 +1,156 @@
+1
+00:00:01,000 --> 00:00:09,000
+In this demo I'll be creating the LINQ to SQL model we'll be using later on to create the entities to which
+
+2
+00:00:09,000 --> 00:00:16,000
+we'll be binding. So here's our Visual Studio project, it's the same as it was at the end of the last module,
+
+3
+00:00:16,000 --> 00:00:23,000
+I haven't made any changes, and the first thing we'll do is come over to Server Explorer and pin that,
+
+4
+00:00:23,000 --> 00:00:28,000
+and we'll create a Data Connection to the SQL Server database we'll be using.
+
+5
+00:00:28,000 --> 00:00:33,000
+So I'll right-click on Data Connections and choose Add Connection.
+
+6
+00:00:33,000 --> 00:00:38,000
+The Add Connection dialog here is the one for SQL Server; if I wanted to connect to a different kind of
+
+7
+00:00:38,000 --> 00:00:45,000
+database, I could click Change here, and choose the appropriate provider, but I do want to connect to SQL
+
+8
+00:00:45,000 --> 00:00:52,000
+server, so I'll leave that highlighted, and click OK to come back to this dialog.
+
+9
+00:00:52,000 --> 00:00:58,000
+I want to connect to the default instance on my local machine, so the server name will be localhost.
+
+10
+00:00:58,000 --> 00:01:05,000
+I want to use Windows Authentication to authenticate with the database, so I'll leave the default here,
+
+11
+00:01:05,000 --> 00:01:12,000
+and then in here, I'll select the Northwind database, and click OK.
+
+12
+00:01:12,000 --> 00:01:18,000
+So now I have a connection to the Northwind database, I can come in here and I can see the Tables, I can see
+
+13
+00:01:18,000 --> 00:01:27,000
+any Views there are, I can see the Stored Procedures, and so on. Now I'll come over to my project, and I'll
+
+14
+00:01:27,000 --> 00:01:38,000
+add in the model, so I'll right-click on the project and choose Add-New Item, and then I'll switch to the
+
+15
+00:01:38,000 --> 00:01:50,000
+Data section and choose LINQ to SQL Classes; and I'll call my model Northwind, and click Add.
+
+16
+00:01:50,000 --> 00:01:57,000
+Our model is going to be the same simple model we've using all along, so I just want the Categories, drag and
+
+17
+00:01:57,000 --> 00:02:06,000
+drop that onto my design surface, and I also want the Products. So with the model created I can unpin the
+
+18
+00:02:06,000 --> 00:02:14,000
+Server Explorer, so you can see we're going to have two entities here, a Category entity and a Products entity.
+
+19
+00:02:14,000 --> 00:02:19,000
+And you can see it's picked up several things from the database, for example, what are the columns in the two
+
+20
+00:02:19,000 --> 00:02:27,000
+different tables, it's going to create properties to represent those columns, which ones are keys, the types
+
+21
+00:02:27,000 --> 00:02:34,000
+of the columns, so if I click here on QuantityPerUnit, we can come in here and we can see it knows it's a string,
+
+22
+00:02:34,000 --> 00:02:44,000
+and if I click on UnitsInStock, it knows it's a number. And if I want my logical model, which is here, to be
+
+23
+00:02:44,000 --> 00:02:52,000
+a little bit different than my physical model, which is in the database, I can make some changes using this designer.
+
+24
+00:02:52,000 --> 00:02:58,000
+I will make two changes. If I leave things as they are, the designer is going to create a class called
+
+25
+00:02:58,000 --> 00:03:06,000
+Product to represent this entity, and a class called Category to represent this entity.
+
+26
+00:03:06,000 --> 00:03:12,000
+And this will be a problem because I already have a class called Category and I already have a class called Product.
+
+27
+00:03:12,000 --> 00:03:28,000
+So I'll just rename these; this will become LinqProduct, and this will become LinqCategory.
+
+28
+00:03:28,000 --> 00:03:36,000
+So now if I save my model and then come over to here and turn on Show All Files, and then come down under
+
+29
+00:03:36,000 --> 00:03:45,000
+Northwind.dbml, there'll be a file called Northwind.designer.vb or Northwind.designer.cs, depending on what
+
+30
+00:03:45,000 --> 00:03:52,000
+language you're using, and this file will contain the classes with methods and properties that are used to
+
+31
+00:03:52,000 --> 00:03:59,000
+represent the underlying data store. Right, so one of the key classes, as I mentioned in the slides, will be
+
+32
+00:03:59,000 --> 00:04:08,000
+the DataContext, but the classes that actually represent our data are down farther here, so here is our
+
+33
+00:04:08,000 --> 00:04:15,000
+LinqCategory class, and you can see it as properties to represent the field values, CategoryID, CategoryName,
+
+34
+00:04:15,000 --> 00:04:24,000
+Description, and it also has a property for the products; categories and products are related in the database,
+
+35
+00:04:24,000 --> 00:04:30,000
+so I can use this property to get the products that are related to the current entity.
+
+36
+00:04:30,000 --> 00:04:36,000
+And if I scroll down here farther, we'll eventually see the products class, there it is LinqProduct,
+
+37
+00:04:36,000 --> 00:04:43,000
+and there's its properties, and there's its implementation. So that completes the building of the model.
+
+38
+00:04:43,000 --> 00:04:50,000
+In the next demo we'll add the LinqSource class, have it implement ISource, and then implement the different
+
+39
+00:04:50,000 --> 00:59:00,000
+methods of the ISource interface.
+

@@ -1,0 +1,252 @@
+1
+00:00:01,000 --> 00:00:10,000
+Back in our Visual Studio project, I have the code for the form open, and what I want to do is add an event
+
+2
+00:00:10,000 --> 00:00:16,000
+handler for the click event of the ShowMessageButton. And when the user clicks the button, I want to take
+
+3
+00:00:16,000 --> 00:00:24,000
+the text that's in the TextBox and copy it into the text for the label.
+
+4
+00:00:24,000 --> 00:00:27,000
+Now as I mentioned in the slides, there are two ways that I can do this.
+
+5
+00:00:27,000 --> 00:00:35,000
+I can do it statically using the WithEvents and Handles keywords, or I can do it dynamically using AddHandler.
+
+6
+00:00:35,000 --> 00:00:40,000
+In Visual Basic, most often you're going to see the use of the WithEvents and Handles keywords, so that's
+
+7
+00:00:40,000 --> 00:00:47,000
+where I'll start out. So over here on the Declaration for our ShowMessageButton, I'm going to add in the
+
+8
+00:00:47,000 --> 00:00:54,000
+WithEvents keyword, so that says that this button should listen for all of its events, and then down here at
+
+9
+00:00:54,000 --> 00:01:00,000
+the bottom what I want to do is add in the Sub routine, which will be our event handler, and an indicated
+
+10
+00:01:00,000 --> 00:01:09,000
+handle as the ClickEvent for the ShowMessageButton. Now virtually all event handlers have a common signature.
+
+11
+00:01:09,000 --> 00:01:15,000
+The first parameter is of type object, we normally name the parameter sender, and this is a reference to the
+
+12
+00:01:15,000 --> 00:01:23,000
+object that raised the event. And the second parameter, which we normally e, is of type EventArgs,
+
+13
+00:01:23,000 --> 00:01:29,000
+or something that derives from EventArgs, and it has information that's specific to the event.
+
+14
+00:01:29,000 --> 00:01:34,000
+When you're writing event handler in code as we're doing here, it's difficult to remember what kind of
+
+15
+00:01:34,000 --> 00:01:41,000
+EventArgs each different kind of event takes. Luckily, Visual Studio is going to help us out here.
+
+16
+00:01:41,000 --> 00:01:48,000
+So if I want to add the Sub routine, which will be the event handler for the Click event of the ShowMessageButton,
+
+17
+00:01:48,000 --> 00:01:54,000
+what I'll do is go to the left dropdown here at the top of my text editor, and then pick ShowMessageButton,
+
+18
+00:01:54,000 --> 00:02:02,000
+and then over here in the right dropdown, I'll pick the event I want to handle, in this case it's the Click event.
+
+19
+00:02:02,000 --> 00:02:08,000
+And then Visual Studio will add in a Sub routine with the appropriate signature and the appropriate Handles
+
+20
+00:02:08,000 --> 00:02:17,000
+clauses for my event handler. So if we take a look, here you can see I have a Sub routine, it's a Private
+
+21
+00:02:17,000 --> 00:02:26,000
+Sub routine, the naming convention is the name of the control, so ShowMessageButton_ and then the name of the event.
+
+22
+00:02:26,000 --> 00:02:30,000
+But we don't have to use this name; we can really name it anything we want.
+
+23
+00:02:30,000 --> 00:02:37,000
+So just to show you that I'll change this to ClickHandler. Here's the signature I mentioned, so we have
+
+24
+00:02:37,000 --> 00:02:43,000
+sender As Object, and then e As EventArgs, so for the Click event handler there's no special information that
+
+25
+00:02:43,000 --> 00:02:56,000
+we need for the event, we're getting the base EventArgs. Then finally, this handles the Click event for the ShowMessageButton.
+
+26
+00:02:56,000 --> 00:03:02,000
+So when the button gets clicked, I want to copy the text from the TextBox into the label, so that's
+
+27
+00:03:02,000 --> 00:03:13,000
+MessageLabel.Text, is going to be set to the MessageTexBox.text.
+
+28
+00:03:13,000 --> 00:03:18,000
+And then just to give a little bit more of a visual indication that the event happened, I'll also add in a
+
+29
+00:03:18,000 --> 00:03:26,000
+message box here just saying that the button was clicked. So at this point we're ready to test out our work,
+
+30
+00:03:26,000 --> 00:03:35,000
+so I'll press F5, and then I'll type some text into the TextBox, and click the ShowMessageButton, and there
+
+31
+00:03:35,000 --> 00:03:39,000
+you can see the text from TextBox has been copied into the label, and then there's a little message box
+
+32
+00:03:39,000 --> 00:03:48,000
+showing up here. So that's how to handle the event using WithEvents and Handles, now let's take a look at
+
+33
+00:03:48,000 --> 00:03:57,000
+how we can handle an event using AddHandler. So what I'll do is I'll get rid of this Handles clause,
+
+34
+00:03:57,000 --> 00:04:09,000
+and also get rid of the underscore there, and then up at the top I'll get rid of the WithEvents keyword.
+
+35
+00:04:09,000 --> 00:04:16,000
+And then down in the constructor, after we've created our button, I'll dynamically attach our Sub routine,
+
+36
+00:04:16,000 --> 00:04:20,000
+our event handler Sub routine, to the Click event using AddHandler.
+
+37
+00:04:20,000 --> 00:04:31,000
+So it's AddHandler, then the event we want to handle, so that's our ShowMessageButton.Click, and then a
+
+38
+00:04:31,000 --> 00:04:39,000
+pointer to the Sub routine that's going to handle the event, so that's AddressOf and then ClickHandler.
+
+39
+00:04:39,000 --> 00:04:45,000
+Okay, so now if I press F5, and then again type some text in the TextBox, and click the button, you can see
+
+40
+00:04:45,000 --> 00:04:52,000
+the text is copied from the TextBox to the label, and then there's our message box.
+
+41
+00:04:52,000 --> 00:04:59,000
+Now one note about the use of AddHandler is that if you have multiple calls to AddHandler for the same
+
+42
+00:04:59,000 --> 00:05:06,000
+event, the second one doesn't replace the first one, it adds to the first one.
+
+43
+00:05:06,000 --> 00:05:13,000
+So now if I Run the program and click the button, our event handler will run two times, because I've attached it twice.
+
+44
+00:05:13,000 --> 00:05:23,000
+So I'll press F5, type some text into the TextBox, click the button; so there's the first run, and then there
+
+45
+00:05:23,000 --> 00:05:27,000
+is the second run.
+
+46
+00:05:27,000 --> 00:05:35,000
+Handling events in C# is similar to what we just saw, but there are some small differences, and it's worth
+
+47
+00:05:35,000 --> 00:05:42,000
+a quick demo. So here I have my form, and on the form we have a TextBox, a Button, and a Label, and just
+
+48
+00:05:42,000 --> 00:05:49,000
+like in the previous example, I want to add an event handler for the Click event of the button.
+
+49
+00:05:49,000 --> 00:05:56,000
+So down here, after I've created the button, what I'll do is say ShowMessageButton.Click, and the equivalent
+
+50
+00:05:56,000 --> 00:06:05,000
+to AddHandler in C# is actually an operator, it's the += operator, and you notice Visual Studio saying TAB to insert.
+
+51
+00:06:05,000 --> 00:06:13,000
+So I can use the TAB key to 1) Attach the event handler method, so that's the first TAB, and then 2) Actually
+
+52
+00:06:13,000 --> 00:06:20,000
+create the void function that will be our event handler, that's the second TAB.
+
+53
+00:06:20,000 --> 00:06:29,000
+So coming back up here, you can see it says ShowMessageButton.Click += ShowMessageButton_Click; notice the
+
+54
+00:06:29,000 --> 00:06:36,000
+same naming convention we had before, it's the name of the control _ (underscore) and then the name of the event,
+
+55
+00:06:36,000 --> 00:06:42,000
+and then down here, we have the void function where we'll put our code, and it'll be the same code we saw
+
+56
+00:06:42,000 --> 00:06:58,000
+before; it's MessageLabel.Text = MessageTextBox.text. And just like I showed you in the VB example, while
+
+57
+00:06:58,000 --> 00:07:04,000
+the naming convention is commonly used, we don't have to use it, so I can go ahead and refactor this and
+
+58
+00:07:04,000 --> 00:07:14,000
+rename this to ClickHandler, then click OK, and this will work exactly the same.
+
+59
+00:07:14,000 --> 00:07:20,000
+So I press F5, and then type some text into the TextBox, and click the button, and you can see that text has
+
+60
+00:07:20,000 --> 00:07:29,000
+transferred over to the label. So at this point we've seen all the core pieces of creating a Windows Forms
+
+61
+00:07:29,000 --> 00:07:36,000
+application, we've created a form, we've added controls to the form, and we've added event handlers to those controls.
+
+62
+00:07:36,000 --> 00:07:41,000
+But we've done all this using code. In the next section we'll take a look at how we can build the same
+
+63
+00:07:41,000 --> 00:59:00,000
+application, but this time using the visual designer and tools that Visual Studio makes available for us.
+

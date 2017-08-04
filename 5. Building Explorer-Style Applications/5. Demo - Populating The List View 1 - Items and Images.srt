@@ -1,0 +1,236 @@
+1
+00:00:04,000 --> 00:00:13,000
+In this demo we'll add the code to add the items and images to the list view in our Explorer-Style application.
+
+2
+00:00:13,000 --> 00:00:15,000
+So let's come over to Windows Explorer and take a look
+
+3
+00:00:15,000 --> 00:00:22,000
+at how the list view works. As the user clicks on Folders here in the tree view, the items that are in that
+
+4
+00:00:22,000 --> 00:00:30,000
+folder are shown in the list view; in this case it's Folders and Files; in our application we'll only be
+
+5
+00:00:30,000 --> 00:00:38,000
+showing the Files. Now notice that each item has an icon and a caption, that's one important
+
+6
+00:00:38,000 --> 00:00:47,000
+characteristic of the list view. Another important characteristic is you can switch the views.
+
+7
+00:00:47,000 --> 00:00:54,000
+So here we have Medium Icons, I can show Large Icons, and notice the only difference here is the size of the icon.
+
+8
+00:00:54,000 --> 00:01:02,000
+I can go to Small Icons; again the same thing, just the way they're laid out and the size of the icon.
+
+9
+00:01:02,000 --> 00:01:09,000
+And we also have a view called Details view. So here we have the icon and the caption for the item, but we
+
+10
+00:01:09,000 --> 00:01:18,000
+also have some additional information about the item; in this case it's the date modified, the type, and the size.
+
+11
+00:01:18,000 --> 00:01:24,000
+These additional items are called the sub-items of the main item.
+
+12
+00:01:24,000 --> 00:01:30,000
+So in our application we'll add an event handler from when the user selects one of the items out of the tree
+
+13
+00:01:30,000 --> 00:01:35,000
+view; when they do we'll find the information about the files contained in that folder, and then display them
+
+14
+00:01:35,000 --> 00:01:44,000
+in the list view using the view selected by the user. Okay, let's switch back over to Visual Studio,
+
+15
+00:01:44,000 --> 00:01:51,000
+and then double-click on the tree view to add the event handler for the AfterSelect event, this is the one I
+
+16
+00:01:51,000 --> 00:01:56,000
+want to handle, and the first thing I want to do is create a DirectoryInfo object to represent the folder the
+
+17
+00:01:56,000 --> 00:02:07,000
+user selected in the tree view, so that's Dim dir As New DirectoryInfo, and here I need to pass the path to
+
+18
+00:02:07,000 --> 00:02:13,000
+the folder, that's stored in the Tag property of the selected tree view node.
+
+19
+00:02:13,000 --> 00:02:25,000
+I can get access to the selected tree view node using the event arguments for the event handler, so that's e.Node.Tag.
+
+20
+00:02:25,000 --> 00:02:36,000
+Then I want to clear the items in the list view, so that's ListView1.Items.Clear, then I want to look
+
+21
+00:02:36,000 --> 00:02:41,000
+through the files in the selected folder and create a list view item for each one of those,
+
+22
+00:02:41,000 --> 00:02:55,000
+so that's For Each File In dir.GetFiles; oh and actually let me rename this variable because the IntelliSense
+
+23
+00:02:55,000 --> 00:03:05,000
+is confusing the file variable with the file type, so just so there's no confusion, let's call it thisFile.
+
+24
+00:03:05,000 --> 00:03:17,000
+Alright, so now I want to create the list view item, so that's Dim item As New ListViewItem, and one of the
+
+25
+00:03:17,000 --> 00:03:23,000
+overloads for the constructor takes the caption for the item, that will be the name of the file,
+
+26
+00:03:23,000 --> 00:03:31,000
+so thisFile.Name, and then we can add the item into the items collection for the list view,
+
+27
+00:03:31,000 --> 00:03:46,000
+so that's ListView1.Items.Add(item). Alright, so at this point we can run, let's press F5, and then pick
+
+28
+00:03:46,000 --> 00:03:55,000
+a folder here, how about Reflector. So right now we're getting the captions for the items but not their
+
+29
+00:03:55,000 --> 00:04:03,000
+images; so let's add that functionality. Alright, so let's get out of full screen, and then come back over
+
+30
+00:04:03,000 --> 00:04:09,000
+to the Designer, and let's take a look at some of the properties of the list view control.
+
+31
+00:04:09,000 --> 00:04:19,000
+So the first is View, which is what is the default view; here we can see the options; we'll leave it at LargeIcon.
+
+32
+00:04:19,000 --> 00:04:30,000
+And then as I scroll up, we can see there's a SmallImageList, and then further up there is a property called LargeImageList.
+
+33
+00:04:30,000 --> 00:04:37,000
+So the images associated with the items in the list view are stored in an image list control.
+
+34
+00:04:37,000 --> 00:04:48,000
+So if we go to the Toolbox here, and then open up the Components section, we'll see that we find the ImageList control.
+
+35
+00:04:48,000 --> 00:04:55,000
+So let's put two of these onto our form; since they're not visible they go down here in the Component area.
+
+36
+00:04:55,000 --> 00:05:04,000
+One of these is going to store the large images for our list view, so we'll call this guy the LargeImageList,
+
+37
+00:05:04,000 --> 00:05:14,000
+and we'll set the ColorDepth here to 32, and then the size of the images this will store will be 32,32.
+
+38
+00:05:14,000 --> 00:05:27,000
+And then as you can imagine this one's going to be the SmallImageList, and the ColorDepth will be 32, and the
+
+39
+00:05:27,000 --> 00:05:38,000
+size of the images will stay at 16,16. So now if we come over to the list view here, I can set the two properties;
+
+40
+00:05:38,000 --> 00:05:45,000
+so one was the LargeImageList, so I'll set that to the LargeImageList control, and the other was the
+
+41
+00:05:45,000 --> 00:05:52,000
+SmallImageList, so I'll set that to the SmallImageList control. We won't be using the SmallImageList right
+
+42
+00:05:52,000 --> 00:05:56,000
+now, but we will be using it momentarily.
+
+43
+00:05:56,000 --> 00:06:01,000
+Alright, so let's go back to our event handler and add the code to populate the image list and to associate
+
+44
+00:06:01,000 --> 00:06:08,000
+images with list view items. Now at this point you've probably seen me type enough code, so I'm going to
+
+45
+00:06:08,000 --> 00:06:18,000
+start copying and pasting in code snippets. Each item in an image list has an index in a key, and you can
+
+46
+00:06:18,000 --> 00:06:28,000
+reference it either way; we'll be storing images associated with files, so we'll use the file extension as the key.
+
+47
+00:06:28,000 --> 00:06:34,000
+So the first thing we'll do is check to see whether or not the image list already has an image associated
+
+48
+00:06:34,000 --> 00:06:44,000
+with the file extension. If it doesn't, then we'll use the method Icon.ExtracAssociatedIcon, to get the icon
+
+49
+00:06:44,000 --> 00:06:53,000
+associated with the file in Windows, and then we'll add that into the image list.
+
+50
+00:06:53,000 --> 00:07:01,000
+And then finally we'll tell the list view item that its ImageKey is the file extension, so we'll then go to
+
+51
+00:07:01,000 --> 00:07:08,000
+the appropriate image list and get the icon it needs, depending on the current view.
+
+52
+00:07:08,000 --> 00:07:14,000
+Now there's one more line of code we need to add. For almost all files in Windows, if the file has the same
+
+53
+00:07:14,000 --> 00:07:22,000
+extension it has the same icon. But for executables that's not the case, so what we'll do up here is we'll
+
+54
+00:07:22,000 --> 00:07:30,000
+remove the item in the image list associated with the executable or .exe extension.
+
+55
+00:07:30,000 --> 00:07:35,000
+Now there could be some case where a single folder holds multiple files with the .exe extension, and they
+
+56
+00:07:35,000 --> 00:07:41,000
+have different icons, but we're not going to deal with that scenario in our app.
+
+57
+00:07:41,000 --> 00:07:49,000
+Alright, so let's press F5 now, and now we can see we not only get the caption, but we get the icon
+
+58
+00:07:49,000 --> 00:08:01,000
+associated with the file. So that covers adding items and images to our list view, so we'll end this part of
+
+59
+00:08:01,000 --> 00:59:00,000
+the demo here, and then in the next demo we'll take a look at supporting multiple views, including the details view.
+

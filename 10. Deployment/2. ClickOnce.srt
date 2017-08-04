@@ -1,0 +1,76 @@
+1
+00:00:01,000 --> 00:00:10,000
+ClickOnce is a Smart Client deployment technology that was added to the .NET framework in Version 2.
+
+2
+00:00:10,000 --> 00:00:16,000
+The idea behind ClickOnce is to give developers and administrators a deployment experience similar to that of
+
+3
+00:00:16,000 --> 00:00:22,000
+web applications, while still enabling a rich client experience for end users.
+
+4
+00:00:22,000 --> 00:00:28,000
+To install an application deployed by ClickOnce, an end user simply needs to click on a link in a website or
+
+5
+00:00:28,000 --> 00:00:36,000
+click on a file in a file share, hence the name ClickOnce. As we'll see in the upcoming demo, the reality is
+
+6
+00:00:36,000 --> 00:00:42,000
+that ClickOnce often turns into click twice, or click three times, or click four times, but when the
+
+7
+00:00:42,000 --> 00:00:49,000
+ClickOnce deployment package has been signed by a publisher certificate, the installation process is
+
+8
+00:00:49,000 --> 00:00:57,000
+generally pretty simple and intuitive. One other important aspect of the installation process, users do
+
+9
+00:00:57,000 --> 00:01:03,000
+not have to have administrative rights on their machine to install applications deployed by ClickOnce.
+
+10
+00:01:03,000 --> 00:01:10,000
+In the upcoming demos, I'll give you a solid introduction to ClickOnce, and we'll see its core uses from
+
+11
+00:01:10,000 --> 00:01:17,000
+both the developer and the end user side. We'll see how to publish to and install from both a file share
+
+12
+00:01:17,000 --> 00:01:25,000
+and a website. We'll talk about the difference between Installed applications and Launched applications,
+
+13
+00:01:25,000 --> 00:01:30,000
+and we'll see how to do automatic Application Updates. Now ClickOnce is one of those topics we could have
+
+14
+00:01:30,000 --> 00:01:36,000
+an entire course on, so there are several things I'm not going to be able to cover in this module, but I
+
+15
+00:01:36,000 --> 00:01:42,000
+do want to make you aware of them so you can do additional research when you start using this technology.
+
+16
+00:01:42,000 --> 00:01:49,000
+So what's not covered in the upcoming demos is handling Prerequisites, like the installation of the version
+
+17
+00:01:49,000 --> 00:01:55,000
+of the .NET framework or different component suites, and using the Bootstrapper to handle those prerequisites;
+
+18
+00:01:55,000 --> 00:02:03,000
+storing files on the end user's machine using Isolated storage; Security and Trust Levels; and the Deployment
+
+19
+00:02:03,000 --> 00:59:00,000
+API that's included with ClickOnce.
+

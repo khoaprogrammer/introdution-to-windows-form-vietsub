@@ -1,0 +1,132 @@
+1
+00:00:02,000 --> 00:00:08,000
+In this section we'll take a look at Menus and Toolbars. We'll start by looking at Menus.
+
+2
+00:00:08,000 --> 00:00:14,000
+The menu is implemented by the MenuStrip control, and the menu items are implemented by the
+
+3
+00:00:14,000 --> 00:00:23,000
+ToolStripMenuItem controls. Once you've added a MenuStrip to your form, you can add and edit items inline.
+
+4
+00:00:23,000 --> 00:00:27,000
+Once you've added the items you want, you can set their properties and handle their events using
+
+5
+00:00:27,000 --> 00:00:38,000
+the Properties Window. The three key properties of a menu item are the Text, Image, and ShortCutKeys.
+
+6
+00:00:38,000 --> 00:00:45,000
+When setting the text, which is the caption of the menu item, you can prefix one of the characters with ampersand (&amp;).
+
+7
+00:00:45,000 --> 00:00:50,000
+This makes that character the quick key, meaning that the user can either open the menu if it's a top level
+
+8
+00:00:50,000 --> 00:00:59,000
+menu, or select the menu item if it's a child by using the Alt key plus the quick key.
+
+9
+00:00:59,000 --> 00:01:04,000
+You can also assign a ShortCutKey to a menu item. This is generally something in combination with the Ctrl key,
+
+10
+00:01:04,000 --> 00:01:11,000
+but that's not required. And when a menu item has a ShortCutKey, you can run the event handler for that menu
+
+11
+00:01:11,000 --> 00:01:18,000
+item anywhere in the application using the ShortCutKey combination.
+
+12
+00:01:18,000 --> 00:01:23,000
+And finally, you can associate an image with the menu item using image property.
+
+13
+00:01:23,000 --> 00:01:28,000
+Commonly used images are available in the Visual Studio image library.
+
+14
+00:01:28,000 --> 00:01:36,000
+For Visual Studio 2010 and earlier, this comes as part of the install for Visual Studio; for Visual Studio
+
+15
+00:01:36,000 --> 00:01:39,000
+2012 it's a separate download.
+
+16
+00:01:39,000 --> 00:01:47,000
+Most applications that have a Menu will also have a Toolbar; this is another way to get quick access to
+
+17
+00:01:47,000 --> 00:01:56,000
+the menu functionality. We can add a toolbar to our form using the ToolStrip control.
+
+18
+00:01:56,000 --> 00:02:02,000
+The most common control you'll add to a ToolStrip is the button, or more specifically the ToolStrip button,
+
+19
+00:02:02,000 --> 00:02:11,000
+but you can also add Labels, TextBoxes, ComboBoxes, ProgressBars, and more.
+
+20
+00:02:11,000 --> 00:02:16,000
+One thing to note about the controls in the ToolStrip is they're actually a wrapper around the controls
+
+21
+00:02:16,000 --> 00:02:23,000
+we normally use. For example, you could add a ComboBox to the ToolStrip, or more specifically a ToolStripComboBox,
+
+22
+00:02:23,000 --> 00:02:30,000
+and this is just a wrapper around the ComboBox. So many of the properties and events of the ComboBox are
+
+23
+00:02:30,000 --> 00:02:37,000
+surfaced by the ToolStripComboBox, but not all of them. So sometimes you'll need to get access to the
+
+24
+00:02:37,000 --> 00:02:45,000
+underlying control, and each of the different ToolStrip controls has a property which gives you that access.
+
+25
+00:02:45,000 --> 00:02:52,000
+Now while I've been talking about Menus and Toolbars, you may have asking yourself, what about the Ribbon?
+
+26
+00:02:52,000 --> 00:02:57,000
+Many applications today use the Ribbon instead of Menus and Toolbars.
+
+27
+00:02:57,000 --> 00:03:03,000
+There are no Ribbon controls in the .NET framework, or more specifically Windows Forms, so we're not covering
+
+28
+00:03:03,000 --> 00:03:09,000
+it in this course. However, you do have options if you want to use the Ribbon.
+
+29
+00:03:09,000 --> 00:03:16,000
+Several of the third-party control suites include Ribbon controls, and there's also a Windows Forms wrapper
+
+30
+00:03:16,000 --> 00:03:21,000
+around the unmanaged functionality available from the Windows SDK.
+
+31
+00:03:21,000 --> 00:03:29,000
+This is a CodePlex project you can find at windowsribbon.codeplex.com.
+
+32
+00:03:29,000 --> 00:03:33,000
+Now I don't want to spend too much time on what we're not covering, so let's get back to what we are
+
+33
+00:03:33,000 --> 00:59:00,000
+covering, which is a demo of the introduction to Menus and Toolbars.
+

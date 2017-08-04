@@ -1,0 +1,20 @@
+1
+00:00:01,000 --> 00:00:10,000
+Hi everybody, this is Rob Windsor, and this module, which is part of our Introduction to Windows Forms course
+
+2
+00:00:10,000 --> 00:00:13,000
+is on Data Binding with LINQ to SQL.
+
+3
+00:00:13,000 --> 00:00:20,000
+I'll begin the module with an introduction to LINQ to SQL and the main object in a LINQ to SQL module,
+
+4
+00:00:20,000 --> 00:00:26,000
+which is the DataContext, and then we'll take a look at how to perform CRUD operations, that's Create, Read,
+
+5
+00:00:26,000 --> 00:59:00,000
+Update, and Delete, against a LINQ to SQL model.
+

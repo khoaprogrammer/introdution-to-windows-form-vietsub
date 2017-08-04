@@ -1,0 +1,180 @@
+1
+00:00:02,000 --> 00:00:10,000
+In this section we'll take a look at the basics of data binding. The concept of data binding is pretty simple.
+
+2
+00:00:10,000 --> 00:00:17,000
+In our system we have objects that contain data, and we have forms with controls where we want to display
+
+3
+00:00:17,000 --> 00:00:24,000
+and update that data. Now instead of a developer having to go and take the values out of the objects and
+
+4
+00:00:24,000 --> 00:00:30,000
+push them into the controls, and then later take the changes made by the user and push them from the controls
+
+5
+00:00:30,000 --> 00:00:40,000
+back into the objects, we could instead bind the object to the control and let Windows Forms do that work for us.
+
+6
+00:00:40,000 --> 00:00:47,000
+Taking a look at the slide, I have two objects, Categories and Products; Categories is a collection of
+
+7
+00:00:47,000 --> 00:00:51,000
+category objects, and Products is a collection of product objects.
+
+8
+00:00:51,000 --> 00:00:59,000
+And then in the form in the top left, I have a ComboBox where I want to show the names of all the categories.
+
+9
+00:00:59,000 --> 00:01:06,000
+So I can bind the Categories object to the ComboBox, and then indicate that I want to show the category name
+
+10
+00:01:06,000 --> 00:01:14,000
+property of each of the categories in the control. Then I can add an event handler to the ComboBox so that
+
+11
+00:01:14,000 --> 00:01:21,000
+when the user selects a category, I'll go to the products collection and do a query to find all the products
+
+12
+00:01:21,000 --> 00:01:27,000
+from that category, and then I combine the results of that query to the ListBox.
+
+13
+00:01:27,000 --> 00:01:35,000
+Again I would need to indicate that it's the product name property that I want to show in the ListBox.
+
+14
+00:01:35,000 --> 00:01:41,000
+I can also bind the results of the query to the TextBoxes. So here I'd indicate in the first TextBox that
+
+15
+00:01:41,000 --> 00:01:48,000
+I want to bind the product name, in the second the unit price, and in the third the units in stock.
+
+16
+00:01:48,000 --> 00:01:54,000
+Now obviously I can't show multiple values and TextBoxes, so the values that will be shown are for the
+
+17
+00:01:54,000 --> 00:02:02,000
+currently selected item within the collection. So since I've bound the results of the query to both the
+
+18
+00:02:02,000 --> 00:02:08,000
+ListBox and the TextBoxes, as the user scrolls through the items in the ListBox, the values in the
+
+19
+00:02:08,000 --> 00:02:15,000
+TextBoxes will change to be the properties of the currently selected item.
+
+20
+00:02:15,000 --> 00:02:20,000
+What I've described so far is called one-way data binding, where we can take the properties of objects and
+
+21
+00:02:20,000 --> 00:02:26,000
+show them in controls using the data binding mechanism. But the Windows Forms data binding mechanism also
+
+22
+00:02:26,000 --> 00:02:31,000
+supports moving the other way; in other words, it supports two-way data binding.
+
+23
+00:02:31,000 --> 00:02:40,000
+So as the user does data entry in the forms, the changes he or she makes are automatically pushed back into
+
+24
+00:02:40,000 --> 00:02:47,000
+the source object. So again, looking at the slide, if the user were to change the product name, the unit
+
+25
+00:02:47,000 --> 00:02:53,000
+price, or the units in stock, then as they Tab out of the control, the new value will automatically get
+
+26
+00:02:53,000 --> 00:03:00,000
+pushed back into the appropriate property for the currently selected product item.
+
+27
+00:03:00,000 --> 00:03:06,000
+Now let's take a look at the code we'll use to bind objects to controls.
+
+28
+00:03:06,000 --> 00:03:12,000
+We use different code depending on whether we're binding to objects that show a single value, like a TextBox,
+
+29
+00:03:12,000 --> 00:03:20,000
+a label, or a checkbox, or whether we're binding to objects that show multiple values, like a ComboBox,
+
+30
+00:03:20,000 --> 00:03:28,000
+ListBox, or data grid view. To bind to a control that shows a single value, we'll use the Add method of the
+
+31
+00:03:28,000 --> 00:03:35,000
+data binding's property of the control. This method has several overloads, but we need to provide three
+
+32
+00:03:35,000 --> 00:03:43,000
+pieces of information. One is the name of the property on the control to which we're binding, two is the
+
+33
+00:03:43,000 --> 00:03:50,000
+name of the object, and three is the name of the property of the object, which will populate the designated
+
+34
+00:03:50,000 --> 00:03:57,000
+property of the control. So taking a look at the code on the slide, I'm binding the ProductName property
+
+35
+00:03:57,000 --> 00:04:04,000
+of the product object to the Text property of the NameTextBox. I'm binding the UnitPrice property of the
+
+36
+00:04:04,000 --> 00:04:11,000
+product object to the Text property of the PriceTextBox, and I'm binding the Discontinued property of the
+
+37
+00:04:11,000 --> 00:04:18,000
+product object to the Checked property of the DiscontinuedCheckBox.
+
+38
+00:04:18,000 --> 00:04:28,000
+To bind an object to a control that shows multiple values, we set the DataSource property of the control to the object.
+
+39
+00:04:28,000 --> 00:04:36,000
+This object must implement the IList or IListSource interface, arrays, collections, and the different data
+
+40
+00:04:36,000 --> 00:04:44,000
+objects we'll find in things like ADO, LINQ, Entity Framework, all implement these interfaces.
+
+41
+00:04:44,000 --> 00:04:50,000
+Now if we're binding to a data grid view, we're done, because the data grid view shows all of the properties
+
+42
+00:04:50,000 --> 00:04:57,000
+of each of the objects in the collection. But if we're binding to a control like a ComboBox or a ListBox,
+
+43
+00:04:57,000 --> 00:05:04,000
+we need to indicate which property we want to show in those controls; we do this by setting the DisplayMember
+
+44
+00:05:04,000 --> 00:05:13,000
+property of the control. Alright, so that's enough background, let's move on to the demo where we'll
+
+45
+00:05:13,000 --> 00:59:00,000
+implement the different bits of code we've seen here on the slides.
+

@@ -1,0 +1,8 @@
+1
+00:00:01,000 --> 00:00:09,000
+That concludes our coverage of data binding to DataSets. We'll continue our look at data binding in the next
+
+2
+00:00:09,000 --> 00:59:00,000
+module, but this time we'll be binding to objects we create using LINQ to SQL.
+

@@ -1,0 +1,48 @@
+1
+00:00:01,000 --> 00:00:10,000
+In this section we'll take a look at the BindingSource control. The use of the BindingSource is an easy
+
+2
+00:00:10,000 --> 00:00:18,000
+way to add functionality that you don't get when you bind directly to sets of objects.
+
+3
+00:00:18,000 --> 00:00:24,000
+The BindingSource enables you to navigate through your collections, sort and filter them, add and delete
+
+4
+00:00:24,000 --> 00:00:31,000
+items from them, all the while providing event notifications to the user interface so it stays in sync with
+
+5
+00:00:31,000 --> 00:00:40,000
+the underlying data. To get this functionality, you just need to put the BindingSource between the object
+
+6
+00:00:40,000 --> 00:00:45,000
+that contains the data and the controls to which you'll be binding.
+
+7
+00:00:45,000 --> 00:00:52,000
+So taking a look at the code on the slide, I create a new list of product objects and populate it, then I
+
+8
+00:00:52,000 --> 00:01:00,000
+create a new BindingSource. I set the DataSource of the BindingSource to be the products collection,
+
+9
+00:01:00,000 --> 00:01:08,000
+and then I data bind the controls to the BindingSource. Internally the BindingSource takes the collection,
+
+10
+00:01:08,000 --> 00:01:16,000
+which implements the IList interface and wraps it in an implementation of IBinding list.
+
+11
+00:01:16,000 --> 00:01:25,000
+And IBinding list has the properties and methods that are required to add the functionality I mentioned earlier.
+
+12
+00:01:25,000 --> 00:59:00,000
+So in the upcoming demos we'll modify our projects to use BindingSources for our category and product data.
+

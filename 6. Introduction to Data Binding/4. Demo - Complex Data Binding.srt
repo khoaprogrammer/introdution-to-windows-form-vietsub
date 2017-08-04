@@ -1,0 +1,152 @@
+1
+00:00:03,000 --> 00:00:08,000
+In this demo we'll take a look at complex data binding; specifically we'll be binding our category and
+
+2
+00:00:08,000 --> 00:00:18,000
+products data to a ComboBox and to a ListBox. I'll start by adding a ComboBox; we'll use this to show the
+
+3
+00:00:18,000 --> 00:00:27,000
+names of all the categories, so ComboBox, and I'll put that up here, make that a little bit bigger, I'll set
+
+4
+00:00:27,000 --> 00:00:44,000
+the Name property to CategoriesComboBox, and I'll set the DropDownStyle to DropDownList.
+
+5
+00:00:44,000 --> 00:00:50,000
+The default style is to act as a ComboBox where you can show a list of items, but you can also type in your
+
+6
+00:00:50,000 --> 00:00:56,000
+own values in the TextBox. By setting the DropDownStyle to DropDownList, we only see the items we add
+
+7
+00:00:56,000 --> 00:01:05,000
+through the data binding. Now we'll add the event handler for the Form_Load event, and we'll populate the ComboBox.
+
+8
+00:01:05,000 --> 00:01:18,000
+So I'm going to have a field here, we'll call this guy _source, and that will be a New ObjectSource, and then
+
+9
+00:01:18,000 --> 00:01:24,000
+here in the Form_Load, we'll set the DataSource property of the ComboBox, so that's
+
+10
+00:01:24,000 --> 00:01:42,000
+CategoriesComboBox.DataSource = _source.GetCategories. And then I want to indicate that it's the Category
+
+11
+00:01:42,000 --> 00:01:48,000
+name property I want to show in the ComboBox, so we set the DisplayMember property, so that's
+
+12
+00:01:48,000 --> 00:02:04,000
+CategoriesComboBox.DisplayMember = "CategoryName". And at this point if I hit F5, there's our ComboBox,
+
+13
+00:02:04,000 --> 00:02:12,000
+and there are our category names. Following the scenario I laid out in the slides, we now want to add a
+
+14
+00:02:12,000 --> 00:02:22,000
+ListBox to our form, so we'll add a ListBox, and I'll put that underneath our ComboBox, and I'll call this
+
+15
+00:02:22,000 --> 00:02:35,000
+the ProductsListBox, and then I'll add the SelectedIndexChanged event handler for our ComboBox,
+
+16
+00:02:35,000 --> 00:02:41,000
+and then when the user selects a category, I want to go get the products that are in that category, and bind
+
+17
+00:02:41,000 --> 00:02:54,000
+them into the ListBox. So the first thing I need is the category ID, so that's Dim catId =, and what I
+
+18
+00:02:54,000 --> 00:03:02,000
+really want to do is get the category ID associated with the category that the user selected.
+
+19
+00:03:02,000 --> 00:03:09,000
+Now the CategoriesComboBox does have a property called SelectedItem, so I could use that to get the
+
+20
+00:03:09,000 --> 00:03:15,000
+category object associated with the SelectedItem in the category dropdown.
+
+21
+00:03:15,000 --> 00:03:23,000
+But the CategoriesComboBox also has this property called SelectedValue, and I'm going to use that instead.
+
+22
+00:03:23,000 --> 00:03:30,000
+So up here in the Form_Load, I've set the DisplayMember to indicate which properties show in the ComboBox.
+
+23
+00:03:30,000 --> 00:03:47,000
+The ComboBox also has a property called ValueMember, so I can say here CategoriesComboBox.ValueMember = "CategoryID".
+
+24
+00:03:47,000 --> 00:03:55,000
+And then now when I ask for the selected value, that should give me back the CategoryID associated with the
+
+25
+00:03:55,000 --> 00:04:02,000
+currently selected item. Once I have the selected CategoryID, I can then go get the products for that
+
+26
+00:04:02,000 --> 00:04:18,000
+category and bind them to the ProductsListBox.DataSource = _source, that's our object data source, .GetProducts,
+
+27
+00:04:18,000 --> 00:04:28,000
+and then pass in the catId. And then finally I need to tell the ProductsListBox that the property I want to
+
+28
+00:04:28,000 --> 00:04:40,000
+show is the product name, so that's ProductsListBox.DisplayMember = "Product Name".
+
+29
+00:04:40,000 --> 00:04:50,000
+Alright, so now I can hit F5, and I get an InvalidCastException; Conversion from type 'Category' to type
+
+30
+00:04:50,000 --> 00:04:57,000
+'Integer' is not valid. Okay, so if I hover over SelectedValue here, we can see that what it's giving me
+
+31
+00:04:57,000 --> 00:05:03,000
+back is actually the category object, and if I expand that, we can see there's the CategoryID and the
+
+32
+00:05:03,000 --> 00:05:10,000
+CategoryName; but that's not what I wanted, I wanted the CategoryID.
+
+33
+00:05:10,000 --> 00:05:21,000
+So let me stop debugging and fix that issue. It turns out that to get the SelectedValue property to work
+
+34
+00:05:21,000 --> 00:05:28,000
+right, you need to set the ValueMemberProperty before you set the DataSource on the ComboBox.
+
+35
+00:05:28,000 --> 00:05:38,000
+So if we just take this line and move it down here, and then press F5, this will work as expected.
+
+36
+00:05:38,000 --> 00:05:44,000
+I'm not sure why you have to set the ValueMember first before you set the DataSource; it just works that way,
+
+37
+00:05:44,000 --> 00:05:49,000
+but now we can see we're showing the products that are beverages, and then I can show condiments, and I
+
+38
+00:05:49,000 --> 00:59:00,000
+can show meat and poultry, and so on.
+

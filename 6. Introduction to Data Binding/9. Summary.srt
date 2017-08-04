@@ -1,0 +1,16 @@
+1
+00:00:01,000 --> 00:00:10,000
+In this module we took a look at the basics of data binding, we covered what it is and how it works, and we
+
+2
+00:00:10,000 --> 00:00:16,000
+saw how to bind two collections of objects in memory. In the next module we'll take a look at another
+
+3
+00:00:16,000 --> 00:00:25,000
+in-memory data store called a DataSet, but this time the data inside that data store will be populated from
+
+4
+00:00:25,000 --> 00:59:00,000
+a SQL Server database.
+

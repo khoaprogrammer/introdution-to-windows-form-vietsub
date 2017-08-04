@@ -1,0 +1,52 @@
+1
+00:00:01,000 --> 00:00:09,000
+Hi everybody, this is Rob Windsor, and this module, which is part of our Introduction to Windows Forms course,
+
+2
+00:00:09,000 --> 00:00:11,000
+is on Deployment.
+
+3
+00:00:11,000 --> 00:00:17,000
+Once you've completed building your application, you need some way to get it out to your clients, and with
+
+4
+00:00:17,000 --> 00:00:24,000
+Windows Forms you have a few different options. For simple applications that have few external dependencies
+
+5
+00:00:24,000 --> 00:00:31,000
+you can use XCopy deployment; basically you just take the contents of the bin-debug or bin-release folder,
+
+6
+00:00:31,000 --> 00:00:37,000
+copy them from your development machine over to the client the machine.
+
+7
+00:00:37,000 --> 00:00:43,000
+For more complex applications you'll need an installer package, and here you have two options.
+
+8
+00:00:43,000 --> 00:00:50,000
+You can go with the traditional Windows Installer or MSI; there are a few options in terms of building these;
+
+9
+00:00:50,000 --> 00:00:56,000
+you can use the Visual Studio setup project if you're using Visual Studio 2010 or earlier.
+
+10
+00:00:56,000 --> 00:01:04,000
+This project type has been removed in Visual Studio 2012. You can use the Third-party installer Tool,
+
+11
+00:01:04,000 --> 00:01:12,000
+a limited edition of Install Shield comes with Visual Studio 2010 and 2012, or you can go with something
+
+12
+00:01:12,000 --> 00:01:19,000
+OpenSource like Windows Installer XML or WiX. The other option for creating an installer package is to
+
+13
+00:01:19,000 --> 00:59:00,000
+use ClickOnce Deployment, and that's the focus of the remainder of this module.
+

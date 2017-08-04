@@ -1,0 +1,24 @@
+1
+00:00:01,000 --> 00:00:09,000
+As I mentioned previously, this module is on Forms, Controls, and Events.
+
+2
+00:00:09,000 --> 00:00:15,000
+In this module we'll examine these three key pieces of the Windows Forms framework, by building a Windows
+
+3
+00:00:15,000 --> 00:00:21,000
+Forms application using only code. And then once we have a solid understanding of how Forms, Controls,
+
+4
+00:00:21,000 --> 00:00:28,000
+and Events work, we'll rebuild the application using the Designers and Tools Windows Forms that are built
+
+5
+00:00:28,000 --> 00:00:35,000
+into Visual Studio, and we'll see the code that Visual Studio generates, the files where it places that code,
+
+6
+00:00:35,000 --> 00:59:00,000
+and how it organizes our project.
+

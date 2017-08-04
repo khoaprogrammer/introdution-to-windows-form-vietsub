@@ -1,0 +1,76 @@
+1
+00:00:03,000 --> 00:00:09,000
+Now that we have our Form, we'll add some Controls to build the user interface for our program.
+
+2
+00:00:09,000 --> 00:00:14,000
+We'll be using controls that are built into the .NET framework; I'm not sure exactly how many of these there
+
+3
+00:00:14,000 --> 00:00:21,000
+are, about 30 to 40 maybe, and for many applications these are the only controls that you'll need.
+
+4
+00:00:21,000 --> 00:00:25,000
+Now if you do have a need for a control that's not in the .NET framework, there's a very large third-party
+
+5
+00:00:25,000 --> 00:00:31,000
+market out there, and you could even create your own custom controls.
+
+6
+00:00:31,000 --> 00:00:34,000
+The properties for controls will differ depending on what the controls do.
+
+7
+00:00:34,000 --> 00:00:44,000
+But because all controls inherit from System.Windows.Forms.Control, they will share some common properties.
+
+8
+00:00:44,000 --> 00:00:50,000
+Three of these common properties are related to positioning, and three are related to sizing.
+
+9
+00:00:50,000 --> 00:00:54,000
+When positioning a control, you can either set the Top and Left properties.
+
+10
+00:00:54,000 --> 00:01:00,000
+Top is the number of pixels that the top edge of the control is away from the top of the form, and Left is
+
+11
+00:01:00,000 --> 00:01:06,000
+the number of pixels that the left edge of the control is away from the left edge of the form.
+
+12
+00:01:06,000 --> 00:01:11,000
+Or you can set the Location property, which is a point which represents both of those values.
+
+13
+00:01:11,000 --> 00:01:16,000
+Similarly, when you're setting the Size of the control, you can set the Height and Width properties, or you
+
+14
+00:01:16,000 --> 00:01:20,000
+can set the Size property.
+
+15
+00:01:20,000 --> 00:01:27,000
+To programmatically add a control to a form takes a few steps. First we'll create a private field for the
+
+16
+00:01:27,000 --> 00:01:33,000
+control, then in the forms constructor, we'll create an instance of the control and store our reference
+
+17
+00:01:33,000 --> 00:01:39,000
+to that in the private field, we'll set the properties of the control, and then we'll add the control to the
+
+18
+00:01:39,000 --> 00:01:46,000
+Controls to the collection of the form. Now let's move back to the demo, where we'll add a few controls to the form
+
+19
+00:01:46,000 --> 00:59:00,000
+to build the user interface.
+

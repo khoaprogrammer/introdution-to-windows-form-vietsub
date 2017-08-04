@@ -1,0 +1,360 @@
+1
+00:00:01,000 --> 00:00:09,000
+In this demo we'll modify our Drag-and-Drop data binding applications to use the Details view instead
+
+2
+00:00:09,000 --> 00:00:19,000
+of the DataGridView. I'll start here in our DataSet application, I'll come to our DataGridView, and I'll
+
+3
+00:00:19,000 --> 00:00:29,000
+just delete it. And then I'll come over to the DataSources window, I'll pin it open, and then I'll go to
+
+4
+00:00:29,000 --> 00:00:37,000
+Products, and I'm going to switch the dropdown here from DataGridView to Details view.
+
+5
+00:00:37,000 --> 00:00:44,000
+And then for each of the properties and products, it shows you which data entry element it's going to use to show that.
+
+6
+00:00:44,000 --> 00:00:52,000
+So these are all textboxes and this is a checkbox. But we have some control over how this is shown.
+
+7
+00:00:52,000 --> 00:01:01,000
+So, for example, if I don't want to show ProductID, I can click on it and I can just choose None here.
+
+8
+00:01:01,000 --> 00:01:12,000
+I'll do the same for SupplierID, and ReorderLevel, and then for CategoryID and ProductName, I want these to
+
+9
+00:01:12,000 --> 00:01:21,000
+be ReadOnly. So I'll change CategoryID to be a Label instead of a textbox, and for ProductName I'll modify
+
+10
+00:01:21,000 --> 00:01:28,000
+the textbox after I've built my form. So now that I've configured the Details view the way I want it,
+
+11
+00:01:28,000 --> 00:01:36,000
+I can just drag products onto the form, and now instead of getting a grid, I get a set of more traditional
+
+12
+00:01:36,000 --> 00:01:43,000
+data entry controls. And now I can just clean up the layout a little bit, so I'm going to take these and
+
+13
+00:01:43,000 --> 00:01:50,000
+lasso them and just move them down a little bit. And then here I want this to be a little bit bigger,
+
+14
+00:01:50,000 --> 00:02:00,000
+this textbox; I also want it to be ReadOnly, so I'll come down to ReadOnly and set that to True.
+
+15
+00:02:00,000 --> 00:02:11,000
+And then for the discontinued checkbox, I'll get rid of the text here, and that should be good.
+
+16
+00:02:11,000 --> 00:02:19,000
+So let's hit F5. So now instead of working with all the products in one big grid, I'm working with
+
+17
+00:02:19,000 --> 00:02:26,000
+individual items, and again I can use the BindingNavigator to scroll through the items, and I can go to the
+
+18
+00:02:26,000 --> 00:02:39,000
+end like we did before, and for Test 10, I've got 100, 10, and 10, let's change that to 300, 30, and 30,
+
+19
+00:02:39,000 --> 00:02:49,000
+and then go back one. And for Test 4 let's go ahead and delete, and then let's save our changes, and stop
+
+20
+00:02:49,000 --> 00:02:59,000
+the program, run again, go to the end; there's Test 10, 300, 30, 30, and if I go back one, now we're actually
+
+21
+00:02:59,000 --> 00:03:07,000
+into an original item, not one of our test items. And if I close this program down here, and then come over
+
+22
+00:03:07,000 --> 00:03:15,000
+to our LINQ example, I can do exactly the same thing. So I'll remove the data grid, open up DataSources,
+
+23
+00:03:15,000 --> 00:03:27,000
+pin the window, switch to Details view, set the CategoryID = None, set the SupplierID = None, set the
+
+24
+00:03:27,000 --> 00:03:35,000
+ReorderLevel = None, set the ProductID, oops I didn't want CategoryID = None, I wanted it to be a Label,
+
+25
+00:03:35,000 --> 00:03:43,000
+it's ProductID I wanted to be None. And then I can drag Product onto my form.
+
+26
+00:03:43,000 --> 00:03:50,000
+And notice I not only get the product information, I also get information about the associated category.
+
+27
+00:03:50,000 --> 00:03:57,000
+So here in the LINQ to SQL side, it picked up that there's a two-way relationship; categories have products,
+
+28
+00:03:57,000 --> 00:04:04,000
+and products are associated to a category. Now in this case I don't want the category information on the
+
+29
+00:04:04,000 --> 00:04:11,000
+screen, so I'll just lasso it and delete it. And then I'll do a little bit of cleanup here, so I want
+
+30
+00:04:11,000 --> 00:04:18,000
+Discontinued to be at the bottom not up there, and I want Product Name to be a little bit higher, and then
+
+31
+00:04:18,000 --> 00:04:28,000
+I want Category ID to be below that, that looks good, and then I want to lasso the entire thing and then just
+
+32
+00:04:28,000 --> 00:04:40,000
+move it up over here, move this or resize that, and then set it to be ReadOnly, press F5,
+
+33
+00:04:40,000 --> 00:04:52,000
+and I can get exactly the same behavior I had in my DataSet example.
+
+34
+00:04:52,000 --> 00:04:57,000
+Now coming back to our form designer, when I dragged and dropped the controls from the DataSources window
+
+35
+00:04:57,000 --> 00:05:07,000
+over, I got the Category here related to the Product; let's explore this a little bit further but in the other way.
+
+36
+00:05:07,000 --> 00:05:16,000
+So I'm going to add a new form to my project, I'll right-click and choose Add-Windows Form.
+
+37
+00:05:16,000 --> 00:05:22,000
+And now what I'm going to do is start with Categories, so I'll go to Category and say that I want Details,
+
+38
+00:05:22,000 --> 00:05:30,000
+and then I'll drag and drop Category onto my form. I'll just move these controls over a little bit, get rid
+
+39
+00:05:30,000 --> 00:05:39,000
+of this Length label and textbox, and make my form a little bit bigger, and then I'm going to go to Products
+
+40
+00:05:39,000 --> 00:05:49,000
+here, but not the product entity we used before; I'm going to go to the products associated with the categories.
+
+41
+00:05:49,000 --> 00:05:56,000
+So here I'm going to say I want this in DataGridView, and then I'll drag and drop this on my form here,
+
+42
+00:05:56,000 --> 00:06:05,000
+and just place it like this. And then to ensure this control resizes when the form resizes, I'll just change
+
+43
+00:06:05,000 --> 00:06:20,000
+its Anchor property, so this will be right, bottom, and left. Alright, so now let's examine our controls.
+
+44
+00:06:20,000 --> 00:06:26,000
+We have the DataGridview, we have the textboxes, the labels, the BindingNavigator, we have a
+
+45
+00:06:26,000 --> 00:06:36,000
+CategoryBindingSource, and we also have a ProductsBindingSource. So, for the CategoryBindingSource, it says
+
+46
+00:06:36,000 --> 00:06:45,000
+here that the DataSource is the Category entities in our LINQ to SQL model, but for the ProductsBindingSource
+
+47
+00:06:45,000 --> 00:06:54,000
+it says that the DataSource is the CategoryBindingSource, so this BindingSource is binding to that BindingSource.
+
+48
+00:06:54,000 --> 00:07:00,000
+And then back in the ProductsBindingSource, this is binding to the Products collection coming out of the
+
+49
+00:07:00,000 --> 00:07:08,000
+CategoryBindingSource. So in our LINQ to SQL model, categories are related to products by a foreign key in
+
+50
+00:07:08,000 --> 00:07:19,000
+the database, so category entities have a products collection property, which represent the products in that category.
+
+51
+00:07:19,000 --> 00:07:26,000
+So now if I press F5, we can see I get the, whoops sorry I need to change the startup form, so I want to use
+
+52
+00:07:26,000 --> 00:07:36,000
+Form2, so I'll go to My Project and double-click and change the startup form to Form2, and now press F5 here,
+
+53
+00:07:36,000 --> 00:07:44,000
+oh and I need to change my code behind, sorry I'm not in the DataSet example, I'm in the LINQ to SQL example.
+
+54
+00:07:44,000 --> 00:07:50,000
+So let me go back to my form, double-click here, and like before I'll create a field to represent our
+
+55
+00:07:50,000 --> 00:08:03,000
+DataContext, so Private _context As New NortwindDataContext, and then down here in Form_Load, I'll say that
+
+56
+00:08:03,000 --> 00:08:17,000
+the CategoryBindingSource.DataSource = _context.Categories. And then if I wanted to make this form so you
+
+57
+00:08:17,000 --> 00:08:24,000
+could edit, I could go back to the form design, click on the Save button in the BindingNavigator, come up and
+
+58
+00:08:24,000 --> 00:08:39,000
+set Enabled = True, add the event handler, and then take the code we had in Form1, and just copy and paste it into Form2.
+
+59
+00:08:39,000 --> 00:08:46,000
+And in this case, now this is not the ProductsBindingSource, it is the CategoryBindingSource.
+
+60
+00:08:46,000 --> 00:08:51,000
+Alright, so now I can press F5, and there we go. So there's our category information, and there are the
+
+61
+00:08:51,000 --> 00:08:58,000
+products associated with the category. Oh, I set my anchor wrong, but that's not important.
+
+62
+00:08:58,000 --> 00:09:04,000
+And now here if I navigate through the categories, you can see that as the categories change the products
+
+63
+00:09:04,000 --> 00:09:11,000
+change because we're only showing the products associated with the current category.
+
+64
+00:09:11,000 --> 00:09:18,000
+So that's our LINQ example. We can do exactly the same thing over here in our DataSet side, so right-click,
+
+65
+00:09:18,000 --> 00:09:31,000
+Add-Windows Form, click Add, resize the form, open up Categories, I want Details view, drag and drop that
+
+66
+00:09:31,000 --> 00:09:38,000
+on the form, there's my category, data entry fields are my category controls, and then go to the products
+
+67
+00:09:38,000 --> 00:09:58,000
+related to the categories, DataGridView, drag and drop on the form over here, and then set the Anchor.
+
+68
+00:09:58,000 --> 00:10:04,000
+And in this case because I'm in a DataSet, the code I need in the code behind is given to me automatically,
+
+69
+00:10:04,000 --> 00:10:11,000
+so I can just press F5 to run, and now I'm able to cycle through, whoops again sorry, I forgot to change the
+
+70
+00:10:11,000 --> 00:10:27,000
+startup form to Form2. Now press F5, and now I can get exactly the same behavior I saw over on the LINQ side.
+
+71
+00:10:27,000 --> 00:10:34,000
+And to finish up this demo, I'll create a form similar to the one we had in our earlier data binding modules.
+
+72
+00:10:34,000 --> 00:10:43,000
+So I'll come to our DataSet project, I'll right-click, and I'll choose to Add a new form, and I'll just
+
+73
+00:10:43,000 --> 00:10:48,000
+resize the form a little bit, and then we'll go to our ToolBox, actually, sorry, I want our DataSources
+
+74
+00:10:48,000 --> 00:10:57,000
+window, and then I'll pin that. So here I want the Categories, and I want the Products, but I don't actually
+
+75
+00:10:57,000 --> 00:11:07,000
+want the controls right now. I just use the drag and drop to get the DataSet, the DataAdapter is all setup,
+
+76
+00:11:07,000 --> 00:11:15,000
+I'll also remove the BindingNavigator. Now I'll come over to the Toolbox and I'll pin that open, and I'll
+
+77
+00:11:15,000 --> 00:11:28,000
+unpin DataSources, and then here in the Common Controls I want a dropdown, so we'll put a ComboBox here.
+
+78
+00:11:28,000 --> 00:11:36,000
+And then I also want a ListBox, so I'll grab that and put that over here.
+
+79
+00:11:36,000 --> 00:11:43,000
+And then what I can do is use the smart tags on these controls to hook them up to the different BindingSources.
+
+80
+00:11:43,000 --> 00:11:52,000
+So here I'll say that I want to data bind the ComboBox, the Data Source will be the CategoriesBindingSource,
+
+81
+00:11:52,000 --> 00:12:02,000
+the Display Member will be the CategoryName. And then here in the ListBox, I'll say that I want to data bind,
+
+82
+00:12:02,000 --> 00:12:09,000
+I want my Data Source to be the ProductsBindingSource, and I want the Display Member to be the ProductName.
+
+83
+00:12:09,000 --> 00:12:19,000
+And then finally I'll unpin the Toolbox, come back to DataSources, change products here to Details, and then
+
+84
+00:12:19,000 --> 00:12:28,000
+drag and drop this over on this side of the form here, and then just move those sort of in line with the ListBox.
+
+85
+00:12:28,000 --> 00:12:34,000
+So now when I run I should be able to choose the category out of the dropdown; that'll show the products in
+
+86
+00:12:34,000 --> 00:12:41,000
+the ListBox, and as I scroll through the ListBox we should see the details for the selected item over here
+
+87
+00:12:41,000 --> 00:12:49,000
+in the textboxes and the checkbox. So let's give that a shot. I'll press F5, oh and again, I need to change
+
+88
+00:12:49,000 --> 00:13:00,000
+the startup form, so back to my project, change startup form to Form3, now press F5, and here are the
+
+89
+00:13:00,000 --> 00:13:06,000
+Beverages, and if I switch to Produce, here are the Produce items, if I scroll through these you see we get
+
+90
+00:13:06,000 --> 00:59:00,000
+the information over here, and then here are our Seafood items.
+

@@ -1,0 +1,368 @@
+1
+00:00:01,000 --> 00:00:14,000
+In this demo we'll implement the Delete and Save functionality for our application that data binds to DataSets.
+
+2
+00:00:14,000 --> 00:00:20,000
+So here we're taking a BindingSource and a product. Okay, we actually don't want a product in this case,
+
+3
+00:00:20,000 --> 00:00:26,000
+that was fine with the ObjectSource, because you can see here in DeleteProduct we're just removing from
+
+4
+00:00:26,000 --> 00:00:35,000
+the actual collection of product objects. But here in the DataSet DataSource it would be better if we got
+
+5
+00:00:35,000 --> 00:00:49,000
+the ProductID, so let's make that change. So I want your ProductID, and that's an Integer, and because this
+
+6
+00:00:49,000 --> 00:00:58,000
+is part of an interface, we're going to need to make that change not only here, but in ObjectSource, so for
+
+7
+00:00:58,000 --> 00:01:08,000
+Delete I want this to be a ProductID, and also in our interface declaration, which is ISource, and I want to
+
+8
+00:01:08,000 --> 00:01:18,000
+change the definition of Delete here. Okay, so coming back to the ObjectSource, now that we're using an
+
+9
+00:01:18,000 --> 00:01:25,000
+integer for Delete, I need to change the implementation to go find the product with the appropriate ID and
+
+10
+00:01:25,000 --> 00:01:33,000
+then remove it. But that also means we need to change the implementation of AddProduct, because the product
+
+11
+00:01:33,000 --> 00:01:39,000
+we're receiving from the AddProduct dialog has the ProductID set to 0, and if we add multiple products
+
+12
+00:01:39,000 --> 00:01:46,000
+they'll all have the same ID. So to address this issue we need to change the implementations of AddProduct
+
+13
+00:01:46,000 --> 00:01:56,000
+and DeleteProduct to look like this. So in AddProduct I'll do a LINQ query to find the current maximum
+
+14
+00:01:56,000 --> 00:02:04,000
+ProductID, and then I'll just set the ProductID for the product coming in to that number +1, and then I'll
+
+15
+00:02:04,000 --> 00:02:12,000
+add the product in. So that will ensure that each product has its own unique ID, and then in Delete, I can
+
+16
+00:02:12,000 --> 00:02:21,000
+do the LINQ query to find the product whose ProductID matches the one being passed in here, and then I can
+
+17
+00:02:21,000 --> 00:02:29,000
+remove that particular product. And coming back to DataSet DataSource, for DeleteProduct, we want to have
+
+18
+00:02:29,000 --> 00:02:37,000
+the same kind of implementation. So what I'll do is get the Products table, and then I'm going to do a LINQ
+
+19
+00:02:37,000 --> 00:02:54,000
+to DataSet query, so we're going to go through the rows of the Products table, and if the RowState is not
+
+20
+00:02:54,000 --> 00:02:59,000
+Deleted, and this is there because sometimes we do LINQ queries or LINQ to DataSet queries, it will complain
+
+21
+00:02:59,000 --> 00:03:07,000
+if you try to inspect the properties or the field values of deleted rows, but the key thing is this part here
+
+22
+00:03:07,000 --> 00:03:17,000
+where we go and find the product row whose ProductID field value is = to the productId being passed in here.
+
+23
+00:03:17,000 --> 00:03:23,000
+Now this syntax may look a little bit odd to you. This is part of the LINQ to DataSet, and it allows you
+
+24
+00:03:23,000 --> 00:03:34,000
+to get the field values strongly typed. So this returns me a ProductID that's typed as Integer not typed as Object.
+
+25
+00:03:34,000 --> 00:03:40,000
+And now once I have the row that I want to delete, I can go ahead and just call Delete to delete it out of
+
+26
+00:03:40,000 --> 00:03:47,000
+the DataTable; again this is just being done in-memory. So now coming back to Add, I have a little bit of
+
+27
+00:03:47,000 --> 00:03:57,000
+the same issue that I had with the ProductObjects. As I showed you, when I add a new row, the ProductID is null,
+
+28
+00:03:57,000 --> 00:04:02,000
+and if I add several rows, they'll all be null, and this DeleteProduct isn't going to work.
+
+29
+00:04:02,000 --> 00:04:09,000
+So what I can do is assign a temporary value to ProductID that will be used with the rows in-memory,
+
+30
+00:04:09,000 --> 00:04:16,000
+but when I push them back into the database, they'll get the proper auto increment value.
+
+31
+00:04:16,000 --> 00:04:25,000
+So what I'll do is come up to the top here and create a field of type Integer, so I'll call it nextId, and
+
+32
+00:04:25,000 --> 00:04:34,000
+that's of type Integer, and I'll set its initial value to Interger.MaxValue, so that's the maximum value
+
+33
+00:04:34,000 --> 00:04:41,000
+for the integer type. I'm using this very large number so I won't have collisions with numbers that are
+
+34
+00:04:41,000 --> 00:04:52,000
+generated in the auto increment for the keys. And then I'll come down here and just say _nextId -= 1, so a
+
+35
+00:04:52,000 --> 00:05:07,000
+decrement by 1, and then here I'll say row("ProductID = _nextId).
+
+36
+00:05:07,000 --> 00:05:13,000
+So again this value is just temporary, it's only used while the object is in-memory, but again once we get
+
+37
+00:05:13,000 --> 00:05:18,000
+pushed back to the database, this will be replaced by the actual auto increment value.
+
+38
+00:05:18,000 --> 00:05:29,000
+Alright, so we have the code for Add, and we have the code for Delete, we just need the code for Save.
+
+39
+00:05:29,000 --> 00:05:37,000
+Let me paste that in. Let me just pause the demo here for a moment.
+
+40
+00:05:37,000 --> 00:05:44,000
+After I completed this demo, I realized that there's a small but important change that needs to be made to the Save code.
+
+41
+00:05:44,000 --> 00:05:51,000
+Instead of just closing the connection, what I really need to do is dispose of the SQL connection object.
+
+42
+00:05:51,000 --> 00:05:57,000
+I discussed this in the slides and showed the proper implementation for the Save method.
+
+43
+00:05:57,000 --> 00:06:03,000
+So if you came directly to this demo, I suggest once it's complete you go back and look at the video for the
+
+44
+00:06:03,000 --> 00:06:12,000
+slides that introduces the demo to see the proper code for the Save method.
+
+45
+00:06:12,000 --> 00:06:18,000
+So we'll create a new SqlConnection object, passing in the connection string, we'll Open the connection,
+
+46
+00:06:18,000 --> 00:06:25,000
+and then we'll ask the SQL DataAdapter for products to Update the dataSet, specifically update the Products
+
+47
+00:06:25,000 --> 00:06:33,000
+table within the DataSet. So productsAdapter is a field in this case, so I just need to go add that field,
+
+48
+00:06:33,000 --> 00:06:48,000
+so up here I'll say Private _productsAdapter As SqlDataAdapter, and then in here where I was creating a
+
+49
+00:06:48,000 --> 00:07:04,000
+variable, I'll now use that field. Okay, so let's go ahead and run.
+
+50
+00:07:04,000 --> 00:07:12,000
+And now I've got build errors.  Do you want to continue, NO. Value of type 'Data.Product' cannot be converted to Integer.
+
+51
+00:07:12,000 --> 00:07:18,000
+So here in the Delete, I have the same issue I had with the Add, where I'm expecting the items in the
+
+52
+00:07:18,000 --> 00:07:24,000
+ProductsListBox to be Products, but they're going to be DataRowViews, but what I really want here now
+
+53
+00:07:24,000 --> 00:07:31,000
+because I've made the change to the ProductID, so let's just change that, so this will be the
+
+54
+00:07:31,000 --> 00:07:45,000
+ProductsListBox.SelectedValue. And then this now will be productId, and then all I need to do is come up
+
+55
+00:07:45,000 --> 00:08:03,000
+here in my form, right up here, and say that the ProductsListBox.ValueMember = "ProductID" and I just need
+
+56
+00:08:03,000 --> 00:08:14,000
+to move the setting of the DataSource down here below where I set the ValueMember.
+
+57
+00:08:14,000 --> 00:08:19,000
+And changing this code reminds me that I need to do one more step, because I forgot to do this when I was
+
+58
+00:08:19,000 --> 00:08:23,000
+testing earlier, I need to implement the Save button Click event handler,
+
+59
+00:08:23,000 --> 00:08:37,000
+so this is just _currentSource.Save. Alright, so let's try this again, F5, and then switch to DataSet,
+
+60
+00:08:37,000 --> 00:08:48,000
+and pick a different category, how about seafood, and then click Add, so let's add in Test 1 and some values
+
+61
+00:08:48,000 --> 00:09:02,000
+in here, 100, 0, 0, click OK, and then Save. And we're getting an error: Update requires a valid
+
+62
+00:09:02,000 --> 00:09:08,000
+InsertCommand when passed DataRow collection with new rows. Okay, so what it's saying is that there is no
+
+63
+00:09:08,000 --> 00:09:17,000
+InsertCommand, and if we take a look at the productsAdapter, and then come down here, let's see InsertCommand
+
+64
+00:09:17,000 --> 00:09:25,000
+is Nothing, there should also be an UpdateCommand, that's Nothing, and there should be a DeleteCommand,
+
+65
+00:09:25,000 --> 00:09:33,000
+that's Nothing, but the SelectCommand has our query; actually if we take a look at the text, there we go,
+
+66
+00:09:33,000 --> 00:09:44,000
+"Select * From Products". Okay, so let me get out of debugging here, and let's come back up to the top.
+
+67
+00:09:44,000 --> 00:09:50,000
+So for our productsAdapter I've defined the Select command, but to be able to do updates I also need to
+
+68
+00:09:50,000 --> 00:09:56,000
+define the Insert, Update, and DeleteCommands. So as I showed you, there are properties, so I could say
+
+69
+00:09:56,000 --> 00:10:02,000
+productsAdapter.InsertCommand, and then I could manually add the InsertCommand, I could do the same Update,
+
+70
+00:10:02,000 --> 00:10:09,000
+and I could do the same for Delete. Now since we're only updating rows in one table, I don't really need
+
+71
+00:10:09,000 --> 00:10:15,000
+any kind of complex commands here, so I can actually let ADO write the commands for me, and I can do that
+
+72
+00:10:15,000 --> 00:10:28,000
+by using a SQL command builder, so I can say Dim builder As New SqlCommandBuilder, and then just pass in my
+
+73
+00:10:28,000 --> 00:10:36,000
+data, actually it's my products DataAdapter, to the constructor. And what this will do is this object,
+
+74
+00:10:36,000 --> 00:10:46,000
+once past the DataAdapter, will create the Insert, Update, and DeleteCommands based on the SelectCommand.
+
+75
+00:10:46,000 --> 00:10:54,000
+Alright, now let's run again, and I'm going to put a breakpoint right here, so F5,
+
+76
+00:10:54,000 --> 00:11:08,000
+and then go to DataSet, and then here's F5 to continue on, and let's go to seafood, again F5, and then let's
+
+77
+00:11:08,000 --> 00:11:17,000
+click Add, and test, whoops, I've got Caps Lock on here, Test 1, and some values here, and say 100, 0, and 0,
+
+78
+00:11:17,000 --> 00:11:30,000
+and 0, and click OK, so there's Test 1. And then let's go to beverages, F5, and then come back to seafood
+
+79
+00:11:30,000 --> 00:11:41,000
+here and now let's use the DataSet Visualizer, so we scroll down, so there's our item, but now we have the
+
+80
+00:11:41,000 --> 00:11:49,000
+very large integer value as our temporary key. Alright, so let me close, get out of full screen,
+
+81
+00:11:49,000 --> 00:11:58,000
+and continue running, and then now save, to that save completed, stop the program,
+
+82
+00:11:58,000 --> 00:12:05,000
+press F5 again, go to DataSet,
+
+83
+00:12:05,000 --> 00:12:17,000
+Continue, and then go to seafood, and now let's take a look at the table, and then scroll down to the bottom,
+
+84
+00:12:17,000 --> 00:12:24,000
+so there's Test 1, but there's the auto generated ID. Alright, so let's close out of this,
+
+85
+00:12:24,000 --> 00:12:38,000
+remove the breakpoint, Continue running, and now let's Add another item, this will be Test 2, and then
+
+86
+00:12:38,000 --> 00:12:55,000
+finally one more item, this will be Test 3, click OK. So Test 1 is in the database, Test 2 and Test 3 are
+
+87
+00:12:55,000 --> 00:13:02,000
+just in memory. So I'll go to Test 2 and click Delete, so you can see we can properly delete items that are
+
+88
+00:13:02,000 --> 00:13:12,000
+just in memory or have been added since the last save, and then I can delete Test 1, and then finally I can
+
+89
+00:13:12,000 --> 00:13:15,000
+save, and if I stop and come back we should just have Test 3.
+
+90
+00:13:15,000 --> 00:13:29,000
+So stop, run again, switch to DataSet, go to seafood, and there is Test 3.
+
+91
+00:13:29,000 --> 00:13:34,000
+So that completes the implementation of our data binding using the DataSet as a DataSource.
+
+92
+00:13:34,000 --> 00:59:00,000
+Next we'll look at data binding using LINQ to SQL object as a DataSource.
+

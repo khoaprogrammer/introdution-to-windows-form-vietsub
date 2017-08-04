@@ -1,0 +1,176 @@
+1
+00:00:03,000 --> 00:00:10,000
+In this demo we'll create our LinqSource class, implement the Get methods, and then setup our form so we can
+
+2
+00:00:10,000 --> 00:00:18,000
+bind to the new LinqSource. So I'll start by creating the class, I'll right-click on the project and choose
+
+3
+00:00:18,000 --> 00:00:28,000
+Add-Class, I'll call this class LinqSource. I want this class to implement the ISource interface,
+
+4
+00:00:28,000 --> 00:00:39,000
+so Implements ISource, let me get into full screen. Now I want to add a field to represent our DataContext,
+
+5
+00:00:39,000 --> 00:00:50,000
+so Private _context As New NorthwindDataContext, and now I want to implement our two Get methods, so let me
+
+6
+00:00:50,000 --> 00:01:01,000
+just move those up to the top. For GetCategories, we'll just return the Categories entity,
+
+7
+00:01:01,000 --> 00:01:13,000
+so Return _context.LinqCategories. So we have a LinqCategory entity in our model, and the designer
+
+8
+00:01:13,000 --> 00:01:20,000
+automatically added a LinqCategories collection to the context. So it took the name of the entity and
+
+9
+00:01:20,000 --> 00:01:27,000
+pluralized it to get the name of the collection. And now for the products, I want to do a query to get all
+
+10
+00:01:27,000 --> 00:01:42,000
+the products in the category that's been passed in as a parameter, Dim query = From p In _context.LinqProducts
+
+11
+00:01:42,000 --> 00:01:54,000
+Where p.CategoryID = CategoryId we've been passing as a parameter, I want to Select p, and now I just want
+
+12
+00:01:54,000 --> 00:02:04,000
+to Return the results of the query. Alright, so now that we have our Get methods, we can go modify the form
+
+13
+00:02:04,000 --> 00:02:13,000
+to use them, so let me get out of full screen, and then open up the data form, and then go to the SourceComboBox,
+
+14
+00:02:13,000 --> 00:02:29,000
+and modify its Items, so I want to add a new item, and this one is called LINQ to SQL, and click OK.
+
+15
+00:02:29,000 --> 00:02:33,000
+And now I want to go into the code for the form, so I'll right-click on the designer and choose View Code,
+
+16
+00:02:33,000 --> 00:02:52,000
+and go into full screen, and I want to add a field for our LinqSource, so private _linqSource As LinqSource,
+
+17
+00:02:52,000 --> 00:03:02,000
+and now I want to scroll down to where we set the source, here, and just add in a new Case in our Case statement.
+
+18
+00:03:02,000 --> 00:03:12,000
+And if this is 2, then I want to create a LinqSource, or check to see is the LinqSource Nothing, and if it
+
+19
+00:03:12,000 --> 00:03:27,000
+is then I want to set the LinqSource to a New LinqSource, and then I want to set the currentSource = _linqSource.
+
+20
+00:03:27,000 --> 00:03:32,000
+So because of the way we've implemented our form, that should be all that's required to get the data and
+
+21
+00:03:32,000 --> 00:03:37,000
+show it on the form, so let's press F5,
+
+22
+00:03:37,000 --> 00:03:48,000
+and then let's change the source to LINQ to SQL, and then let's change the Category here to Confections,
+
+23
+00:03:48,000 --> 00:03:59,000
+so there's our Confections, and our Produce, and our Seafood, and there's a Test item from the previous module,
+
+24
+00:03:59,000 --> 00:04:07,000
+and I can scroll through these guys and get the data for the selected item, so that's working, and then our
+
+25
+00:04:07,000 --> 00:04:16,000
+last test was to come over to, I believe we've been using Outback Lager, and set the unit price to be 100,
+
+26
+00:04:16,000 --> 00:04:24,000
+and set the units in stock to be 200, I believe we've done before, and that's just not working; let me try that again.
+
+27
+00:04:24,000 --> 00:04:33,000
+So 100 and Tab, and it changes back, and then 200 and Tab, and it changes back.
+
+28
+00:04:33,000 --> 00:04:39,000
+Okay, so that's not working correctly. So let's close the running form,
+
+29
+00:04:39,000 --> 00:04:49,000
+and then come back to our code. And it's not really obvious, but the problem is here when we set the DataBindings.
+
+30
+00:04:49,000 --> 00:04:57,000
+So we take a look at the overloads for Add, let me just add a , here, and you can see that the IntelliSense
+
+31
+00:04:57,000 --> 00:05:03,000
+is saying that the next parameter is formattingEnabled, creates a binding with a specified control property
+
+32
+00:05:03,000 --> 00:05:09,000
+name, data source, data member, and information about whether formatting is enabled, and to get the data
+
+33
+00:05:09,000 --> 00:05:15,000
+binding to work properly, or the simple data binding to work properly, we need to set this to True when
+
+34
+00:05:15,000 --> 00:05:22,000
+we're working with LINQ to SQL, so that needs to be True, that needs to be True, and actually, let me just
+
+35
+00:05:22,000 --> 00:05:31,000
+copy and paste this and it will be faster, so I need to set that to True, and that to True, and then that
+
+36
+00:05:31,000 --> 00:05:43,000
+to True, and then that to True. Alright, so now if we press F5, and then go to LINQ to SQL, and then go to
+
+37
+00:05:43,000 --> 00:05:53,000
+Outback Lager, and then go to units in stock and set that to say 200, and then go to units on order and
+
+38
+00:05:53,000 --> 00:06:01,000
+set that to 100, and you can see those values are preserving, and then if I come over to Chang and then
+
+39
+00:06:01,000 --> 00:06:10,000
+Ipoh Coffee, and then come back to Outback Lager, those values are preserved, and if I go to say Produce,
+
+40
+00:06:10,000 --> 00:06:16,000
+and then to Seafood, and then back to Beverages, and then back to Outback Lager, you can see that those
+
+41
+00:06:16,000 --> 00:06:24,000
+values are still there. So when you're setting up the simple data binding using LINQ to SQL entities,
+
+42
+00:06:24,000 --> 00:06:33,000
+you need to make sure you set that fourth parameter to True to get the binding to work correctly.
+
+43
+00:06:33,000 --> 00:06:38,000
+That completes the implementation of the Get operations. In the next section we'll take a look at
+
+44
+00:06:38,000 --> 00:59:00,000
+implementing Add, Delete, and Save.
+

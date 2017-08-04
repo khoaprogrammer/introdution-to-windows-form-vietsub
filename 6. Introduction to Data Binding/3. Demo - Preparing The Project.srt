@@ -1,0 +1,96 @@
+1
+00:00:02,000 --> 00:00:12,000
+In this demo I'll prepare the project we'll be using as we begin our examination of data binding.
+
+2
+00:00:12,000 --> 00:00:19,000
+So here I have the project we'll be using, I named it Data, I renamed the form we were given to DataForm,
+
+3
+00:00:19,000 --> 00:00:27,000
+I resized the form and set the title. I added two classes to represent the objects to which we'll be binding;
+
+4
+00:00:27,000 --> 00:00:34,000
+one is called Category, it has two properties and a constructor to set those properties; a class called
+
+5
+00:00:34,000 --> 00:00:42,000
+Product that has seven or eight properties and a constructor to set those properties; and then finally
+
+6
+00:00:42,000 --> 00:00:50,000
+a class called ObjectSource. ObjectSource has two fields, one is a collection of category objects, and the
+
+7
+00:00:50,000 --> 00:01:03,000
+other is a collection of product objects, and then in the constructor for ObjectSource, we populate those two collections.
+
+8
+00:01:03,000 --> 00:01:09,000
+ObjectSource also has two methods, one to get the collection of categories; in this case we just return the
+
+9
+00:01:09,000 --> 00:01:15,000
+entire collection, and the other is to get a collection of products.
+
+10
+00:01:15,000 --> 00:01:21,000
+This method takes a CategoryId as a parameter and then we do a LINQ query to get the products from that
+
+11
+00:01:21,000 --> 00:01:30,000
+category and we return the result of that query. So in our form we'll be using the result from the
+
+12
+00:01:30,000 --> 00:01:37,000
+GetCategories method call and the GetProducts method call as the data source for our controls.
+
+13
+00:01:37,000 --> 00:01:40,000
+We're now ready to start working on our form,
+
+14
+00:01:40,000 --> 00:01:47,000
+so I'll come over to the Form Designer and open the Toolbox. The first control I want to add is a ToolStrip,
+
+15
+00:01:47,000 --> 00:01:54,000
+so I'll come down to Menus &amp; Toolbars and add a ToolStrip, and then I also want to add a TabControl,
+
+16
+00:01:54,000 --> 00:02:01,000
+that's in the Containers section. We're going to have two views of our data, a form view and a grid view,
+
+17
+00:02:01,000 --> 00:02:09,000
+I'll use a TabPage for each of these. I want the tab control to be docked in the remaining space in the form,
+
+18
+00:02:09,000 --> 00:02:19,000
+so I'll come up to its Dock property and set that to dock to the rest of the form, and then I'll click in the
+
+19
+00:02:19,000 --> 00:02:28,000
+TabPage here for the first page, and set its caption to be Form, and then I'll switch to the second TabPage,
+
+20
+00:02:28,000 --> 00:02:37,000
+and then click its page designer, and set its caption to be Grid.
+
+21
+00:02:37,000 --> 00:02:45,000
+And then in the second page I'll go to the Data tab and dropdown a DataGridView control.
+
+22
+00:02:45,000 --> 00:03:03,000
+And then I'll have this dock in the TabPage. I'll also rename the control to ProductsDataGridView.
+
+23
+00:03:03,000 --> 00:03:08,000
+That completes the preparation of the project. In the next demo we'll start a look at data binding;
+
+24
+00:03:08,000 --> 00:59:00,000
+specifically we'll look at complex data binding.
+

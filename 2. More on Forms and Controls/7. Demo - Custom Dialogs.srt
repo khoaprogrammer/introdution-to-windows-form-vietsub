@@ -1,0 +1,140 @@
+1
+00:00:02,000 --> 00:00:10,000
+In this demo we'll build a custom dialog. I have a new project, but the form is the same as in the last project.
+
+2
+00:00:10,000 --> 00:00:18,000
+So I press F5, and then try to close the form, I'll get a dialog box, it has the text, Are you sure you want to close?
+
+3
+00:00:18,000 --> 00:00:26,000
+It has two buttons, Yes and No. If I click Yes or press Enter, the form will close; if I click No or press
+
+4
+00:00:26,000 --> 00:00:37,000
+Escape it won't. And what I want to do in this demo is build a custom dialog to replace the one we're using here.
+
+5
+00:00:37,000 --> 00:00:44,000
+I have the form for our custom dialog partially completed, so it created, I went to the project, right-click
+
+6
+00:00:44,000 --> 00:00:56,000
+Add, Windows Form, I called the form the Confirm dialog, I resized the form, I added a Panel control from
+
+7
+00:00:56,000 --> 00:01:03,000
+down here in the containers, and I docked it to the top, and then set its background color to white so we get
+
+8
+00:01:03,000 --> 00:01:09,000
+this, and then I added a label, put the text in, Are you sure you want to close?
+
+9
+00:01:09,000 --> 00:01:18,000
+I added two buttons, so this button is called the Yes button, and this button is called the No button.
+
+10
+00:01:18,000 --> 00:01:22,000
+And now what I want to do is set the properties of the form in the controls so that it really takes on the
+
+11
+00:01:22,000 --> 00:01:31,000
+role of a dialog. So let me unpin the toolbox here. So we'll start out with the properties of the form.
+
+12
+00:01:31,000 --> 00:01:38,000
+The first thing I want to do is set the border style to indicate visually that this is a dialog and also so
+
+13
+00:01:38,000 --> 00:01:41,000
+the form can't be resized, and that's the FormBorderStyle property.
+
+14
+00:01:41,000 --> 00:01:49,000
+I want to change that from Sizable, which is the default, to FixedDialog.
+
+15
+00:01:49,000 --> 00:01:55,000
+The next thing I want to do is remove the ability to minimize, maximize, or close using the control box.
+
+16
+00:01:55,000 --> 00:02:03,000
+So I'll go to the ControlBox property, and I'll set that to False.
+
+17
+00:02:03,000 --> 00:02:08,000
+And then finally I want to indicate that the Yes button is the accept button, meaning that pressing the Enter
+
+18
+00:02:08,000 --> 00:02:13,000
+key is the equivalent of clicking the button, and that the No button is the Cancel button, meaning that
+
+19
+00:02:13,000 --> 00:02:18,000
+pressing Escape is the same as clicking the button. So I'll come up, well actually we have a CancelButton
+
+20
+00:02:18,000 --> 00:02:25,000
+right here, so I'll say the CancelButton is the NoButton, and then I'll scroll up and we have the
+
+21
+00:02:25,000 --> 00:02:35,000
+AcceptButton, and that is the YesButton. And then the last thing I need to do to complete the dialog,
+
+22
+00:02:35,000 --> 00:02:41,000
+is indicate that if the user selects Yes by either clicking the button or pressing Enter, that the dialog
+
+23
+00:02:41,000 --> 00:02:47,000
+result is Yes, or if they choose No that the dialog result is equal to No.
+
+24
+00:02:47,000 --> 00:02:53,000
+Now I could do this by adding event handlers for the Yes or No buttons, but if the only thing we want to do
+
+25
+00:02:53,000 --> 00:02:57,000
+when the user clicks Yes or No is actually to set the DialogResult, then we can do that through properties of
+
+26
+00:02:57,000 --> 00:03:04,000
+the buttons themselves. So if I click on the Yes button, and then come over here, I can set the DialogResult
+
+27
+00:03:04,000 --> 00:03:17,000
+property to be Yes, and I can do the same thing for the No button, set the DialogResult property here to be No.
+
+28
+00:03:17,000 --> 00:03:20,000
+So with our dialog completed, we can now come over to
+
+29
+00:03:20,000 --> 00:03:28,000
+our code behind and modify it to use our new dialog. So here I'll change this variable to be a variable for
+
+30
+00:03:28,000 --> 00:03:41,000
+the dialog, so Dim dialog As New ConfirmDialog, and then down here, instead of using MsgBox, we just need to
+
+31
+00:03:41,000 --> 00:03:59,000
+say Dialog.ShowDialog. And then instead of checking for MsgBoxResult.No, we want to check for DialogResult.No.
+
+32
+00:03:59,000 --> 00:04:06,000
+Alright, so we're ready to test out our work, let's press F5, and then try to close the form, there's our
+
+33
+00:04:06,000 --> 00:04:17,000
+dialog, if I click Yes the form closes, press F5; try to close the dialog, click No, form doesn't close,
+
+34
+00:04:17,000 --> 00:04:24,000
+click Yes it does. So a good deal of the process of building a custom dialog is the same as building any
+
+35
+00:04:24,000 --> 00:59:00,000
+other Windows Forms, there are just a few extra properties of the form and the controls that you need to be aware of.
+
